@@ -26,6 +26,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
     init_DB();
 
     switch($action) {
+        case 'get_login'                : get_login();break;
         case 'get_users'                : get_users();break;
         case 'get_user'                 : get_user($_POST['user_id']);break;
         case 'get_items'                : get_items();break;
@@ -48,6 +49,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
     }
 }
 
+ 
 
 function init_DB(){
 
@@ -65,6 +67,41 @@ function init_DB(){
 
 //----GETTERS----
 
+function get_login()
+{
+    $rootElementName = "users";
+    $childElementName="user";
+
+    // build query
+    global $config;
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+   // $username = $mysqli->real_escape_string($username);
+    // $password = $mysqli->real_escape_string($password);
+
+    $query = ("SELECT UserID, UserFirstName, UserLastName, UserRegDate FROM Users WHERE UserEmail = '" . $username . "' AND UserPassword = '" . $password ."'");
+    $result = query_get($query);
+    $returnValue = query_get($query)->fetch_assoc();
+
+    if( count($returnValue) ) {
+        echo " <h1>user found</h1>";
+        echo $returnValue["UserLastName"];
+        require_once(TEMPLATES_PATH . "/header_hasLoggedin.php");
+        //resources/templates/header_hasLoggedin.php
+    }
+    else
+    {
+        echo "error";
+    }
+    // query data from database
+   
+
+    //convert query to xml
+    //$xml = sqlToXml($result,$rootElementName, $childElementName);
+    $xml = sqlToXml($result,$rootElementName, $childElementName);
+    //return data
+    echo $xml;
+}
 
 function get_user($user_id){
 
