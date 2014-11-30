@@ -26,7 +26,11 @@
                         <div class="tab-content">
                             <div id="shop_sectionA" class="tab-pane fade in active">
                                 <h3>Section A</h3>
-                                <p>Aliquip placeat </p>
+
+                                <?php
+                                    require_once(realpath(dirname(__FILE__). "/panel_shop_listItems.php"));
+                                ?>
+
                             </div>
                             <div id="shop_sectionB" class="tab-pane fade">
                                 <h3>Section B</h3>
