@@ -1,6 +1,6 @@
 html, body {
 	height:100%;
-    font-family: 'Open Sans', sans-serif;
+    font-family:MontserratRegular,Arial,Helvetica,sans-serif;
 }
 
 
@@ -52,6 +52,7 @@ footer {
 	left:0;
 	background:#333333;
     border-top:1px solid #666666;
+    color:#eeeeee;
 
 }
 
@@ -100,16 +101,15 @@ header section{
 
 
 
-.footer .wrapper_footer{
+.footer .inner_wrapper_footer{
 	line-height:20px;
-	margin: auto;/*center content */
     margin-top: 20px;
-	width:960px;
+    padding-top: 20px;
 	font-size:12px;
-    text-align:center; /*centers block for IE(the mainblock) http://bluerobot.com/web/css/center1.html*/
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    
+
+    border-top: 1px solid #555555;
+    border-bottom: 1px solid #444444;
+
         /*vertical graidient for left footer column */
 	background: -moz-linear-gradient(top, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.2)), color-stop(100%,rgba(0,0,0,0)));
@@ -121,14 +121,6 @@ header section{
     
 }
 
-footer .column{
-	color:#ababab;
-	float:left;
-	width:298px;
-	height:220px;
-	border-bottom: 1px solid #666666;
-    padding:10px;
-}
 
 footer .wrapper_footer  ul li{/*textformatting for mid footer column */
 	width:auto;
@@ -141,35 +133,11 @@ footer .wrapper_footer ul li a:hover{
 }
 
 
-footer .wrapper_footer .column.rightlist ul li{
-	text-align:left;
-	width:auto;
-	margin-bottom:5px;
-	clear:left;	/* removes the possibility of images floating */
-	padding:5px;
-}
-
-footer .wrapper_footer .column.rightlist ul li a span{
-	display:block;
-}
-
-footer .wrapper .column.rightlist ul li a img{
-	transition: border .20s ease;
-	float:left;
-	border:1px solid #444444;
-	margin-right:5px;
-}
-
-footer .wrapper_footer .column.rightlist ul li a img:hover{
-	border-color: #5e5e5e;
-}
-
 footer .wrapper_footer .column h4{
 	font-size: 16px;
 	color: #fff;
-	border-top: 1px solid #444444;
 	padding: 0 0 10px 0;
-	margin-bottom: 10px;
+    text-align:center;
 }
 
 
@@ -194,45 +162,30 @@ footer  .legalnotices_section_style {
 
 /*-------FOOTER--------*/
 
-@media (max-width: 915px){
-	
-	footer .wrapper .column{
-		font-size: 12px;
-		width: 230px;
-	}
-	footer .legalnotices_section_style .social{/* stacks the legal info */
-		display:block;
-	}
-	footer .legalnotices_section_style p{ /*adjust margin of legal info  */
-		margin-top:5px;
-	}
+@media (max-width: 992px){
+
+
+    .content {
+        padding:10px;
+        padding-bottom:900px;   /* Height of the footer element */
+    }
+
+    footer {
+
+        width:100%;
+        height:900px;
+
+    }
+    .column_wrapper{
+        float:none;
+        margin: 0 auto;
+        max-width: 400px;
+        padding:10px;
+    }
+    footer .wrapper_footer .column h4{
+        border-bottom: 1px solid #444444;
+    }
+
 }
 
-@media (max-width: 765px){
 
-	footer .wrapper_footer{/*limits the footer width*/
-		width: 320px;
-		margin: 0 auto;
-	}
-
-	footer .wrapper_footer .column{ /*formatting all 3 footer columns*/
-		float:none;
-		font-size: 14px;
-		width: 300px;
-		height:auto;
-		margin-top:5px;
-		margin-bottom:5px;
-		background:inherit;
-	}
-	footer .wrapper_footer .column.leftlist{	/*remove background from left and right column(vertical gradient)*/
-		background:inherit;
-	}
-	footer .wrapper_footer .column.rightlist{
-		background:inherit;
-	}
-	footer .legalnotices_section_style p{/* gives the text of the leagal footer more space*/
-		margin-top:5px;
-		border-top:1px;
-	}
-	
-}
