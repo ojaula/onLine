@@ -1,0 +1,716 @@
+@font-face{/* load cool font*/
+	font-family:Coalition;
+	src: url(fonts/Coalition_v2..ttf);
+}
+
+html,body{
+
+	font-family: 'Open Sans', sans-serif;
+	color: #111111;
+	text-align:center; /*centers block for IE(the mainblock) http://bluerobot.com/web/css/center1.html*/
+	min-height:100%;
+}
+
+body{
+    background-repeat:  no-repeat;
+    background: rgb(255,255,255); /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover, rgb(255,255,255) 56%, rgb(170,170,170) 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(56%,rgb(255,255,255)), color-stop(100%,rgb(170,170,170))); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover, rgb(255,255,255) 56%,rgb(170,170,170) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover, rgb(255,255,255) 56%,rgb(170,170,170) 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover, rgb(255,255,255) 56%,rgb(170,170,170) 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center, rgb(255,255,255) 56%,rgb(170,170,170) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#aaaaaa',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */  
+}
+
+.main_wrapper{
+
+    min-height: 100%;
+	position:relative;/*these 3 atr. centers the section*/
+	max-width:960px;
+    margin:auto; 
+}
+
+strong{
+	font-weight: bold;
+}
+input{
+	font-family: 'Open Sans', sans-serif;
+	font-size:16px;
+	padding: 7px;
+	outline: 0;
+	border:0;
+	width:150px;
+	background: #EBE8DE;
+	border-radius:2px;
+}
+
+input[name=start_search]{/*target input with specific name */
+	padding: 5px 18px;
+	width:auto;
+	line-height:25px;
+	text-shadow:none;
+	cursor:pointer;
+	box-shadow: none; /*box-shadow(-moz-box-shadow/-webkit-box-shadow/...) works thanks to prefix free script*/
+	background: #333333;
+	color: #ffffff;
+}
+
+a{
+	text-decoration: none;
+	color: inherit;/*gain its parent computed value */
+	transition: color .5s ease;
+}
+h3{
+	line-height: 25px;
+	font-size:14px;
+	width:200px;
+}
+
+h3 strong{
+
+	padding-bottom:10px;
+	margin: 10px 0;
+	display:block;
+	color:#eee;
+}
+p{ color:#999999;}
+
+/*-----------------------Top------------------------*/
+
+.section_top{
+	background:url(../images/planets/Stars.jpg);
+}
+
+header{
+
+	position:relative;
+	width:auto;
+	max-width:900px;
+	margin: 0 auto 20px auto;
+
+}
+
+header h1
+{
+	margin: 35px 0 0 0;
+	font-size: 55px;
+	color: #eeeeee;
+}
+
+
+header p
+{
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	color: #666666;
+	margin-left:132px;
+}
+
+nav ul
+{
+	list-style:none;
+	margin-top:20px;
+}
+
+
+nav ul li
+{
+	display:block;
+	float:left;
+	padding:3px 15px;
+}
+
+
+nav ul li a{
+	font-family: 'Open Sans', sans-serif;
+	text-transform: uppercase;
+	transition: all .20s ease;
+	color:#cccccc;
+}
+
+
+nav ul li a:hover{
+	color: #E56038;
+}
+
+
+#slider_content1, #slider_content2, #slider_content3{
+	line-height: 25px;
+	font-family: 'Open Sans', sans-serif;
+	width:350px;
+	position:absolute;
+	top:15%;
+	left:15%;
+	display:none;
+	z-index:11;
+}
+
+#slider_content1{
+	display:block;
+}
+
+.container{
+	width:auto;
+	margin: 0 auto;
+	position:relative;
+}
+
+#slider_content1 h3, #slider_content2 h3, #slider_content3 h3{
+	color:#EBE8DE;
+	font-size:25px;
+	font-weight:bold;
+	margin-bottom:10px;
+	background-color:#333333;
+	padding:10px 15px;
+	border-radius: 15px 0 15px 0;
+	display:inline-block;
+}
+
+
+#slider_content1 p, #slider_content2 p, #slider_content3 p{
+	margin:0 0 30px 0;
+	color:#4a463b;
+	background-color:#EBE8DE;
+	padding:10px 15px;
+	border-radius: 2px;
+}
+
+
+#spacer{
+	width:auto;
+	height:70px;
+	background-color:#e56038;
+	position:relative;
+	font-family: 'Open Sans', sans-serif;
+	font-size:18px;
+	
+	background: #ba4848; /* Old browsers */
+	background: -moz-linear-gradient(left, #ba4848 1%, #ff7130 35%, #ff7130 65%, #843333 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(1%,#ba4848), color-stop(35%,#ff7130), color-stop(65%,#ff7130), color-stop(100%,#843333)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left, #ba4848 1%,#ff7130 35%,#ff7130 65%,#843333 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left, #ba4848 1%,#ff7130 35%,#ff7130 65%,#843333 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left, #ba4848 1%,#ff7130 35%,#ff7130 65%,#843333 100%); /* IE10+ */
+	background: linear-gradient(to right, #ba4848 1%,#ff7130 35%,#ff7130 65%,#843333 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ba4848', endColorstr='#843333',GradientType=1 ); /* IE6-9 */
+}
+
+#spacer p{
+	color:#eeeeee;
+	margin-top:22px;
+	width:auto;
+	position:absolute;
+	left:50%;
+	margin-left:-450px;
+}
+
+#spacer .search{
+	margin-top:15px;
+	width:auto;
+	position:absolute;
+	right:50%;
+	margin-right:-480px;
+}
+
+/*--------------------------------------------------*/
+/*-----------------------middle---------------------*/
+
+.section_middle_style article{
+	display:inline;
+	float:left;
+	padding:0px;
+}
+
+.section_middle_style{/* base attributes for middle section of the page, */
+	margin:0 auto;
+	padding:20px 0 20px 0;
+	display:relative;
+}
+.section_middle_style article{/*Base  attributes for left and right article*/
+	float:left;
+	width:449px;
+	font-size:14px;
+	height:280px;
+}
+
+.bg_style_left{
+	float:left;	/*remove this when shrink screen, it will center article */
+	width:auto;
+	margin:0 auto;
+	height:280px;
+	width:900px;
+	background:url(../images/BG.png);
+	background-size:100% 100%;
+	background-repeat:no-repeat;
+	
+}
+
+.Planet_article_left_Style {
+
+	border-left: 1px solid #666666;
+	border-top-left-radius: 15px 15px;/*graidient for right footer column */
+	border-bottom-left-radius: 15px 15px;/*graidient for right footer column */
+	
+	background: -moz-linear-gradient(left,  rgba(64,64,64,1) 53%, rgba(255,255,255,0) 88%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(53%,rgba(64,64,64,1)), color-stop(88%,rgba(255,255,255,0)));
+	background: -webkit-linear-gradient(left,  rgba(64,64,64,1) 53%,rgba(255,255,255,0) 88%);
+	background: -o-linear-gradient(left,  rgba(64,64,64,1) 53%,rgba(255,255,255,0) 88%);
+	background: -ms-linear-gradient(left,  rgba(64,64,64,1) 53%,rgba(255,255,255,0) 88%);
+	background: linear-gradient(to right,  rgba(64,64,64,1) 53%,rgba(255,255,255,0) 88%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#404040', endColorstr='#00ffffff',GradientType=1 );
+
+	position:relative;	/*used for setting a new origo, helping to center the image of the planet image*/
+}
+/*------mini version---------*/
+
+.mini_Planet_article_left_Style {
+	float:right;
+	font-size:14px;
+	background:rgba(255,255,255,0.0);
+	
+	border:#888888;
+
+	position:relative;	/*used for setting a new origo, helping to center the image of the planet image*/
+}
+
+.mini_bg_style_left{
+	float:left;	/*remove this when shrink screen, it will center article */
+	height:70px;
+	width:310px;
+	background:rgba(255,255,255,0.2);
+}
+
+.mini_bg_style_left ul li{
+	float:left;	/*Place the name of the planet in the middle of the button*/
+}
+.mini_bg_style_left p{/*formatting the planet name on the mini version article */
+	font-size:35px; 
+	color:#999999;
+	padding-top:15px;
+	padding-left:5px;
+	border-left:2px solid rgba(255,255,255,0.4);
+}
+
+
+/*-----------------------*/
+
+.section_middle_style .planetimg_style img{ /*placing the planet image, using absolute messurments from leftside article*/
+	height:200px;
+	position:absolute;
+	right:-95px;
+	top:10px;
+	width:auto;
+}
+
+
+
+.bg_style_right{
+	float:left;	/*remove this when shrink screen, it will center article */
+	width:auto;
+	margin:0 auto;
+	height:280px;
+	width:449px;
+	background:url(../images/BGright.png);
+	background-size:100% 100%;
+	background-repeat:no-repeat;
+	
+}
+
+.Planet_article_right_Style {
+
+	border-top-right-radius: 15px 15px;/*graidient for right footer column */
+	border-bottom-right-radius: 15px 15px;/*graidient for right footer column */
+	
+	border-right: 1px solid #666666;
+	background: -moz-linear-gradient(left,  rgba(255,255,255,0) 12%, rgba(64,64,64,1) 47%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(12%,rgba(255,255,255,0)), color-stop(47%,rgba(64,64,64,1)));
+	background: -webkit-linear-gradient(left,  rgba(255,255,255,0) 12%,rgba(64,64,64,1) 47%);
+	background: -o-linear-gradient(left,  rgba(255,255,255,0) 12%,rgba(64,64,64,1) 47%);
+	background: -ms-linear-gradient(left,  rgba(255,255,255,0) 12%,rgba(64,64,64,1) 47%);
+	background: linear-gradient(to right,  rgba(255,255,255,0) 12%,rgba(64,64,64,1) 47%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#404040',GradientType=1 );
+	
+}
+
+.section_middle_style article ul img{/* set small image above planet name*/
+	height:50px;
+	left:0px;
+	top: 0px;
+}
+.Planet_article_right_Style ul li img{/*set moon thumnails images */
+	height:60px;
+}
+
+.Planet_article_left_Style  article h3/* set left planet article headline*/
+{
+	font-family: 'Open Sans', sans-serif;
+	font-size:20px;
+	margin-bottom:10px;
+	margin-left:75px;
+}
+/*---left---*/
+
+.Planet_article_left_Style  ul{/* Position facs at the left(not middle)*/
+	float:left;
+}
+.Planet_article_right_Style  ul{
+	float:right;	/* position moon data on the far right, also reverses order*/
+}
+
+.section_middle_style  ul li{/*format the fact lists */
+	text-align:left;
+	font-size:12px;
+	width:100px;
+	padding:5px;
+}
+.Planet_article_left_Style  ul{/*Adds br to the planet article facts. */
+	border-right: 1px solid rgba(0,0,0,0.15);
+}
+.Planet_article_right_Style  ul{
+	border-left: 1px solid rgba(0,0,0,0.15);
+}
+
+.section_middle_style  article .fact_style{	/*Format the fact text , quickfix: using pos_abs
+ for position the test left of fact list*/
+	font-size:13px;
+	margin-top:10px;
+	text-align:left;
+	width:200px;
+	margin-right:0px;
+	position:absolute;
+	left:120px;
+}
+
+.section_middle_style  .article_Style a{
+	position:relative;	/*Relative creates a new origo for its children. */
+	display:block;
+}
+/*----------*/
+
+
+/*
+.thumb-screen{
+	display:block;
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:113px;
+	background: #000; /*url(img/zoom.png) center center no-repeat;/*
+	z-index:99;
+	opacity: 0;
+	transition: opacity .5s ease;
+}
+
+.thumb-screen:hover{
+	opacity:0.5;
+}
+/*
+
+/*--------------------------------------------------*/
+/*-----------------------info footer---------------------*/
+
+
+footer{
+	/*position:relative;*/
+	clear:both;
+	width:auto;
+	
+	width:100%;
+	min-height:400px;
+	
+    background:#333333;
+	background: -moz-linear-gradient(left, #000000 0%, #222222 35%, #222222 65%, #000000 100%, #000000 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#000000), color-stop(35%,#222222), color-stop(65%,#222222), color-stop(100%,#000000), color-stop(100%,#000000));
+	background: -webkit-linear-gradient(left, #000000 0%,#222222 35%,#222222 65%,#000000 100%,#000000 100%);
+	background: -o-linear-gradient(left, #000000 0%,#222222 35%,#222222 65%,#000000 100%,#000000 100%);
+	background: -ms-linear-gradient(left, #dddddd 0%,#ffffff 50%,#dddddd 100%,#dddddd 100%);
+	background: linear-gradient(to right, #dddddd 0%,#ffffff 50%,#dddddd 100%,#dddddd 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000',GradientType=1 );
+}
+
+footer .wrapper{
+	line-height:20px;
+	margin: 0 auto;/*center content */
+	width:auto;
+	max-width:900px;
+	font-size:14px;
+
+}
+
+footer .wrapper .column{
+	font-family: 'Open Sans', sans-serif;
+	color:#ababab;
+	float:left;
+	width:298px;
+	height:220px;
+	border-bottom: 1px solid #444444;
+	
+	
+}
+footer .wrapper .column.leftlist{	/* left footer column, rounded corner + vertical(up and down) black/transparent gradient-*/
+	
+	border-top-right-radius: 30px 15px;
+
+	/*vertical graidient for left footer column */
+	background: -moz-linear-gradient(top, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.2)), color-stop(100%,rgba(0,0,0,0)));
+	background: -webkit-linear-gradient(top, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%);
+	background: -o-linear-gradient(top, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%);
+	background: -ms-linear-gradient(top, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%);
+	background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33000000', endColorstr='#00000000',GradientType=0 );
+
+}
+
+footer .column.midlist{ /* mid footer column, rounded corner + vertical(down and up) white/transparent gradient-*/
+
+	border-bottom-left-radius: 30px 15px;
+	border-bottom-right-radius: 30px 15px;
+
+	/*vertical graidient for middle footer column */
+	background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(3,3,3,0) 1%, rgba(255,255,255,0.05) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(1%,rgba(3,3,3,0)), color-stop(100%,rgba(255,255,255,255)));
+	background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(3,3,3,0) 1%,rgba(255,255,255,0.5) 100%);
+	background: -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(3,3,3,0) 1%,rgba(255,255,255,0.05) 100%);
+	background: -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(3,3,3,0) 1%,rgba(255,255,255,0.05) 100%);
+	background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(3,3,3,0) 1%,rgba(255,255,255,0.05) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#0dffffff',GradientType=0 );
+
+}
+footer .wrapper .column.midlist ul li{/*textformatting for mid footer column */
+	width:auto;
+	padding:0 0 10px 25px;
+	margin-bottom:10px;	
+}
+
+footer .wrapper .column.midlist ul li a:hover{
+	color:#fff;
+}
+
+footer .wrapper .column.rightlist{
+
+	border-top-left-radius: 15px 15px;/* black and vertical gradient for right footer column */
+	background: -moz-linear-gradient(top, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.2)), color-stop(100%,rgba(0,0,0,0)));
+	background: -webkit-linear-gradient(top, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%);
+	background: -o-linear-gradient(top, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%);
+	background: -ms-linear-gradient(top, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%);
+	background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33000000', endColorstr='#00000000',GradientType=0 );
+}
+
+footer .wrapper .column.rightlist ul li{
+	text-align:left;
+	width:auto;
+	margin-bottom:5px;
+	clear:left;	/* removes the possibility of images floating */
+	padding-left:5px;
+}
+
+footer .wrapper .column.rightlist ul li a span{
+	display:block;
+}
+
+footer .wrapper .column.rightlist ul li a img{
+	transition: border .20s ease;
+	float:left;
+	border:1px solid #444444;
+	margin-right:5px;
+}
+
+footer .wrapper .column.rightlist ul li a img:hover{
+	border-color: #5e5e5e;
+}
+
+footer .wrapper .column h4{
+	font-size: 16px;
+	color: #fff;
+	border-top: 1px solid #444444;
+	padding: 0 0 10px 0;
+	margin-bottom: 10px;
+}
+
+
+footer  .legalnotices_section_style {
+
+	position:relative; 
+	top:5px;
+	transition: opacity .25s ease;
+	opacity: 0.7;
+	margin-left: 12px;
+
+}
+
+/*--------------------------------------------------*/
+/*-----------------------legal footer---------------------*/
+footer .legalnotices_section_style{
+	clear:left;	/*<- added so copyright notice is alwas at bottom(not left of footer)*/
+	margin: 0 auto;/*center content */
+	background:#222;
+	min-height:100px;
+	display:box;
+	color:#555555;
+	/*horisontal graidient for footer*/
+	background: #000000;
+	background: -moz-linear-gradient(left, #000000 0%, #111111 30%, #111111 70%, #000000 100%, #000000 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#000000), color-stop(30%,#111111), color-stop(70%,#111111), color-stop(100%,#000000), color-stop(100%,#000000));
+	background: -webkit-linear-gradient(left, #000000 0%,#111111 30%,#111111 70%,#000000 100%,#000000 100%);
+	background: -o-linear-gradient(left, #000000 0%,#111111 30%,#111111 70%,#000000 100%,#000000 100%);
+	background: -ms-linear-gradient(left, #000000 0%,#111111 30%,#111111 70%,#000000 100%,#000000 100%);
+	background: linear-gradient(to right, #000000 0%,#111111 30%,#111111 70%,#000000 100%,#000000 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000',GradientType=1 )
+	
+}
+
+footer .legalnotices_section_style a
+{
+	transition: opacity .25s ease;
+	opacity: 0.7;
+	margin-left: 12px;
+	color:#ffffff;
+}
+footer .legalnotices_section_style a:hover{
+	opacity: 1;
+}
+footer .legalnotices_section_style .social{
+	display:inline-block; 
+	position:relative; 
+	top:15px;
+}
+
+/*-----------------------------------------------*/
+/*-----------------------misc--------------------*/
+.clear{
+	clear:both;
+}
+
+.hidden{/*remove the hidden headers(search engine helpers)*/
+	position:absolute;
+	clip: rect(1px 1px 1px 1px); /* IE6 & 7 */
+	clip: rect(1px, 1px, 1px, 1px);
+}
+
+
+/*---------------------responsive webb------------------------*/
+/*-----------------------media quary--------------------*/
+
+
+@media (max-width: 915px){
+
+	#spacer{
+		font-size:15px;
+		}
+
+	input{
+		padding:4px;/*reduce forms elements */
+		font-size:14px;
+	}
+	input[type="submit"]{
+		padding: 1px 14px;
+	}
+	
+	footer .wrapper .column{
+		font-size: 12px;
+		width: 230px;
+	}
+	footer .legalnotices_section_style .social{/* stacks the legal info */
+		display:block;
+	}
+	footer .legalnotices_section_style p{ /*adjust margin of legal info  */
+		margin-top:5px;
+	}
+	.section_middle_style  .Planet_article_right_Style{/*shortens the left article side*/
+		width:240px;
+	}
+	.section_middle_style  .Planet_article_right_Style ul{/*remove content of the left article side*/
+		position:absolute;
+		left:5000px;
+	}
+
+}
+
+@media (max-width: 765px){
+	.container{	/*remove the 3 images left of the nav menu*/
+		top: -1500px;
+	}
+	
+	.Headline_Ending_style{	/*stack the website heading*/
+		display:block;
+	}
+
+	#spacer{
+		height:100px;
+	}
+
+	#spacer p{
+		text-align:center;/*align the spacer search bar vertically */
+		position:static;
+		margin: 0 auto;
+		padding:15px 0 7px 0;
+	}
+
+	#spacer .search{/*align the spacer search bar vertically */
+		text-align:center;
+		position:static;
+		margin: 0 auto;
+	}
+
+
+	footer .wrapper{/*limits the footer width*/
+		width: 320px;
+		margin: 0 auto;
+	}
+
+	footer .wrapper .column{ /*formatting all 3 footer columns*/
+		float:none;
+		font-size: 14px;
+		width: 300px;
+		height:auto;
+		margin-top:5px;
+		margin-bottom:5px;
+		border-bottom-left-radius:0px 0px;
+		border-bottom-right-radius:0px 0px;
+		background:inherit;
+		border-bottom:0px;
+	}
+	footer .wrapper .column.leftlist{	/*remove background from left and right column(vertical gradient)*/
+		background:inherit;
+		border-top-right-radius:0px 0px;
+	}
+	footer .wrapper .column.rightlist{
+		background:inherit;
+		border-top-left-radius:0px0px;
+	}
+
+	
+	footer .legalnotices_section_style p{/* gives the text of the leagal footer more space*/
+		margin-top:5px;
+		border-top:1px;
+	}
+	
+	
+	.section_middle_style  .Planet_article_right_Style{
+
+		Position:absolute;
+		left:5000px;
+	}
+	.section_middle_style  .Planet_article_left_Style .fact_style{/*"removes" the fact text of the planet(leftside article)*/
+		Position:absolute;
+		left:5000px;
+	}
+	
+	
+	.section_middle_style{
+		width:449px;
+	}
+	.bg_style_left{
+		background:inherit;	/*remove planet image holder/bg image */
+	}
+	.section_middle_style  .Planet_article_left_Style img{/*position the planet image more close to the facts(ontop) */
+		right:130px;
+	}
+	
+}
+
+

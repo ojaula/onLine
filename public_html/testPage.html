@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>
+        DB Manager
+    </title>
+
+    <!-- jQuery -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+    <!--<script src="//code.jquery.com/jquery-1.10.2.js"></script> -->
+    <script src="../public_html/js/jquery-1.11.1.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+    <!--BOOTSTRAP -->
+    <link rel="stylesheet" href="../public_html/css/bootstrap.css" type="text/css" media="screen" />
+    <script src="../public_html/js/bootstrap.js"></script>
+    <script src="../public_html/js/bootstrap-slider.js"></script>
+
+
+
+<!--
+    <script>
+        $(function() {
+            $( "#tabs" ).tabs({
+                beforeLoad: function( event, ui ) {
+                    ui.jqXHR.error(function() {
+                        ui.panel.html(
+                                "Couldn't load this tab. We'll try to fix this as soon as possible. " +
+                                "If this wouldn't be a demo." );
+                    });
+                }
+            });
+        });
+    </script>
+    -->
+
+
+</head>
+<body>
+
+
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">insert poi</a></li>
+        <li><a href="#tabs-2">delete by id</a></li>
+
+    </ul>
+    <div id="tabs-1" style="border-bottom: dotted 1px black; padding:10px;">
+
+
+        <section class="formField" style="padding:10px; border-left: dotted 1px black; display: inline-block;">
+            <h3>Insert User</h3>
+            <form id="form_insertUser" action="../resources/manage_db.php" method="get">
+                Action:<br>
+                <input type="text" name="action" value="insertUser">
+                <br>
+                First Name:<br>
+                <input type="text" name="firstName" value="Mickey">
+                <br>
+                Last Name:
+                <br>
+                <input type="text" name="lastName" value="Mouse">
+                <br>
+                password:
+                <br>
+                <input type="text" name="password" value="Mouse">
+                <br>
+                email:
+                <br>
+                <input type="text" name="email" value="Mouse">
+                <br>
+                phone:
+                <br>
+                <input type="text" name="phone" value="Mouse">
+                <br>
+                address:
+                <br>
+                <input type="text" name="address" value="Mouse">
+                <br>
+                zip:
+                <br>
+                <input type="text" name="zip" value="Mouse">
+                <br>
+                city:
+                <br>
+                <input type="text" name="city" value="Mouse">
+                <br>
+                verificationCode:
+                <br>
+                <input type="text" name="verificationCode" value="Mouse">
+                <br>
+                country:
+                <br>
+                <input type="text" name="country" value="Mouse">
+                <br>
+                regDate:
+                <br>
+                <input type="text" name="regdate" value="Mouse">
+                <br>
+                emailVerified:
+                <br>
+                <input type="text" name="emailVerified" value="Mouse">
+                <br>
+
+                submit:
+                <br>
+                <input type="submit" value="Submit">
+                <br>
+            </form>
+
+        </section>
+
+        <section class="formField" style="padding:10px; border-left: dotted 1px black; display: inline-block;">
+            <h3>insert item color</h3>
+            <form id="form_insert_item_color" name="form" action="../resources/manage_db.php" method="GET">
+                Action:<br>
+                <input type="text" name="action" value="insert_item_color">
+                <br>
+                name:<br>
+                <input type="text" name="name" value="Mickey">
+                <br>
+                price:
+                <br>
+                <input type="text" name="price" value="1">
+                <br>
+                weight:
+                <br>
+                <input type="text" name="weight" value="2">
+                <br>
+                descShort:
+                <br>
+                <input type="text" name="descShort" value="Mouse">
+                <br>
+                descLong:
+                <br>
+                <input type="text" name="descLong" value="Mouse">
+                <br>
+                image:
+                <br>
+                <input type="text" name="image" value="Mouse">
+                <br>
+                update:
+                <br>
+                <input type="text" name="update" value="2005-03-30">
+                <br>
+                stock:
+                <br>
+                <input type="text" name="stock" value="4">
+                <br>
+                rank:
+                <br>
+                <input type="text" name="rank" value="5">
+                <br>
+                item color:
+                <br>
+                <input type="text" name="color" value="#aabbcc">
+                <br>
+
+
+
+
+                submit:
+                <br>
+                <button type="submit">Submit</button>
+
+            </form>
+        </section>
+        <section class="formField" style="padding:10px; border-left: dotted 1px black; display: inline-block;">
+            <h3>insert item tool</h3>
+            <form id="form_insert_item_tool" name="form" action="../resources/manage_db.php" method="GET">
+                Action:<br>
+                <input type="text" name="action" value="insert_item_tool">
+                <br>
+                name:<br>
+                <input type="text" name="name" value="Mickey">
+                <br>
+                price:
+                <br>
+                <input type="text" name="price" value="1">
+                <br>
+                weight:
+                <br>
+                <input type="text" name="weight" value="2">
+                <br>
+                descShort:
+                <br>
+                <input type="text" name="descShort" value="Mouse">
+                <br>
+                descLong:
+                <br>
+                <input type="text" name="descLong" value="Mouse">
+                <br>
+                image:
+                <br>
+                <input type="text" name="image" value="Mouse">
+                <br>
+                update:
+                <br>
+                <input type="text" name="update" value="2005-03-30">
+                <br>
+                stock:
+                <br>
+                <input type="text" name="stock" value="4">
+                <br>
+                rank:
+                <br>
+                <input type="text" name="rank" value="5">
+                <br>
+                item color:
+                <br>
+                <input type="text" name="color" value="#aabbcc">
+                <br>
+
+
+                submit:
+                <br>
+                <button type="submit">Submit</button>
+
+            </form>
+        </section>
+
+        <section class="formField" style="padding:10px; border-left: dotted 1px black; display: inline-block;">
+            <h3>insert order</h3>
+            <form id="form_insert_order" action="../resources/manage_db.php" method="get">
+                action:
+                <br>
+                <input type="text" name="action" value="insert_order">
+                <br>
+                user id:
+                <br>
+                <input type="text" name="user_id" value="1">
+                <br>
+                shipName:
+                <br>
+                <input type="text" name="ship_name" value="1">
+                <br>
+                shipAddress:
+                <br>
+                <input type="text" name="ship_address" value="1">
+                <br>
+                shapName:
+                <br>
+                <input type="text" name="ship_zip" value="1">
+                <br>
+                ship_city:
+                <br>
+                <input type="text" name="ship_city" value="1">
+                <br>
+                ship_country:
+                <br>
+                <input type="text" name="ship_country" value="1">
+                <br>
+                shipping:
+                <br>
+                <input type="text" name="shipping" value="1">
+                <br>
+                phone:
+                <br>
+                <input type="text" name="phone" value="1">
+                <br>
+                tax:
+                <br>
+                <input type="text" name="tax" value="1">
+                <br>
+                date:
+                <br>
+                <input type="text" name="date" value="1">
+                <br>
+                paymentId:
+                <br>
+                <input type="text" name="paymentId" value="1">
+                <br>
+                ransactStatus:
+                <br>
+                <input type="text" name="transactStatus" value="1">
+                <br>
+                shipped:
+                <br>
+                <input type="text" name="shipped" value="1">
+                <br>
+                fullfilled:
+                <br>
+                <input type="text" name="fullfilled" value="1">
+                <br>
+                submit:
+                <br>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <link rel="stylesheet" href="../public_html/css/slider.css"/>
+        <style rel="stylesheet">
+            #RGB {
+                height: 20px;
+                background: rgb(128, 128, 128);
+            }
+            #RC .slider-selection {
+                background: #FF8282;
+            }
+            #RC .slider-handle {
+                background: red;
+            }
+            #GC .slider-selection {
+                background: #428041;
+            }
+            #GC .slider-handle {
+                background: green;
+            }
+            #BC .slider-selection {
+                background: #8283FF;
+            }
+            #BC .slider-handle {
+                border-bottom-color: blue;
+            }
+            #R, #G, #B {
+                width: 300px;
+            }
+        </style>
+
+        <section class="formField" style="padding:10px; border-left: dotted 1px black; display: inline-block;">
+            <h3>insert orderDetail</h3>
+            <form id="form_insert_color" action="../resources/manage_db.php" method="get">
+                action:
+                <br>
+                <input type="text" name="action" value="insert_insert_color">
+                <br>
+                 <!--------http://www.eyecon.ro/bootstrap-slider/ -->
+
+                <p>
+                    <b>R</b> <input type="text" class="span2" value=""
+                                    data-slider-min="0" data-slider-max="255"
+                                    data-slider-step="1" data-slider-value="128"
+                                    data-slider-id="RC" id="R"/>
+                </p>
+                <p>
+                    <b>G</b> <input type="text" class="span2" value=""
+                                    data-slider-min="0" data-slider-max="255"
+                                    data-slider-step="1" data-slider-value="128"
+                                    data-slider-id="GC" id="G"/>
+                </p>
+                <p>
+                    <b>B</b> <input type="text" class="span2" value=""
+                                    data-slider-min="0" data-slider-max="255"
+                                    data-slider-step="1" data-slider-value="128"
+                                    data-slider-id="BC" id="B"/>
+                </p>
+
+                <div id="RGB"></div>
+                <br>
+                <input type="text" name="RGB_hex" id="display_RGB_hex"/>
+
+                <!--Script for bootstrap sliders -->
+                  <script>
+                      function componentToHex(c) {
+                          var hex = c.toString(16);
+                          return hex.length == 1 ? "0" + hex : hex;
+                      }
+                      function rgbToHex(r, g, b) {
+                          return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+                      }
+                      var RGBChange = function() {
+                          $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')');
+                          $('#display_RGB_hex').val(rgbToHex(r.getValue(), g.getValue(), b.getValue()));
+                      };
+
+                      var r = $('#R').slider()
+                            .on('slide', RGBChange)
+                            .data('slider');
+                      var g = $('#G').slider()
+                              .on('slide', RGBChange)
+                              .data('slider');
+                      var b = $('#B').slider()
+                              .on('slide', RGBChange)
+                              .data('slider');
+
+                  </script>
+
+
+
+                submit:
+                <br>
+                <button type="submit">Submit</button>
+            </form>
+            <!--make slider look nice -- >
+            <script>
+                $('.slider').slider()
+            </script>
+        </section>
+
+        <section class="formField" style="padding:10px; border-left: dotted 1px black; display: inline-block;">
+            <h3>insert orderDetail</h3>
+            <form id="form_insert_orderDetail" action="../resources/manage_db.php" method="get">
+                action:
+                <br>
+                <input type="text" name="action" value="insert_orderDetail">
+                <br>
+                name:
+                <br>
+                <input type="text" name="name" value="1">
+                <br>
+                price:
+                <br>
+                <input type="text" name="price" value="1">
+                <br>
+                quantity:
+                <br>
+                <input type="text" name="quantity" value="1">
+                <br>
+
+                submit:
+                <br>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <section class="formField" style="padding:10px; border-left: dotted 1px black; display: inline-block;">
+            <h3>diverse</h3>
+            <button onclick="sendRequest_post('action=get_all_poi')">get all poi</button>
+            <br><br>
+            <button onclick="sendRequest_post('action=get_all_rutt')">get all rutt</button>
+            <br><br>
+            <form id="form_get_rutt_poi" action="../resources/manage_db.php" method="get">
+                rutt id:
+                <input type="text" name="rutt_id" value="1">
+                <br>
+                action:
+                <input type="text" name="action" value="get_rutt_poi">
+                <br>
+                <button type="submit">alla rutt poi mappningar</button>
+            </form>
+            <!--<button onclick="sendRequest_post('action=get_rutt_poi')">get rutt poi</button> -->
+            <br><br>
+            <form id="form_get_poi_images" action="../resources/manage_db.php" method="get">
+                rutt id:
+                <input type="text" name="poi_id" value="1">
+                <br>
+                action:
+                <input type="text" name="action" value="get_poi_images">
+                <br>
+                <button type="submit">alla poi images</button>
+            </form>
+           <!-- <button onclick="sendRequest_post('action=get_rutt_images')">get rutt images</button> -->
+            <br><br>
+            <form id="form_get_poi_sounds" action="../resources/manage_db.php" method="get">
+                poi id:
+                <input type="text" name="poi_id" value="1">
+                <br>
+                action:
+                <input type="text" name="action" value="get_poi_sounds">
+                <br>
+                <button type="submit">alla poi sounds</button>
+            </form>
+            <br><br>
+            <form id="form_get_all_poi_kategori" action="../resources/manage_db.php" method="get">
+                poi id:
+                <input type="text" name="poi_id" value="1">
+                <br>
+                action:
+                <input type="text" name="action" value="get_all_poi_kategori">
+                <br>
+                <button type="submit">alla poi kategori mappningar</button>
+            </form>
+           <!-- <button onclick="sendRequest_post('action=get_rutt_sounds')">get rutt sounds</button> -->
+        </section>
+
+        <section class="formField" style="padding:10px;border-left: dotted 1px black; display: inline-block;">
+            <h3>delete By ID</h3>
+            <form id="form_deleteByid" action="../resources/manage_db.php" method="get">
+                Action:<br>
+                <input type="text" name="action" value="deleteById">
+                <br>
+
+                table:<br>
+                <input type="radio" name="tableName" value="items" checked>poi
+                <br>
+                <input type="radio" name="tableName" value="users">users
+                <br>
+                <input type="radio" name="tableName" value="userItems">userItems
+                <br>
+                <input type="radio" name="tableName" value="itemModifiers">itemModifiers
+                <br>
+                <input type="radio" name="tableName" value="modifiers">modifiers
+                <br>
+                <input type="radio" name="tableName" value="itemCategories">itemCategories
+                <br>
+                <input type="radio" name="tableName" value="orders">order
+                <br>
+                <input type="radio" name="tableName" value="orderDetails">orderDetails
+                <br>
+                <br>
+                Id:<br>
+                <input type="text" name="id" value="1">
+                <br>
+                submit:
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+
+        </section>
+
+
+
+
+    </div>
+    <div id="tabs-2">
+
+
+
+
+
+    </div>
+    <div id="tabs-3">
+
+
+
+
+
+    </div>
+
+    <!-- RESPONSE FIELD-->
+    <section class="textfield" style="padding:10px; border-left:dotted 1px black; display: inline-block;">
+        <h3>Response Log</h3>
+        <textarea id="responseArea" name="message" rows="60" cols="130"></textarea>
+        <div id="responseRender">
+
+        </div>
+    </section>
+
+</div>
+
+<script src="js/ajaxScript.js"></script>    //using functions from manager_db
+
+</body>
+</html>

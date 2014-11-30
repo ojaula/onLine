@@ -1,0 +1,238 @@
+html, body {
+	height:100%;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+body{
+    
+    background-repeat:  no-repeat;
+    background: rgb(255,255,255); /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover, rgba(242,242,242,0.1) 0%, rgba(240,240,240,0.1) 1%, rgba(0,0,0,0.3) 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(242,242,242,0.1)), color-stop(1%,rgba(240,240,240,0.1)), color-stop(100%,rgba(0,0,0,0.3))); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover, rgba(242,242,242,0.1) 0%,rgba(240,240,240,0.1) 1%,rgba(0,0,0,0.3) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover, rgba(242,242,242,0.1) 0%,rgba(240,240,240,0.1) 1%,rgba(0,0,0,0.3) 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover, rgba(242,242,242,0.1) 0%,rgba(240,240,240,0.1) 1%,rgba(0,0,0,0.3) 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center, rgba(242,242,242,0.1) 0%,rgba(240,240,240,0.1) 1%,rgba(0,0,0,0.3) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1af2f2f2', endColorstr='#4d000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    
+}
+
+footer, .header{
+
+    background: rgb(51,51,51); /* Old browsers */
+    background: -moz-linear-gradient(left,  rgba(51,51,51,1) 0%, rgba(68,68,68,1) 50%, rgba(51,51,51,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(51,51,51,1)), color-stop(50%,rgba(68,68,68,1)), color-stop(100%,rgba(51,51,51,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left,  rgba(51,51,51,1) 0%,rgba(68,68,68,1) 50%,rgba(51,51,51,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left,  rgba(51,51,51,1) 0%,rgba(68,68,68,1) 50%,rgba(51,51,51,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left,  rgba(51,51,51,1) 0%,rgba(68,68,68,1) 50%,rgba(51,51,51,1) 100%); /* IE10+ */
+    background: linear-gradient(to right,  rgba(51,51,51,1) 0%,rgba(68,68,68,1) 50%,rgba(51,51,51,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#333333',GradientType=1 ); /* IE6-9 */
+}
+
+.body_wrapper {
+	min-height:100%;
+	position:relative;
+}
+.header {
+	padding:10px;
+    min-height: 150px;
+}
+.content {
+	padding:10px;
+	padding-bottom:300px;   /* Height of the footer element */
+}
+
+footer {
+    
+	width:100%;
+	height:300px;
+	position:absolute;
+	bottom:0;
+	left:0;
+	background:#333333;
+    border-top:1px solid #666666;
+
+}
+
+a{
+    text-decoration: none;
+    color: inherit;/*gain its parent computed value */
+    transition: color .5s ease;
+}
+
+/*--------------------------------------------------*/
+/*-----------------------header---------------------*/
+
+header h1
+{
+    margin: 35px 0 0 0;
+    font-size: 55px;
+    color: #eeeeee;
+}
+header section{
+
+
+}
+
+/*--------------------------------------------------*/
+/*-----------------------canvas---------------------*/
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width:0px) {
+    canvas, .canvasWrapper {
+        width: 360px;
+        height:640px;
+    }
+}
+/* Medium devices (desktops, 992px and up) */
+@media  (min-width:992px) {
+    canvas , .canvasWrapper{
+        width: 900px;
+        height:600px;
+    }
+}
+
+
+/*--------------------------------------------------*/
+/*-----------------------footer---------------------*/
+
+
+
+
+.footer .wrapper_footer{
+	line-height:20px;
+	margin: auto;/*center content */
+    margin-top: 20px;
+	width:960px;
+	font-size:12px;
+    text-align:center; /*centers block for IE(the mainblock) http://bluerobot.com/web/css/center1.html*/
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    
+        /*vertical graidient for left footer column */
+	background: -moz-linear-gradient(top, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.2)), color-stop(100%,rgba(0,0,0,0)));
+	background: -webkit-linear-gradient(top, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%);
+	background: -o-linear-gradient(top, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%);
+	background: -ms-linear-gradient(top, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%);
+	background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33000000', endColorstr='#00000000',GradientType=0 );
+    
+}
+
+footer .column{
+	color:#ababab;
+	float:left;
+	width:298px;
+	height:220px;
+	border-bottom: 1px solid #666666;
+    padding:10px;
+}
+
+footer .wrapper_footer  ul li{/*textformatting for mid footer column */
+	width:auto;
+	padding:0 0 5px 15px;
+	margin-bottom:10px;
+}
+
+footer .wrapper_footer ul li a:hover{
+	color:#ffffff;
+}
+
+
+footer .wrapper_footer .column.rightlist ul li{
+	text-align:left;
+	width:auto;
+	margin-bottom:5px;
+	clear:left;	/* removes the possibility of images floating */
+	padding:5px;
+}
+
+footer .wrapper_footer .column.rightlist ul li a span{
+	display:block;
+}
+
+footer .wrapper .column.rightlist ul li a img{
+	transition: border .20s ease;
+	float:left;
+	border:1px solid #444444;
+	margin-right:5px;
+}
+
+footer .wrapper_footer .column.rightlist ul li a img:hover{
+	border-color: #5e5e5e;
+}
+
+footer .wrapper_footer .column h4{
+	font-size: 16px;
+	color: #fff;
+	border-top: 1px solid #444444;
+	padding: 0 0 10px 0;
+	margin-bottom: 10px;
+}
+
+
+footer  .legalnotices_section_style {
+
+	position:relative; 
+	top:5px;
+	transition: opacity .25s ease;
+	opacity: 0.7;
+	margin-left: 12px;
+
+}
+
+
+/*---------------------responsive webb------------------------*/
+/*-----------------------media quary--------------------*/
+
+
+
+
+
+
+/*-------FOOTER--------*/
+
+@media (max-width: 915px){
+	
+	footer .wrapper .column{
+		font-size: 12px;
+		width: 230px;
+	}
+	footer .legalnotices_section_style .social{/* stacks the legal info */
+		display:block;
+	}
+	footer .legalnotices_section_style p{ /*adjust margin of legal info  */
+		margin-top:5px;
+	}
+}
+
+@media (max-width: 765px){
+
+	footer .wrapper_footer{/*limits the footer width*/
+		width: 320px;
+		margin: 0 auto;
+	}
+
+	footer .wrapper_footer .column{ /*formatting all 3 footer columns*/
+		float:none;
+		font-size: 14px;
+		width: 300px;
+		height:auto;
+		margin-top:5px;
+		margin-bottom:5px;
+		background:inherit;
+	}
+	footer .wrapper_footer .column.leftlist{	/*remove background from left and right column(vertical gradient)*/
+		background:inherit;
+	}
+	footer .wrapper_footer .column.rightlist{
+		background:inherit;
+	}
+	footer .legalnotices_section_style p{/* gives the text of the leagal footer more space*/
+		margin-top:5px;
+		border-top:1px;
+	}
+	
+}
