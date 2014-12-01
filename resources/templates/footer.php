@@ -72,7 +72,7 @@
 
 <!--load bootstrap scripts -->
 <script src="js/bootstrap.min.js"></script>
-<script src="js/ajaxScript.js"></script>
+
 
 <?php
 /**
