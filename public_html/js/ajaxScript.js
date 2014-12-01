@@ -130,6 +130,11 @@
                 for (i=0;i<names.length; i++){
                     console.log(names[i].textContent);
                 }
+                 if(xmlObj.getElementsByTagName('POIs'))
+                 {
+                //  callback_listAllPOI(xmlObj);
+                 }
+                
 
                
             }
@@ -138,4 +143,12 @@
             }
         }
     }
-
+function xmlProccessSimple(xmlhttp)
+{
+    var xmlObj = xmlhttp.responseXML;
+                var rootName= xmlObj.documentElement.nodeName;   // get root tag from xml
+                var names = xmlObj.getElementsByTagName("POI_namn");
+                for (i=0;i<names.length; i++){
+                    console.log(names[i].textContent);
+                }
+}
