@@ -19,19 +19,27 @@
             Category:
             <input type="radio" name="tableName" value="itemModifiers">itemModifiers
             <br>
+
             <?php
                 include '/../library/DB_manager.php';
 
-                echo "Item category:";
+                echo "<hr>";
+                echo "Item category:  ";
 
-                $xmlResponse_str = get_categories();
+                $xmlResponse_str = get_categories(0); // 0 not an ajax request
                 $xml = new SimpleXMLElement($xmlResponse_str);
                 if($xml !=null){
                     foreach($xml->children() as $category) {
                         $categoryName =  $category->category_name;
                         echo "<input style='display:inline-block;' type='radio' name='tableName' value='".$categoryName."'>".$categoryName;
+
                     }
                 }
+
+
+
+
+                echo "<hr>";
             ?>
 
             <div id="RGB"></div>

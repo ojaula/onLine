@@ -2,6 +2,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <link rel="stylesheet" href="../public_html/css/style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../public_html/css/form.css" type="text/css" media="screen" />
 
 
     <!--Google host libs: JQuery -->

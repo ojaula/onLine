@@ -8,7 +8,7 @@ require_once(realpath(dirname(__FILE__) . "/../config.php"));
 $mysqlCon;
 
 //print debug logg , on or off.
-$printLog = 1;
+$printLog = 0;
 
 if($printLog){
     echo "entered manage_db file"."\n";
@@ -25,18 +25,20 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 
     init_DB();
 
+    $ajax= 1;
+
     switch($action) {
         case 'get_login'                : get_login();break;
-        case 'get_users'                : get_users();break;
-        case 'get_user'                 : get_user($_POST['user_id']);break;
-        case 'get_items'                : get_items();break;
-        case 'get_categories'           : get_categories();break;
-        case 'get_item_category'        : get_item_category($_POST['item_id']);break;
-        case 'get_category_items'       : get_category_items($_POST['category_id']);break;
-        case 'get_user_items'           : get_user_items($_POST['user_id']);break;
-        case 'get_user_missingItems'    : get_user_missingItems($_POST['user_id']);break;
-        case 'get_user_orders'          : get_user_orders($_POST['user_id']);break;
-        case 'get_order_orderDetails'   : get_order_orderDetails($_POST['order_id']);break;
+        case 'get_users'                : get_users($ajax);break;
+        case 'get_user'                 : get_user($ajax,$_POST['user_id']);break;
+        case 'get_items'                : get_items($ajax);break;
+        case 'get_categories'           : get_categories($ajax);break;
+        case 'get_item_category'        : get_item_category($ajax,$_POST['item_id']);break;
+        case 'get_category_items'       : get_category_items($ajax,$_POST['category_id']);break;
+        case 'get_user_items'           : get_user_items($ajax,$_POST['user_id']);break;
+        case 'get_user_missingItems'    : get_user_missingItems($ajax,$_POST['user_id']);break;
+        case 'get_user_orders'          : get_user_orders($ajax,$_POST['user_id']);break;
+        case 'get_order_orderDetails'   : get_order_orderDetails($ajax,$_POST['order_id']);break;
 
         case 'insert_user'              : insert_user();break;
         case 'insert_item_color'        : insert_item_color($_POST['color']);break;
@@ -106,7 +108,7 @@ function get_login()
 
 
 
-function get_user($user_id){
+function get_user($ajax,$user_id){
 
     $rootElementName = "users";
     $childElementName="user";
@@ -121,11 +123,16 @@ function get_user($user_id){
     //$xml = sqlToXml($result,$rootElementName, $childElementName);
     $xml = sqlToXml($result,$rootElementName, $childElementName);
     //return data
-    echo $xml;
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
 
 }
 
-function get_item_category($item_id){
+function get_item_category($ajax,$item_id){
 
     $rootElementName = "items";
     $childElementName="item";
@@ -140,11 +147,16 @@ function get_item_category($item_id){
     //$xml = sqlToXml($result,$rootElementName, $childElementName);
     $xml = sqlToXml($result,$rootElementName, $childElementName);
     //return data
-    echo $xml;
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
 
 }
 
-function get_categories(){
+function get_categories($ajax){
 
     init_DB();
 
@@ -160,12 +172,16 @@ function get_categories(){
     //convert query to xml
     $xml = sqlToXml($result,$rootElementName, $childElementName);
     //return data
-    //echo $xml;
-    return $xml;
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
 
 }
 
-function get_category_items($category_id){
+function get_category_items($ajax,$category_id){
 
     $rootElementName = "category";
     $childElementName="item";
@@ -179,11 +195,16 @@ function get_category_items($category_id){
     //convert query to xml
     $xml = sqlToXml($result,$rootElementName, $childElementName);
     //return data
-    echo $xml;
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
 
 }
 
-function get_items(){
+function get_items($ajax){
 
     $rootElementName = "items";
     $childElementName="item";
@@ -197,11 +218,16 @@ function get_items(){
     //convert query to xml
     $xml = sqlToXml($result,$rootElementName, $childElementName);
     //return data
-    echo $xml;
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
 
 }
 
-function get_users(){
+function get_users($ajax){
 
     $rootElementName = "users";
     $childElementName="user";
@@ -215,11 +241,16 @@ function get_users(){
     //convert query to xml
     $xml = sqlToXml($result,$rootElementName, $childElementName);
     //return data
-    echo $xml;
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
 
 }
 
-function get_user_items($user_id){
+function get_user_items($ajax,$user_id){
 
     $rootElementName = "user_items";
     $childElementName="user_item";
@@ -233,11 +264,16 @@ function get_user_items($user_id){
     //convert query to xml
     $xml = sqlToXml($result,$rootElementName, $childElementName);
     //return data
-    echo $xml;
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
 
 }
 
-function get_user_missingItems($user_id){
+function get_user_missingItems($ajax,$user_id){
 
     $rootElementName = "missingitems";
     $childElementName="missingitem";
@@ -251,11 +287,16 @@ function get_user_missingItems($user_id){
     //convert query to xml
     $xml = sqlToXml($result,$rootElementName, $childElementName);
     //return data
-    echo $xml;
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
 
 }
 
-function get_user_orders($user_id){
+function get_user_orders($ajax,$user_id){
 
     $rootElementName = "orders";
     $childElementName= "order";
@@ -269,11 +310,16 @@ function get_user_orders($user_id){
     //convert query to xml
     $xml = sqlToXml($result,$rootElementName, $childElementName);
     //return data
-    echo $xml;
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
 
 }
 
-function get_order_orderDetails($order_id){
+function get_order_orderDetails($ajax,$order_id){
 
     $rootElementName = "orderDetails";
     $childElementName= "orderDetail";
@@ -288,7 +334,12 @@ function get_order_orderDetails($order_id){
     $xml = sqlToXml($result,$rootElementName, $childElementName);
 
     //return data
-    echo $xml;
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
 
 }
 
