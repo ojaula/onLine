@@ -42,6 +42,24 @@ $config = array(
     )
 
 );
+$host_site = "http://$_SERVER[HTTP_HOST]";
+//echo $host_site ;
+
+if ($host_site == "http://boff.se") {
+    //echo " WE ARE AT BOFF.SE ALtering detials";
+    // executing but not having desired effect.
+    $config["db"]["onlineDB"]["host"] = "boff.se.mysql";
+    $config["db"]["onlineDB"]["dbname"] = "boff_se";
+    $config["db"]["onlineDB"]["username"] = "boff_se";
+    $config["db"]["onlineDB"]["password"] = "wyAS5tt4";
+    /*echo "it changed for $actual_link";
+    echo $config["db"]["onlineDB"]["dbname"];
+    echo $config["db"]["onlineDB"]["username"];
+    echo $config["db"]["onlineDB"]["password"];
+    echo $config["db"]["onlineDB"]["host"];
+    */
+}
+
 
 $available_colors = array(
     "r" => "1",
