@@ -51,9 +51,9 @@
 
         <section class="formField" style="padding:10px; border-left: dotted 1px black; display: inline-block;">
             <h3>Insert User</h3>
-            <form id="form_insertUser" action="../resources/manage_db.php" method="get">
+            <form id="form_insert_user" action="../resources/manage_db.php" method="get">
                 Action:<br>
-                <input type="text" name="action" value="insertUser">
+                <input type="text" name="action" value="insert_user">
                 <br>
                 First Name:<br>
                 <input type="text" name="firstName" value="Mickey">
@@ -96,7 +96,7 @@
                 <br>
                 regDate:
                 <br>
-                <input type="text" name="regdate" value="Mouse">
+                <input type="text" name="regDate" value="Mouse">
                 <br>
                 emailVerified:
                 <br>
@@ -289,6 +289,174 @@
             </form>
         </section>
 
+
+        <section class="formField" style="padding:10px; border-left: dotted 1px black; display: inline-block;">
+            <h3>insert orderDetail</h3>
+            <form id="form_insert_orderDetail" action="../resources/manage_db.php" method="get">
+                action:
+                <br>
+                <input type="text" name="action" value="insert_orderDetail">
+                <br>
+                name:
+                <br>
+                <input type="text" name="name" value="1">
+                <br>
+                price:
+                <br>
+                <input type="text" name="price" value="1">
+                <br>
+                quantity:
+                <br>
+                <input type="text" name="quantity" value="1">
+                <br>
+
+                submit:
+                <br>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+
+        <section class="formField" style="padding:10px; border-left: dotted 1px black; display: inline-block;">
+            <h3>insert category</h3>
+            <form id="form_insert_category" action="../resources/manage_db.php" method="get">
+                action:
+                <br>
+                <input type="text" name="action" value="insert_category">
+                <br>
+                name:
+                <br>
+                <input type="text" name="name" value="cat">
+                <br>
+                image:
+                <br>
+                <input type="text" name="image" value="1">
+                <br>
+
+                submit:
+                <br>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <section class="formField" style="padding:10px; border-left: dotted 1px black; display: inline-block;">
+            <h3>bind item to category</h3>
+            <form id="form_bind_itemCategory" action="../resources/manage_db.php" method="get">
+                action:
+                <br>
+                <input type="text" name="action" value="bind_itemCategory">
+                <br>
+                item id:
+                <br>
+                <input type="text" name="item_id" value="1">
+                <br>
+                category id:
+                <br>
+                <input type="text" name="category_id" value="1">
+                <br>
+                submit:
+                <br>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <section class="formField" style="padding:10px; border-left: dotted 1px black; display: inline-block;">
+            <h3>Getters</h3>
+            <button onclick="sendRequest_post('action=get_items')">get all items</button>
+            <br><br>
+            <button onclick="sendRequest_post('action=get_users')">get all users</button>
+            <br><br>
+            <form id="form_get_user_items" action="../resources/manage_db.php" method="get">
+                user id:
+                <input type="text" name="user_id" value="1">
+                <br>
+                action:
+                <input type="text" name="action" value="get_user_items">
+                <br>
+                <button type="submit"> get user items</button>
+            </form>
+            <!--<button onclick="sendRequest_post('action=get_rutt_poi')">get rutt poi</button> -->
+            <br><br>
+            <form id="form_get_user_missingItems" action="../resources/manage_db.php" method="get">
+                rutt id:
+                <input type="text" name="user_id" value="1">
+                <br>
+                action:
+                <input type="text" name="action" value="get_user_missingItems">
+                <br>
+                <button type="submit">get user missing items</button>
+            </form>
+           <!-- <button onclick="sendRequest_post('action=get_rutt_images')">get rutt images</button> -->
+            <br><br>
+            <form id="form_get_user_orders" action="../resources/manage_db.php" method="get">
+                poi id:
+                <input type="text" name="user_id" value="1">
+                <br>
+                action:
+                <input type="text" name="action" value="get_user_orders">
+                <br>
+                <button type="submit">get user orders</button>
+            </form>
+            <br><br>
+            <form id="form_get_order_orderDetails" action="../resources/manage_db.php" method="get">
+                poi id:
+                <input type="text" name="order_id" value="1">
+                <br>
+                action:
+                <input type="text" name="action" value="get_order_orderDetails">
+                <br>
+                <button type="submit">order details from order</button>
+            </form>
+            <form id="form_get_category_items" action="../resources/manage_db.php" method="get">
+                poi id:
+                <input type="text" name="category_id" value="1">
+                <br>
+                action:
+                <input type="text" name="action" value="get_category_items">
+                <br>
+                <button type="submit">items in category</button>
+            </form>
+           <!-- <button onclick="sendRequest_post('action=get_rutt_sounds')">get rutt sounds</button> -->
+        </section>
+
+        <section class="formField" style="padding:10px;border-left: dotted 1px black; display: inline-block;">
+            <h3>delete By ID</h3>
+            <form id="form_deleteByid" action="../resources/manage_db.php" method="get">
+                Action:<br>
+                <input type="text" name="action" value="delete_by_id">
+                <br>
+                table:<br>
+                <input type="radio" name="tableName" value="items" checked>items
+                <br>
+                <input type="radio" name="tableName" value="users">users
+                <br>
+                <input type="radio" name="tableName" value="userItems">userItems
+                <br>
+                <input type="radio" name="tableName" value="itemModifiers">itemModifiers
+                <br>
+                <input type="radio" name="tableName" value="modifiers">modifiers
+                <br>
+                <input type="radio" name="tableName" value="itemCategories">itemCategories
+                <br>
+                <input type="radio" name="tableName" value="categories">order
+                <br>
+                <input type="radio" name="tableName" value="orders">order
+                <br>
+                <input type="radio" name="tableName" value="orderDetails">orderDetails
+                <br>
+                <br>
+                Id:<br>
+                <input type="text" name="id" value="1">
+                <br>
+                submit:
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+
+        </section>
+
+
+
         <link rel="stylesheet" href="../public_html/css/slider.css"/>
         <style rel="stylesheet">
             #RGB {
@@ -325,7 +493,7 @@
                 <br>
                 <input type="text" name="action" value="insert_insert_color">
                 <br>
-                 <!--------http://www.eyecon.ro/bootstrap-slider/ -->
+                <!--------http://www.eyecon.ro/bootstrap-slider/ -->
 
                 <p>
                     <b>R</b> <input type="text" class="span2" value=""
@@ -351,30 +519,30 @@
                 <input type="text" name="RGB_hex" id="display_RGB_hex"/>
 
                 <!--Script for bootstrap sliders -->
-                  <script>
-                      function componentToHex(c) {
-                          var hex = c.toString(16);
-                          return hex.length == 1 ? "0" + hex : hex;
-                      }
-                      function rgbToHex(r, g, b) {
-                          return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-                      }
-                      var RGBChange = function() {
-                          $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')');
-                          $('#display_RGB_hex').val(rgbToHex(r.getValue(), g.getValue(), b.getValue()));
-                      };
+                <script>
+                    function componentToHex(c) {
+                        var hex = c.toString(16);
+                        return hex.length == 1 ? "0" + hex : hex;
+                    }
+                    function rgbToHex(r, g, b) {
+                        return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+                    }
+                    var RGBChange = function() {
+                        $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')');
+                        $('#display_RGB_hex').val(rgbToHex(r.getValue(), g.getValue(), b.getValue()));
+                    };
 
-                      var r = $('#R').slider()
+                    var r = $('#R').slider()
                             .on('slide', RGBChange)
                             .data('slider');
-                      var g = $('#G').slider()
-                              .on('slide', RGBChange)
-                              .data('slider');
-                      var b = $('#B').slider()
-                              .on('slide', RGBChange)
-                              .data('slider');
+                    var g = $('#G').slider()
+                            .on('slide', RGBChange)
+                            .data('slider');
+                    var b = $('#B').slider()
+                            .on('slide', RGBChange)
+                            .data('slider');
 
-                  </script>
+                </script>
 
 
 
@@ -387,118 +555,6 @@
                 $('.slider').slider()
             </script>
         </section>
-
-        <section class="formField" style="padding:10px; border-left: dotted 1px black; display: inline-block;">
-            <h3>insert orderDetail</h3>
-            <form id="form_insert_orderDetail" action="../resources/manage_db.php" method="get">
-                action:
-                <br>
-                <input type="text" name="action" value="insert_orderDetail">
-                <br>
-                name:
-                <br>
-                <input type="text" name="name" value="1">
-                <br>
-                price:
-                <br>
-                <input type="text" name="price" value="1">
-                <br>
-                quantity:
-                <br>
-                <input type="text" name="quantity" value="1">
-                <br>
-
-                submit:
-                <br>
-                <button type="submit">Submit</button>
-            </form>
-        </section>
-
-        <section class="formField" style="padding:10px; border-left: dotted 1px black; display: inline-block;">
-            <h3>diverse</h3>
-            <button onclick="sendRequest_post('action=get_all_poi')">get all poi</button>
-            <br><br>
-            <button onclick="sendRequest_post('action=get_all_rutt')">get all rutt</button>
-            <br><br>
-            <form id="form_get_rutt_poi" action="../resources/manage_db.php" method="get">
-                rutt id:
-                <input type="text" name="rutt_id" value="1">
-                <br>
-                action:
-                <input type="text" name="action" value="get_rutt_poi">
-                <br>
-                <button type="submit">alla rutt poi mappningar</button>
-            </form>
-            <!--<button onclick="sendRequest_post('action=get_rutt_poi')">get rutt poi</button> -->
-            <br><br>
-            <form id="form_get_poi_images" action="../resources/manage_db.php" method="get">
-                rutt id:
-                <input type="text" name="poi_id" value="1">
-                <br>
-                action:
-                <input type="text" name="action" value="get_poi_images">
-                <br>
-                <button type="submit">alla poi images</button>
-            </form>
-           <!-- <button onclick="sendRequest_post('action=get_rutt_images')">get rutt images</button> -->
-            <br><br>
-            <form id="form_get_poi_sounds" action="../resources/manage_db.php" method="get">
-                poi id:
-                <input type="text" name="poi_id" value="1">
-                <br>
-                action:
-                <input type="text" name="action" value="get_poi_sounds">
-                <br>
-                <button type="submit">alla poi sounds</button>
-            </form>
-            <br><br>
-            <form id="form_get_all_poi_kategori" action="../resources/manage_db.php" method="get">
-                poi id:
-                <input type="text" name="poi_id" value="1">
-                <br>
-                action:
-                <input type="text" name="action" value="get_all_poi_kategori">
-                <br>
-                <button type="submit">alla poi kategori mappningar</button>
-            </form>
-           <!-- <button onclick="sendRequest_post('action=get_rutt_sounds')">get rutt sounds</button> -->
-        </section>
-
-        <section class="formField" style="padding:10px;border-left: dotted 1px black; display: inline-block;">
-            <h3>delete By ID</h3>
-            <form id="form_deleteByid" action="../resources/manage_db.php" method="get">
-                Action:<br>
-                <input type="text" name="action" value="deleteById">
-                <br>
-
-                table:<br>
-                <input type="radio" name="tableName" value="items" checked>poi
-                <br>
-                <input type="radio" name="tableName" value="users">users
-                <br>
-                <input type="radio" name="tableName" value="userItems">userItems
-                <br>
-                <input type="radio" name="tableName" value="itemModifiers">itemModifiers
-                <br>
-                <input type="radio" name="tableName" value="modifiers">modifiers
-                <br>
-                <input type="radio" name="tableName" value="itemCategories">itemCategories
-                <br>
-                <input type="radio" name="tableName" value="orders">order
-                <br>
-                <input type="radio" name="tableName" value="orderDetails">orderDetails
-                <br>
-                <br>
-                Id:<br>
-                <input type="text" name="id" value="1">
-                <br>
-                submit:
-                <br>
-                <input type="submit" value="Submit">
-            </form>
-
-        </section>
-
 
 
 

@@ -30,6 +30,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
         case 'get_users'                : get_users();break;
         case 'get_user'                 : get_user($_POST['user_id']);break;
         case 'get_items'                : get_items();break;
+        case 'get_categories'           : get_categories();break;
         case 'get_item_category'        : get_item_category($_POST['item_id']);break;
         case 'get_category_items'       : get_category_items($_POST['category_id']);break;
         case 'get_user_items'           : get_user_items($_POST['user_id']);break;
@@ -103,6 +104,8 @@ function get_login()
     echo $xml;
 }
 
+
+
 function get_user($user_id){
 
     $rootElementName = "users";
@@ -128,7 +131,7 @@ function get_item_category($item_id){
     $childElementName="item";
 
     // build query
-    $query = "SELECT * FROM category WHERE item_id =". $item_id ;
+    $query = "SELECT * FROM categories WHERE item_id =". $item_id ;
 
     // query data from database
     $result = query_get($query);
@@ -143,6 +146,8 @@ function get_item_category($item_id){
 
 function get_categories(){
 
+    init_DB();
+
     $rootElementName ="categories";
     $childElementName="category";
 
@@ -155,7 +160,8 @@ function get_categories(){
     //convert query to xml
     $xml = sqlToXml($result,$rootElementName, $childElementName);
     //return data
-    echo $xml;
+    //echo $xml;
+    return $xml;
 
 }
 
@@ -514,7 +520,7 @@ function query_get($query){
 //convert mysql query to xml string
 function sqlToXml($result, $rootElementName, $childElementName)
 {
-    header("Content-Type: text/xml; charset=utf-8");
+    //header("Content-Type: text/xml; charset=utf-8");
     $xml = "<?xml version='1.0' encoding='utf-8'?>\n";
     $xml .=  "<" . $rootElementName . ">"."\n";
 

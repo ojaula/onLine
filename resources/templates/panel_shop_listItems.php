@@ -16,6 +16,24 @@
             <br>
             <input type="text" name="action" value="insert_insert_color">
 
+            Category:
+            <input type="radio" name="tableName" value="itemModifiers">itemModifiers
+            <br>
+            <?php
+                include '/../library/DB_manager.php';
+
+                echo "Item category:";
+
+                $xmlResponse_str = get_categories();
+                $xml = new SimpleXMLElement($xmlResponse_str);
+                if($xml !=null){
+                    foreach($xml->children() as $category) {
+                        $categoryName =  $category->category_name;
+                        echo "<input style='display:inline-block;' type='radio' name='tableName' value='".$categoryName."'>".$categoryName;
+                    }
+                }
+            ?>
+
             <div id="RGB"></div>
             <br>
             <input type="text" name="RGB_hex" id="display_RGB_hex"/>
