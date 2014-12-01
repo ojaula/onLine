@@ -1,7 +1,3 @@
-
-
-
-
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Inventory</h3>
@@ -17,6 +13,7 @@
 
             <br>
 
+            <!-- Dynamic filter menu for shop items -->
 
             <?php
                 include '/../library/DB_manager.php';
@@ -33,10 +30,6 @@
 
                     }
                 }
-
-
-
-
                 echo "<hr>";
             ?>
 
@@ -44,32 +37,10 @@
             <br>
 
         </form>
-
-
-
+        <!-- area for deploy shop items -->
         <div class="row">
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img data-src="holder.js/300x300" alt="...">
-                    <div class="caption">
-                        <h3>Thumbnail label</h3>
-                        <p>...</p>
-                        <p>
+            <div id="shop_itemContainer" class="col-sm-6 col-md-4">
 
-                        <table>
-                            <tr>
-                                <td><a href="#" class="btn btn-primary" role="button">BUY</a></td>
-                                <td>
-                                    Price
-                                    <br>
-                                    Category
-                                </td>
-                            </tr>
-                        </table>
-
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
 

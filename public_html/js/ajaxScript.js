@@ -171,18 +171,42 @@
         }
     }
 
-
-    function ajaxCallback_items()
+    //print names of items....test
+    function ajaxCallback_listShopItems()
     {
+        var deployContainer = document.getElementById("shop_itemContainer");
+
         var xmlObj = xmlhttp.responseXML;
-        var rootName= xmlObj.documentElement.nodeName;   // get root tag from xml
-        var names = xmlObj.getElementsByTagName("item_name");
-        for (i=0;i<names.length; i++)
-        {
-            console.log(names[i].textContent);
+        //var rootName= xmlObj.documentElement.nodeName;   // get root tag from xml
+        var item_name       = xmlObj.getElementsByTagName("item_name");
+        var item_id         = xmlObj.getElementsByTagName("item_id");
+        var item_price      = xmlObj.getElementsByTagName("item_price");
+        var item_descShort   = xmlObj.getElementsByTagName("item_descShort");
+
+        for (i=0;i<item_name.length; i++) {
+
+            var thumnail = '' +
+                '<div class="thumbnail">'+
+                '<img data-src="holder.js/300x300" alt="...">'+
+                '<div class="caption">'+
+                    '<h3>Thumbnail label</h3>'+
+                    '<p>...</p>'+
+                    '<p>'+
+                        '<table>'+
+                        '<tr>'+
+                            '<td><a href="#" class="btn btn-primary" role="button">BUY</a></td>'+
+                            '<td>'+
+                                '<br>'+
+                                    '</td>'+
+                                '</tr>'+
+                            '</table>'+
+                        '</p>'+
+                    '</div>'+
+                '</div>'+
+            '}";';
         }
     }
-
+    //log xml to response in testPage
     function ajaxCallback_std()
     {
         respArea.innerHTML += xmlhttp.responseText;
