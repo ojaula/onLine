@@ -57,6 +57,7 @@ if ($host_site == "http://boff.se") {
     echo $config["db"]["onlineDB"]["username"];
     echo $config["db"]["onlineDB"]["password"];
     echo $config["db"]["onlineDB"]["host"];
+    echo "test ftp commit";
     */
 }
 
