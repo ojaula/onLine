@@ -12,13 +12,11 @@
 
         <!-- filter items -->
         <form id="form_insert_color" action="../resources/manage_db.php" method="get">
-            action:
             <br>
-            <input type="text" name="action" value="insert_insert_color">
+            <input type="hidden" type="text" name="action" value="get_item_category">
 
-            Category:
-            <input type="radio" name="tableName" value="itemModifiers">itemModifiers
             <br>
+
 
             <?php
                 include '/../library/DB_manager.php';
@@ -31,7 +29,7 @@
                 if($xml !=null){
                     foreach($xml->children() as $category) {
                         $categoryName =  $category->category_name;
-                        echo "<input style='display:inline-block;' type='radio' name='tableName' value='".$categoryName."'>".$categoryName;
+                        echo "<input style='display:inline-block;' type='checkbox' name='tableName' value='".$categoryName."'>".$categoryName;
 
                     }
                 }
@@ -42,9 +40,9 @@
                 echo "<hr>";
             ?>
 
-            <div id="RGB"></div>
+            <input type="submit" value="Submit">
             <br>
-            <input type="text" name="RGB_hex" id="display_RGB_hex"/>
+
         </form>
 
 
