@@ -571,7 +571,7 @@ function query_get($query){
 //convert mysql query to xml string
 function sqlToXml($result, $rootElementName, $childElementName)
 {
-    //header("Content-Type: text/xml; charset=utf-8");
+    header("Content-Type: text/xml; charset=utf-8");
     $xml = "<?xml version='1.0' encoding='utf-8'?>\n";
     $xml .=  "<" . $rootElementName . ">"."\n";
 

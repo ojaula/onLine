@@ -1,9 +1,13 @@
-  //using functions from manager_db
+
+
     //----global----
     // Ajax object
     var xmlhttp = new XMLHttpRequest();
     //response feedback display target
     var respArea = document.getElementById("responseArea");
+    //store result
+    var ajaxResponse;
+
 
     //Bind all buttons from forms to send ajax post message     ($('form[name="sub"]').onsubmit = function(e) {    // ajax dont seem to work.)
     // loop though all elements
@@ -18,8 +22,18 @@
             var formData = new FormData(f); // load all data from form tags
             xmlhttp = new XMLHttpRequest(); //create request;
 
-            //set callback function -> print php echo on page respone section.
-            xmlhttp.onreadystatechange = serverResponseCheck;
+
+            //set callback function
+            var callback;
+
+            if(f.getAttribute("data-callback")){
+
+                callback = f.getAttribute("data-callback");
+
+            }else{
+                callback = "ajaxCallback_std";
+            }
+            xmlhttp.onreadystatechange= function(){serverResponseCheck(callback);};
 
             //send te request
             xmlhttp.open("POST", "../resources/library/DB_manager.php?", true);
@@ -36,22 +50,45 @@
         }
         xmlhttp=new XMLHttpRequest(); //create request;
         //set callback function -> print php echo on page response section.
-        xmlhttp.onreadystatechange= serverResponseCheck;
+
+        //set callback function
+        f =document.getElementById("get_items");
+        var callback;
+
+        if(f.getAttribute("data-callback")){
+
+            callback = f.getAttribute("data-callback");
+
+        }else{
+            callback = "ajaxCallback_std";
+        }
+        xmlhttp.onreadystatechange= function(){serverResponseCheck(callback);};
 
         xmlhttp.open("GET","../resources/libraryDB_manager.php?"+str,true);
         xmlhttp.send();
     }
 
     // send specific ajax request using get.
-    function sendRequest_post(str)
+    function sendRequest_post(str,callback)
     {
         if (str.length==0)
         {
             return;
         }
         xmlhttp=new XMLHttpRequest(); //create request;
-        //set callback function -> print php echo on page respone section.
-        xmlhttp.onreadystatechange= serverResponseCheck;
+
+        //set callback function
+        f =document.getElementById("get_items");
+        var callback;
+
+        if(f.getAttribute("data-callback")){
+
+             callback = f.getAttribute("data-callback");
+
+        }else{
+             callback = "ajaxCallback_std";
+        }
+        xmlhttp.onreadystatechange= function(){serverResponseCheck(callback);};
 
         xmlhttp.open("POST", "../resources/library/DB_manager.php?", true);
         xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
@@ -59,7 +96,7 @@
     }
 
     //server response status check and get request.
-    function serverResponseCheck()
+    function serverResponseCheck(callback)
     {
         
         var printStatus = 1;
@@ -94,9 +131,7 @@
             }
             if (xmlhttp.status == 200)  // connection and request was successful!
             {
-                handleResponse(xmlhttp);
-                respArea.innerHTML += xmlhttp.responseText;
-                document.getElementById("responseRender").innerHTML=xmlhttp.responseText;
+                handleResponse(callback,xmlhttp);
                 respArea.innerHTML+="\nServer is finished!<br>\n";
             }
             else
@@ -107,48 +142,51 @@
 
     }
     //handle response from ajax
-    function handleResponse(xmlhttp){
+    function handleResponse(callback,xmlhttp){
+        // if xml file
+        if(xmlhttp.responseXML)
+        {
+            try
+            {
+                ajaxResponse = xmlhttp.responseXML; // store callback global
+                window[callback]();                 // execute callback from string
+            }
+            catch(err)
+            {
+                console.log("Error parsing XML file!");
+            }
+        }
+
         //if plaintext -> probably json
-        if(xmlhttp.responseText && 0)
+        else if(xmlhttp.responseText)
         {
             // parse plain text to json.
             try{
-                var jsonObj = JSON.parse(xmlhttp.responseText);
-                //...
+                ajaxResponse = JSON.parse(xmlhttp.responseText);
+                window[callback]();
             }
             catch(err){
                 console.log("retrieving plain text!");
             }
         }
-        // if xml file
-        else if(xmlhttp.responseXML)
-        {
-            try{
-               var xmlObj = xmlhttp.responseXML;
-                var rootName= xmlObj.documentElement.nodeName;   // get root tag from xml
-                var names = xmlObj.getElementsByTagName("POI_namn");
-                for (i=0;i<names.length; i++){
-                    console.log(names[i].textContent);
-                }
-                 if(xmlObj.getElementsByTagName('POIs'))
-                 {
-                //  callback_listAllPOI(xmlObj);
-                 }
-                
+    }
 
-               
-            }
-            catch(err){
-                console.log("Error parsing XML file!");
-            }
+
+    function ajaxCallback_items()
+    {
+        var xmlObj = xmlhttp.responseXML;
+        var rootName= xmlObj.documentElement.nodeName;   // get root tag from xml
+        var names = xmlObj.getElementsByTagName("item_name");
+        for (i=0;i<names.length; i++)
+        {
+            console.log(names[i].textContent);
         }
     }
-function xmlProccessSimple(xmlhttp)
-{
-    var xmlObj = xmlhttp.responseXML;
-                var rootName= xmlObj.documentElement.nodeName;   // get root tag from xml
-                var names = xmlObj.getElementsByTagName("POI_namn");
-                for (i=0;i<names.length; i++){
-                    console.log(names[i].textContent);
-                }
-}
+
+    function ajaxCallback_std()
+    {
+        respArea.innerHTML += xmlhttp.responseText;
+        document.getElementById("responseRender").innerHTML=xmlhttp.responseText;
+    }
+
+
