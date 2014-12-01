@@ -61,6 +61,7 @@
     //server response status check and get request.
     function serverResponseCheck()
     {
+        
         var printStatus = 1;
         // debug prints!
         if(xmlhttp.readyState==1)
@@ -123,12 +124,18 @@
         else if(xmlhttp.responseXML)
         {
             try{
-                var xmlObj = xmlhttp.responseXML;
+               var xmlObj = xmlhttp.responseXML;
                 var rootName= xmlObj.documentElement.nodeName;   // get root tag from xml
-                //...
+                var names = xmlObj.getElementsByTagName("POI_namn");
+                for (i=0;i<names.length; i++){
+                    console.log(names[i].textContent);
+                }
+
+               
             }
             catch(err){
                 console.log("Error parsing XML file!");
             }
         }
     }
+
