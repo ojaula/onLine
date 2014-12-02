@@ -28,7 +28,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
     $ajax= 1;
 
     switch($action) {
-        case 'get_login'                : get_login();break;
+        case 'get_login'                : get_login($ajax);break;
         case 'get_users'                : get_users($ajax);break;
         case 'get_user'                 : get_user($ajax,$_POST['user_id']);break;
         case 'get_items'                : get_items($ajax);break;
@@ -70,10 +70,10 @@ function init_DB(){
 
 //----GETTERS----
 
-function get_login()
+function get_login($ajax)
 {
-    $rootElementName = "users";
-    $childElementName="user";
+    $rootElementName = "loginUser";
+    $childElementName="loginUser";
 
     // build query
     global $config;
@@ -84,26 +84,41 @@ function get_login()
 
     $query = ("SELECT UserID, UserFirstName, UserLastName, UserRegDate FROM Users WHERE UserEmail = '" . $username . "' AND UserPassword = '" . $password ."'");
     $result = query_get($query);
-    $returnValue = query_get($query)->fetch_assoc();
 
-    if( count($returnValue) ) {
-        echo " <h1>user found</h1>";
-        echo $returnValue["UserLastName"];
-        require_once(TEMPLATES_PATH . "/header_hasLoggedin.php");
-        //resources/templates/header_hasLoggedin.php
-    }
-    else
+
+    if ($result->num_rows == 1)
     {
-        echo "error";
-    }
+        // output data of each row
+        while($row = $result->fetch_assoc())    //loop though row
+        {
+            $id     = $row["UserID"];
+            $fname  = $row["UserFirstName"];
+            $lname  = $row["UserLastName"];
+            
+
+            // store user ID
+            session_regenerate_id();
+            $_SESSION['sess_user_id'] = $id;
+            $_SESSION['sess_username'] = $fname . " " . $lname;
+
+            //close off database and sessionwrite;
+            session_write_close();
+
+        }
+     }
+
     // query data from database
-   
+
 
     //convert query to xml
-    //$xml = sqlToXml($result,$rootElementName, $childElementName);
     $xml = sqlToXml($result,$rootElementName, $childElementName);
-    //return data
-    echo $xml;
+    //echo $xml;
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
 }
 
 

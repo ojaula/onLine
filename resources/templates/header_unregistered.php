@@ -1,6 +1,6 @@
 <form id="form_Login" data-callback="login" name="form_Login" class="nav navbar-nav navbar-form navbar-right" role="login" method="post" action="login.php">
     <div class="form-group">
-        <input type="hidden" name="action" value="get_user">
+        <input type="hidden" name="action" value="get_login">
         <input class="form-control" type="text" name="username" id="username" placeholder="User name" alt="User name"/>
         <input class="form-control" type="password" name="password" id="password" placeholder="password"
                alt="password"/>
