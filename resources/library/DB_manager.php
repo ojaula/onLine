@@ -94,7 +94,7 @@ function get_login($ajax)
             $id     = $row["UserID"];
             $fname  = $row["UserFirstName"];
             $lname  = $row["UserLastName"];
-            
+
 
             // store user ID
             session_regenerate_id();
