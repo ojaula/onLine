@@ -19,6 +19,7 @@
 
 
             <?php
+            /*
                 include_once'/../library/DB_manager.php';
 
                 echo "<hr>";
@@ -35,6 +36,7 @@
                     }
                 }
                 echo "<hr>";
+            */
             ?>
             <br>
             <hr>

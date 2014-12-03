@@ -43,7 +43,6 @@
         <div class="col-xs-0 col-md-5"><div class="clearfix hidden-xs"><img src="images/siteLogoText.png"></div></div>
     </div>
 
-
 </section>
 
 <?php
