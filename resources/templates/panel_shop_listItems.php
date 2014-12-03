@@ -16,7 +16,7 @@
             <!-- Dynamic filter menu for shop items -->
 
             <?php
-                include '/../library/DB_manager.php';
+                include_once'/../library/DB_manager.php';
 
                 echo "<hr>";
                 echo "Item category:  ";
