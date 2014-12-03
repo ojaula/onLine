@@ -1,6 +1,5 @@
 <?php
 
-
 // load config file
 require_once(realpath(dirname(__FILE__) . "/../config.php"));
 
@@ -44,6 +43,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
         case 'insert_item_color'        : insert_item_color($_POST['color']);break;
         case 'insert_item'              : insert_item();break;
         case 'insert_category'          : insert_category();break;
+        case 'insert_order_detail'      : insert_order_detail();break;
 
         case 'delete_by_id'             : delete_by_id();break;
 
@@ -205,11 +205,13 @@ function get_category_items($ajax,$category_id){
     // build query
     //$query = "SELECT * FROM itemCategories, items WHERE category_id =". $category_id .";
 
-    $query = ("SELECT
-        items.*,
-        itemCategories.*
-         FROM  items
-         INNER JOIN itemCategories on (items.itemCategory_id = itemCategories.itemCategory_id)");
+    $query = ("
+        SELECT
+            itemCategories.*,
+            items.*
+         FROM  itemCategories
+         INNER JOIN items ON (items.item_id = itemCategories.item_id)
+        WHERE itemCategories.category_id = $category_id");
 
     // query data from database
     $result = query_get($query);
@@ -218,6 +220,7 @@ function get_category_items($ajax,$category_id){
     $xml = sqlToXml($result,$rootElementName, $childElementName);
     //return data
     if($ajax){
+        header("Content-Type: text/xml; charset=utf-8");
         echo $xml;
     }
     else{
@@ -365,6 +368,9 @@ function get_order_orderDetails($ajax,$order_id){
 
 }
 
+function insert_order_detail(){
+    echo "entered insert order detail";
+}
 
 //----SETTERS----
 
@@ -593,7 +599,7 @@ function query_get($query){
 //convert mysql query to xml string
 function sqlToXml($result, $rootElementName, $childElementName)
 {
-    header("Content-Type: text/xml; charset=utf-8");
+    //header("Content-Type: text/xml; charset=utf-8");
     $xml = "<?xml version='1.0' encoding='utf-8'?>\n";
     $xml .=  "<" . $rootElementName . ">"."\n";
 
