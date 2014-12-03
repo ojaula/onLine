@@ -72,6 +72,8 @@
 
 <!--load bootstrap scripts -->
 <script src="js/bootstrap.min.js"></script>
+<!--My sccript , modify DOM content after its been deployed(therefore not in header) -->
+<script src="js/ajaxScript.js"></script>
 
 
 <?php

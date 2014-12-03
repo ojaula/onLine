@@ -162,7 +162,7 @@
         {
             // parse plain text to json.
             try{
-                ajaxResponse = JSON.parse(xmlhttp.responseText);
+                //ajaxResponse = JSON.parse(xmlhttp.responseText);
                 window[callback]();
             }
             catch(err){
@@ -209,6 +209,7 @@
     //log xml to response in testPage
     function ajaxCallback_std()
     {
+        var respArea = document.getElementById("responseArea");
         respArea.innerHTML += xmlhttp.responseText;
         document.getElementById("responseRender").innerHTML=xmlhttp.responseText;
     }

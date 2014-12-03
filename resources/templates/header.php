@@ -35,8 +35,6 @@
         </div><!-- /.container-fluid -->
     </nav>
     <div id="responseArea" style="color:floralwhite"></div>
-    <script src="js/ajaxScript.js"></script>
-    <script src="js/headerUpdates.js"></script>
     <!--Site LOGO  -->
     <div class="row">
         <div class="col-xs-1 col-md-1"></div>

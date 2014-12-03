@@ -202,7 +202,13 @@ function get_category_items($ajax,$category_id){
     $childElementName="item";
 
     // build query
-    $query = "SELECT * FROM itemCategories WHERE category_id =". $category_id ;
+    //$query = "SELECT * FROM itemCategories, items WHERE category_id =". $category_id .";
+
+    $query = ("SELECT
+        items.*,
+        itemCategories.*
+         FROM  items
+         INNER JOIN itemCategories on (items.itemCategory_id = itemCategories.itemCategory_id)");
 
     // query data from database
     $result = query_get($query);
@@ -586,7 +592,7 @@ function query_get($query){
 //convert mysql query to xml string
 function sqlToXml($result, $rootElementName, $childElementName)
 {
-    //header("Content-Type: text/xml; charset=utf-8");
+    header("Content-Type: text/xml; charset=utf-8");
     $xml = "<?xml version='1.0' encoding='utf-8'?>\n";
     $xml .=  "<" . $rootElementName . ">"."\n";
 

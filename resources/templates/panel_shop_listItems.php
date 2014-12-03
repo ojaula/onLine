@@ -7,13 +7,16 @@
 
 
         <!-- filter items -->
-        <form id="form_insert_color" action="../resources/manage_db.php" method="get">
+        <form data-callback="ajaxCallback_listShopItems" id="form_get_category_items" action="../resources/manage_db.php" method="get">
+            poi id:
+            <input type="text" name="category_id" value="1">
             <br>
-            <input type="hidden" type="text" name="action" value="get_item_category">
-
+            action:
+            <input type="text" name="action" value="get_category_items">
             <br>
 
             <!-- Dynamic filter menu for shop items -->
+
 
             <?php
                 include_once'/../library/DB_manager.php';
@@ -26,23 +29,26 @@
                 if($xml !=null){
                     foreach($xml->children() as $category) {
                         $categoryName =  $category->category_name;
-                        echo "<input style='display:inline-block;' type='checkbox' name='tableName' value='".$categoryName."'>".$categoryName;
+                        $categoryId =  $category->category_id;
+                        echo "<input style='display:inline-block;' type='checkbox' name='category_id' value='".$categoryId."'>".$categoryName;
 
                     }
                 }
                 echo "<hr>";
             ?>
-
-            <input type="submit" value="Submit">
             <br>
-
+            <hr>
+            <button type="submit">Search</button>
         </form>
+
+
         <!-- area for deploy shop items -->
         <div class="row">
             <div id="shop_itemContainer" class="col-sm-6 col-md-4">
 
             </div>
         </div>
+
 
 
 

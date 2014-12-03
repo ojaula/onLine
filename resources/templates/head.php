@@ -19,7 +19,7 @@
 
     <!--My scripts -->
     <script src="js/jqueryScripts.js"></script>
-
+    <script src="js/headerUpdates.js"></script>
 
 
 
