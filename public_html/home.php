@@ -61,6 +61,9 @@ itemCategories.CategoryImage
  INNER JOIN items ON ( userItems.items_ItemID = items.ItemID)
  INNER JOIN itemCategories on (items.itemCategory = itemCategories.CategoryID)
  LIMIT 0 , 30");
+
+$myOldWayOfDoingThis = "select * from table1, table2 where table1.foriegnKeyid == table2.id"; // bad
+
 if ($stmt = $mysqli->prepare($query)) {
 
     $stmt->execute();

@@ -88,6 +88,8 @@ function get_login($ajax)
 
     if ($result->num_rows == 1)
     {
+        $xml = sqlToXml($result,$rootElementName, $childElementName);
+
         // output data of each row
         while($row = $result->fetch_assoc())    //loop though row
         {
@@ -111,8 +113,7 @@ function get_login($ajax)
 
 
     //convert query to xml
-    $xml = sqlToXml($result,$rootElementName, $childElementName);
-    //echo $xml;
+     //echo $xml;
     if($ajax){
         echo $xml;
     }

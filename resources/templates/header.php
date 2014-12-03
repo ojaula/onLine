@@ -15,6 +15,7 @@
             <!-- Collect the nav links, forms, and other content for toggling ,  used from http://getbootstrap.com/components/#navbar-->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
+
                 <div id="user_section">
                 <?php
                 if(!isset($_SESSION['sess_user_id']) || (trim($_SESSION['sess_user_id']) == ''))
