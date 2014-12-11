@@ -189,51 +189,46 @@
         deployContainer.innerHTML = "";
 
         // create lists of contents
-        var xmlObj =ajaxResponse;
+        var xmlObj = ajaxResponse;
         var item_name       = xmlObj.getElementsByTagName("item_name");
         var item_id         = xmlObj.getElementsByTagName("item_id");
         var item_price      = xmlObj.getElementsByTagName("item_price");
-        var item_descShort   = xmlObj.getElementsByTagName("item_descShort");
+        var item_descShort  = xmlObj.getElementsByTagName("item_descShort");
+        var item_image  = xmlObj.getElementsByTagName("item_image");
+        var item_category  = xmlObj.getElementsByTagName("category_id");
 
-        for (i=0;i<item_name.length; i++)
+        for (var i=0;i<item_name.length; i++)
         {
             //no callbacks for now, calculate price on serverside
             //onsubmit="function(e){formSubmitEvent(e);}"
             var form =''+
                 '<form  id="form_insert_orderDetail" action="../resources/manage_db.php" method="get">'+
                     '<input type="hidden" type="text" name="action" value="insert_orderDetail">'+
-                    '<br>'+
                     '<input type="hidden" type="text" name="name" value="1">'+
-                    '<br>'+
-                    'quantity:'+
-                    '<input type="text" name="quantity" value="1">'+
+                    'QTY:'+
+                    '<input type="text" maxlength="1" size="2" name="quantity" value="1">'+
                     '<button type="submit">BUY</button>'+
                 '</form>';
 
+            // check if if item is a color
+            if (item_category[i].textContent==2){}
             var thumnail = '' +
-                '<div class="thumbnail">'+
-                '<img data-src="holder.js/300x300" alt="...">'+
+                '<div style="display: inline-block; max-height=40px; max-width=50px;" class="thumbnail">'+
+                '<img data-src="'+item_image[i]+'" alt="...">'+
                 '<div class="caption">'+
                     '<h3>'+ item_name[i].textContent +'</h3>'+
                     '<p>'+
-                        '<table>'+
-                            '<tr>'+
-                                '<td>' +
-                                    '<a href="#" class="btn btn-primary" role="button">BUY</a>' +
-                                '</td>'+
-                                    form +
-                                '<td>'+
-                                    item_price[i].textContent+
-                                    '<br>' +
-                                    item_descShort[i].textContent+
-                                '</td>'+
-                            '</tr>'+
-                        '</table>'+
+                        item_price[i].textContent+
+                        '<br>' +
+                        +item_category[i].textContent+' : '+
+                        item_descShort[i].textContent+
+                        form +
                     '</p>'+
                 '</div>'+
             '</div>';
+
+            deployContainer.innerHTML += thumnail;
         }
-        deployContainer.innerHTML += thumnail;
 
         // set ajax event to all forms WARNING! this is not optimized, update all forms!
         formSubmitEvent_bindAll();

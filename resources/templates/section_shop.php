@@ -29,6 +29,7 @@
 
                                 <?php
                                     require_once(realpath(dirname(__FILE__). "/panel_shop_listItems.php"));
+                                    require_once(realpath(dirname(__FILE__). "/panel_shop_personalDetails.php"));
                                 ?>
 
                             </div>
@@ -41,6 +42,17 @@
                                 <p>WInteger convallis, nulla in </p>
                             </div>
                         </div>
+                    </div>
+                    <div style="display:inline-block; max-width: 600px; padding-right:40px;">
+                    <p>Online usually ship the ordered goods within 24 hours (if they exist in our local warehouse).<br>
+                        Order here or call (+46)70-5353331. All prices are in <strong>Euros including VAT</strong> and also applies in store..</p>
+                    </div>
+                    <div style="display:inline-block;">
+                    <p> Email Us<br>
+                        Call Us: (+46)70-5353331<br>
+                        Customer Service Hours<br>
+                        8:00AM-6:00PM Mon-Fri\<br>
+                        9:00AM-2:00PM Saturday</p>
                     </div>
 
                     <!-- Dynamic Tabs Script-->

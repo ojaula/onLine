@@ -205,13 +205,32 @@ function get_category_items($ajax,$category_id){
     // build query
     //$query = "SELECT * FROM itemCategories, items WHERE category_id =". $category_id .";
 
+    if (is_array($category_id))
+    {
+        if($category_id<1)
+        {
+            return;
+        }
+        $queryWhere= " WHERE itemCategories.category_id = $category_id[0]";
+        for($i=1; $i<count($category_id);$i++)
+        {
+            $queryWhere.=" or itemCategories.category_id = $category_id[$i] ";
+        }
+    }
+    else
+    {
+        $queryWhere= " WHERE itemCategories.category_id = $category_id";
+    }
+
+
     $query = ("
         SELECT
             itemCategories.*,
             items.*
          FROM  itemCategories
-         INNER JOIN items ON (items.item_id = itemCategories.item_id)
-        WHERE itemCategories.category_id = $category_id");
+         INNER JOIN items ON (items.item_id = itemCategories.item_id)").$queryWhere;
+
+
 
     // query data from database
     $result = query_get($query);
