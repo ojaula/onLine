@@ -15,30 +15,29 @@
 
             <!-- Dynamic filter menu for shop items -->
             <br>
+            <?php
+
+            include_once'/../library/DB_manager.php';
+
+            echo "<hr>";
+            echo "Item category:  ";
+
+            $xmlResponse_str = get_categories(0); // 0 not an ajax request
+            $xml = new SimpleXMLElement($xmlResponse_str);
+            if($xml !=null){
+                foreach($xml->children() as $category) {
+                    $categoryName =  $category->category_name;
+                    $categoryId =  $category->category_id;
+                    echo "<input style='display:inline-block;' type='checkbox' name='category_id[]' value='".$categoryId."'>".$categoryName;
+                }
+            }
+            echo "<hr>";
+
+            ?>
             <hr>
             <button type="submit">Search</button>
         </form>
 
-        <?php
-
-        include_once'/../library/DB_manager.php';
-
-        echo "<hr>";
-        echo "Item category:  ";
-
-        $xmlResponse_str = get_categories(0); // 0 not an ajax request
-        $xml = new SimpleXMLElement($xmlResponse_str);
-        if($xml !=null){
-            foreach($xml->children() as $category) {
-                $categoryName =  $category->category_name;
-                $categoryId =  $category->category_id;
-                echo "<input style='display:inline-block;' type='checkbox' name='category_id[]' value='".$categoryId."'>".$categoryName;
-
-            }
-        }
-        echo "<hr>";
-
-        ?>
 
 
         <!-- area for deploy shop items -->

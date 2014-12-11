@@ -15,21 +15,21 @@
             <!-- Collect the nav links, forms, and other content for toggling ,  used from http://getbootstrap.com/components/#navbar-->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-
-                <div id="user_section">
-                <?php
-                if(!isset($_SESSION['sess_user_id']) || (trim($_SESSION['sess_user_id']) == ''))
-                {
-                    //header("location: login.html");
-                    require_once(TEMPLATES_PATH . "/header_unregistered.php");
-
-                }
-                else
-                {
-                    require_once(TEMPLATES_PATH . "/header_hasLoggedin.php");
-                }
-                ?>
-                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <div id="user_section">
+                        <?php
+                            if(!isset($_SESSION['sess_user_id']) || (trim($_SESSION['sess_user_id']) == ''))
+                            {
+                                //header("location: login.html");
+                                require_once(TEMPLATES_PATH . "/header_unregistered.php");
+                            }
+                            else
+                            {
+                                require_once(TEMPLATES_PATH . "/header_hasLoggedin.php");
+                            }
+                        ?>
+                    </div>
+                </ul>
 
 
             </div><!-- /.navbar-collapse -->

@@ -29,16 +29,8 @@
         xmlhttp = new XMLHttpRequest(); //create request;
 
         //set callback function
-        var callback;
+        var callback = f.getAttribute("data-callback")|| "ajaxCallback_std";
 
-        if(f.getAttribute("data-callback"))
-        {
-            callback = f.getAttribute("data-callback");
-
-        }
-        else{
-            callback = "ajaxCallback_std";
-        }
         xmlhttp.onreadystatechange= function(){serverResponseCheck(callback);};
 
         //send te request
@@ -58,15 +50,8 @@
 
         //set callback function
         f =document.getElementById("get_items");
-        var callback;
+        var callback = f.getAttribute("data-callback")|| "ajaxCallback_std";
 
-        if(f.getAttribute("data-callback")){
-
-            callback = f.getAttribute("data-callback");
-
-        }else{
-            callback = "ajaxCallback_std";
-        }
         xmlhttp.onreadystatechange= function(){serverResponseCheck(callback);};
 
         xmlhttp.open("GET","../resources/libraryDB_manager.php?"+str,true);
@@ -84,15 +69,8 @@
 
         //set callback function
         f =document.getElementById("get_items");
-        var callback;
+        var callback = f.getAttribute("data-callback")|| "ajaxCallback_std";
 
-        if(f.getAttribute("data-callback")){
-
-             callback = f.getAttribute("data-callback");
-
-        }else{
-             callback = "ajaxCallback_std";
-        }
         xmlhttp.onreadystatechange= function(){serverResponseCheck(callback);};
 
         xmlhttp.open("POST", "../resources/library/DB_manager.php?", true);

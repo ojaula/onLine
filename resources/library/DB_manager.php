@@ -97,7 +97,6 @@ function get_login($ajax)
             $fname  = $row["UserFirstName"];
             $lname  = $row["UserLastName"];
 
-
             // store user ID
             session_regenerate_id();
             $_SESSION['sess_user_id'] = $id;
@@ -207,7 +206,7 @@ function get_category_items($ajax,$category_id){
 
     if (is_array($category_id))
     {
-        if($category_id<1)
+        if(count($category_id)<1)
         {
             return;
         }
