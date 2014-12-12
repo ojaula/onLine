@@ -17,6 +17,7 @@
     <script src="../public_html/js/bootstrap.js"></script>
     <script src="../public_html/js/bootstrap-slider.js"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
     <!--My scripts -->
     <script src="js/jqueryScripts.js"></script>
     
