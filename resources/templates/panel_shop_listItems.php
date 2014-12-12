@@ -16,8 +16,14 @@
             <!-- Dynamic filter menu for shop items -->
             <br>
             <?php
+            $loc = "../resources/library/DB_manager.php";
+            if(!@file_exists($loc) ) {
+                echo 'can not include '. $loc;
+            } else {
+                include_once($loc);
+            }
 
-            include_once'/../library/DB_manager.php';
+         //       include_once('/../library/DB_manager.php');
 
             echo "<hr>";
             echo "Item category:  ";

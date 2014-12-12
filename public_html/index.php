@@ -6,7 +6,7 @@ require_once(realpath(dirname(__FILE__) . "/../resources/config.php"));
 
 require_once(LIBRARY_PATH . "/templateFunctions.php");
 
-$sessionLoginDebug = "username:paul@email.com<br>Password:foo<br>";
+$sessionLoginDebug = "username:foo<br>Password:bar<br>";
 $ses_id = "";
 $ses_name = "";
 if(isset($_SESSION['sess_user_id']) ) {
