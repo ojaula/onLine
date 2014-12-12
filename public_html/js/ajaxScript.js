@@ -149,7 +149,6 @@
                 //ajaxResponse = JSON.parse(xmlhttp.responseText);
                 var parser = new DOMParser();
                 var xmlDoc = parser.parseFromString(xmlhttp.responseText, "application/xml");
-
                 ajaxResponse =  xmlDoc;
                 window[callback]();
             }
@@ -211,6 +210,36 @@
         // set ajax event to all forms WARNING! this is not optimized, update all forms!
         formSubmitEvent_bindAll();
     }
+
+    function ajaxCallback_loginEvent(){
+        var xmlObj = ajaxResponse;
+        var loginUser  = xmlObj.getElementsByTagName("loginUser");
+
+        if(loginUser.length<1)
+        {
+            console.log("user did not exist");
+        }
+        else
+        {
+            console.log("user did exist");
+            var headerDeployDiv = document.getElementById("header_userSection");
+
+            //fetch html with Ajax, not async!.
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET","../resources/templates/header_hasLoggedin.php", false);
+            xmlhttp.send();
+            headerDeployDiv.innerHTML = xmlhttp.responseText;
+
+
+        }
+
+        //change header bar
+        //change shop bar
+
+    }
+
+
+
     //log xml to response in testPage
     function ajaxCallback_std()
     {

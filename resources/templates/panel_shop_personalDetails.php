@@ -47,7 +47,16 @@
             <div class="boxtitle">You are not logged in!</div>
             <div class="formrow">If you are not logged in, you want be able to receive the digital goods. However, we gladly accept your donations!</div>
             <?php
-                require(realpath(dirname(__FILE__). "/header_unregistered.php"));
+                if(!isset($_SESSION['sess_user_id']) || (trim($_SESSION['sess_user_id']) == ''))
+                {
+                    //header("location: login.html");
+                    require(TEMPLATES_PATH . "/header_unregistered.php");
+                }
+                else
+                {
+                    require(TEMPLATES_PATH . "/header_hasLoggedin.php");
+                }
+
             ?>
 
     </div>

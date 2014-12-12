@@ -70,9 +70,10 @@ function init_DB(){
 
 //----GETTERS----
 
+
 function get_login($ajax)
 {
-    $rootElementName = "loginUser";
+    $rootElementName = "loginUsers";
     $childElementName="loginUser";
 
     // build query
@@ -82,20 +83,23 @@ function get_login($ajax)
    // $username = $mysqli->real_escape_string($username);
     // $password = $mysqli->real_escape_string($password);
 
-    $query = ("SELECT UserID, UserFirstName, UserLastName, UserRegDate FROM Users WHERE UserEmail = '" . $username . "' AND UserPassword = '" . $password ."'");
+    $query = ("SELECT user_id, user_firstName, user_lastName, user_regDate
+                FROM users
+                WHERE user_email = '" . $username . "' AND user_password = '" . $password ."'");
     $result = query_get($query);
 
+    $xml = sqlToXml($result,$rootElementName, $childElementName);
 
     if ($result->num_rows == 1)
     {
-        $xml = sqlToXml($result,$rootElementName, $childElementName);
+        $xmlObj = new SimpleXMLElement($xml);
 
         // output data of each row
-        while($row = $result->fetch_assoc())    //loop though row
+        foreach ($xmlObj->loginUser as $user)    //loop though row
         {
-            $id     = $row["UserID"];
-            $fname  = $row["UserFirstName"];
-            $lname  = $row["UserLastName"];
+            $id     = $user->user_id;
+            $fname  = $user->user_firstName;
+            $lname  = $user->user_lastName;
 
             // store user ID
             session_regenerate_id();
