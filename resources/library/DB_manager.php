@@ -48,6 +48,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
         case 'delete_by_id'             : delete_by_id();break;
 
         case 'bind_itemCategory'        : bind_itemCategory();break;
+        case 'logout'                   : logOutUser($ajax);break;
 
     }
 }
@@ -70,6 +71,26 @@ function init_DB(){
 
 //----GETTERS----
 
+function logOutUser($ajax)
+{
+
+    // Unset all of the session variables.
+    $_SESSION = array();
+
+// If it's desired to kill the session, also delete the session cookie.
+// Note: This will destroy the session, and not just the session data!
+    if (ini_get("session.use_cookies")) {
+        $params = session_get_cookie_params();
+        setcookie(session_name(), '', time() - 42000,
+            $params["path"], $params["domain"],
+            $params["secure"], $params["httponly"]
+        );
+    }
+
+// Finally, destroy the session.
+    session_destroy();
+
+}
 
 function get_login($ajax)
 {
@@ -94,12 +115,15 @@ function get_login($ajax)
     {
         $xmlObj = new SimpleXMLElement($xml);
 
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         // output data of each row
         foreach ($xmlObj->loginUser as $user)    //loop though row
         {
-            $id     = $user->user_id;
-            $fname  = $user->user_firstName;
-            $lname  = $user->user_lastName;
+            $id     = (string) $user->user_id;
+            $fname  = (string)$user->user_firstName;
+            $lname  = (string) $user->user_lastName;
 
             // store user ID
             session_regenerate_id();
