@@ -179,12 +179,12 @@
             //no callbacks for now, calculate price on serverside
             //onsubmit="function(e){formSubmitEvent(e);}"
             var form =''+
-                '<form  id="form_insert_orderDetail" action="../resources/manage_db.php" method="get">'+
+                '<form  id="" action="../resources/manage_db.php" method="get">'+
                     '<input type="hidden" type="text" name="action" value="insert_orderDetail">'+
                     '<input type="hidden" type="text" name="name" value="1">'+
                     'QTY:'+
                     '<input type="text" maxlength="1" size="2" name="quantity" value="1">'+
-                    '<button type="submit">BUY</button>'+
+                    '<button onclick="">BUY</button>'+
                 '</form>';
 
             // check if if item is a color

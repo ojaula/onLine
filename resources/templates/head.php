@@ -20,7 +20,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
     <!--My scripts -->
     <script src="js/jqueryScripts.js"></script>
-    
     <script src="js/headerUpdates.js"></script>
 
 
