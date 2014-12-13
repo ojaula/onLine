@@ -115,8 +115,11 @@ function get_login($ajax)
     {
         $xmlObj = new SimpleXMLElement($xml);
 
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
+        if(!isset($_SESSION)){session_start();}
+        $_SESSION['valid'] = 'valid';
+        if($_SESSION['valid'] != 'valid')
+        {
+            //handle disabled sessions
         }
         // output data of each row
         foreach ($xmlObj->loginUser as $user)    //loop though row
