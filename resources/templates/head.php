@@ -17,7 +17,10 @@
     <script src="../public_html/js/bootstrap.js"></script>
     <script src="../public_html/js/bootstrap-slider.js"></script>
 
+    <!--AngularJs + xml->json converter -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
+    <script src="../public_html/js/xml2json.min.js"></script>
+
     <!--My scripts -->
     <script src="js/jqueryScripts.js"></script>
     <script src="js/headerUpdates.js"></script>

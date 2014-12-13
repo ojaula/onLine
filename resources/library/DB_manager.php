@@ -1,5 +1,4 @@
 <?php
-
 // load config file
 require_once(realpath(dirname(__FILE__) . "/../config.php"));
 
@@ -50,6 +49,9 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 
         case 'bind_itemCategory'        : bind_itemCategory();break;
 
+        case 'accept_shoppingCart'        : accept_shoppingCart($ajax);break;
+
+
     }
 }
 
@@ -69,8 +71,83 @@ function init_DB(){
     $mysqlCon = new mysqli($DB_SERVERNAME, $DB_USERNAME, $DB_PASSWORD);
 }
 
-//----GETTERS----
 
+function  accept_shoppingCart($ajax)
+{
+    //check if logged in!
+    if(!isset($_SESSION['sess_user_id']) || (trim($_SESSION['sess_user_id']) == '')){
+
+        $rootElementName = "loginUsers";
+        $childElementName="loginUser";
+        $checkthisIs = $_SESSION['sess_user_id'];
+        //get user details for creating order
+        $userData = get_user(0,$_SESSION['sess_user_id']);
+        $xml = sqlToXml($userData,$rootElementName, $childElementName);
+        $xmlObj = new SimpleXMLElement($xml);
+
+        //insert user details to order and save order.
+        foreach ($xmlObj->loginUser as $user)    //loop though row
+        {
+            $uid     = (string)$user->user_id;
+            $ufname  = (string)$user->user_firstName;
+            $ulname  = (string)$user->user_lastName;
+            $uemail     = (string)$user->user_email;
+            $uadress  = (string)$user->user_address;
+            $uzip  = (string)$user->user_zip;
+            $ucity     = (string)$user->user_city;
+            $ucountry  = (string)$user->user_country;
+
+        }
+                          /*
+                          order_shipping,
+                          order_phone,
+                          order_tax,
+                          order_date,
+                          order_paymentID,
+                          order_transactStatus,
+                          order_shipped,
+                          order_fulFilled,
+                          */
+
+        $query = "INSERT INTO orders(
+                          order_ShipName,
+                          order_ShipAddress,
+                          order_email,
+                          order_shipZip,
+                          order_shipCity,
+                          order_shipCountry,
+                          user_id
+                          )
+                       VALUES('"
+                .$ufname.$ulname."','"
+                .$uadress."','"
+                .$uemail."','"
+                .$uzip ."','"
+                .$ucity."','"
+                .$ucountry ."','"
+                .$uid
+                ."')";
+
+        query_insert($query);
+
+        //return the created order as xml
+        $rootElementName = "UserOrders";
+        $childElementName="order";
+
+        $userCurrentOrder = get_user_currentOrder(0,$_SESSION['sess_user_id']);
+        $userCurrentOrder_xml = sqlToXml($userCurrentOrder,$rootElementName, $childElementName);
+
+        if($ajax){
+            echo $userCurrentOrder_xml;
+        }
+        else{
+            return $userCurrentOrder_xml;
+        }
+
+    }
+}
+
+//----GETTERS----
 
 function get_login($ajax)
 {
@@ -351,6 +428,28 @@ function get_user_missingItems($ajax,$user_id){
 
     // build query
     $query = "SELECT * FROM userItems where user_id!=".$user_id ;
+
+    // query data from database
+    $result = query_get($query);
+
+    //convert query to xml
+    $xml = sqlToXml($result,$rootElementName, $childElementName);
+    //return data
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
+
+}
+function get_user_currentOrder($ajax,$user_id){
+
+    $rootElementName = "orders";
+    $childElementName= "order";
+
+    // build query
+    $query = "SELECT * FROM orders where user_id=".$user_id AND order_fulFilled!=1;
 
     // query data from database
     $result = query_get($query);

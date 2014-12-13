@@ -62,6 +62,7 @@ function loadShoppingCart(placmentContainer){
 
     for (var i = 0; i < chartJson.items.length; i++) {
         alert(chartJson.items[i].item_id);
+
     }
 
 
