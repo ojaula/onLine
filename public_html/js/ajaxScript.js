@@ -1,6 +1,9 @@
 
 
     //----global----
+    //global dict for holding items being viewed in shop.
+    //used for smoother integration with the choppingCart.
+    var global_object_dict = {};
     // Ajax object
     var xmlhttp = new XMLHttpRequest();
     //response feedback display target
@@ -167,24 +170,33 @@
 
         // create lists of contents
         var xmlObj = ajaxResponse;
+
         var item_name       = xmlObj.getElementsByTagName("item_name");
         var item_id         = xmlObj.getElementsByTagName("item_id");
         var item_price      = xmlObj.getElementsByTagName("item_price");
         var item_descShort  = xmlObj.getElementsByTagName("item_descShort");
-        var item_image  = xmlObj.getElementsByTagName("item_image");
-        var item_category  = xmlObj.getElementsByTagName("category_id");
+        var item_image      = xmlObj.getElementsByTagName("item_image");
+        var item_category   = xmlObj.getElementsByTagName("category_id");
+        var item            = xmlObj.getElementsByTagName("item");
+
+        //store objects for choppingCart
+        for(var j=0;j<item.length;j++){
+            //var parser = new DOMParser();
+            //global_object_dict[item_id[j].textContent]= parser.parseFromString(item[j], "application/xml");
+            global_object_dict[item_id[j].textContent]= item[j];
+        }
 
         for (var i=0;i<item_name.length; i++)
         {
             //no callbacks for now, calculate price on serverside
             //onsubmit="function(e){formSubmitEvent(e);}"
             var form =''+
-                '<form  id="form_insert_orderDetail" action="../resources/manage_db.php" method="get">'+
+                '<form id="" action="../resources/manage_db.php" method="get">'+
                     '<input type="hidden" type="text" name="action" value="insert_orderDetail">'+
                     '<input type="hidden" type="text" name="name" value="1">'+
                     'QTY:'+
-                    '<input type="text" maxlength="1" size="2" name="quantity" value="1">'+
-                    '<button type="submit">BUY</button>'+
+                    '<input id="item_'+item_id[i].textContent+'" type="text" maxlength="1" size="2" name="quantity" value="1">'+
+                    '<button onclick="shoppingCart_insert('+item_id[i].textContent+')">BUY</button>'+
                 '</form>';
 
             // check if if item is a color
@@ -237,8 +249,17 @@
         //change shop bar
 
     }
+    /*
+    function ajaxCallback_additemToCart()
+    {
+        shoppingCart_insert(ajaxResponse);
+    }
+    */
 
-
+    function ajaxCallback_createdOrder()
+    {
+            alert("created Order callback");
+    }
 
     //log xml to response in testPage
     function ajaxCallback_std()

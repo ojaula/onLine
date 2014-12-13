@@ -1,5 +1,4 @@
 <?php
-
 // load config file
 require_once(realpath(dirname(__FILE__) . "/../config.php"));
 
@@ -31,6 +30,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
         case 'get_users'                : get_users($ajax);break;
         case 'get_user'                 : get_user($ajax,$_POST['user_id']);break;
         case 'get_items'                : get_items($ajax);break;
+        case 'get_item'                 : get_item($ajax,$_POST['item_id']);break;
         case 'get_categories'           : get_categories($ajax);break;
         case 'get_item_category'        : get_item_category($ajax,$_POST['item_id']);break;
         case 'get_category_items'       : get_category_items($ajax,$_POST['category_id']);break;
@@ -48,7 +48,9 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
         case 'delete_by_id'             : delete_by_id();break;
 
         case 'bind_itemCategory'        : bind_itemCategory();break;
-        case 'logout'                   : logOutUser($ajax);break;
+
+        case 'accept_shoppingCart'        : accept_shoppingCart($ajax);break;
+
 
     }
 }
@@ -69,31 +71,87 @@ function init_DB(){
     $mysqlCon = new mysqli($DB_SERVERNAME, $DB_USERNAME, $DB_PASSWORD);
 }
 
-//----GETTERS----
 
-function logOutUser($ajax)
+function  accept_shoppingCart($ajax)
 {
+    //check if logged in!
+    if(!isset($_SESSION['sess_user_id']) || (trim($_SESSION['sess_user_id']) == '')){
 
-    // Unset all of the session variables.
-    $_SESSION = array();
+        $rootElementName = "loginUsers";
+        $childElementName="loginUser";
+        $checkthisIs = $_SESSION['sess_user_id'];
+        //get user details for creating order
+        $userData = get_user(0,$_SESSION['sess_user_id']);
+        $xml = sqlToXml($userData,$rootElementName, $childElementName);
+        $xmlObj = new SimpleXMLElement($xml);
 
-// If it's desired to kill the session, also delete the session cookie.
-// Note: This will destroy the session, and not just the session data!
-    if (ini_get("session.use_cookies")) {
-        $params = session_get_cookie_params();
-        setcookie(session_name(), '', time() - 42000,
-            $params["path"], $params["domain"],
-            $params["secure"], $params["httponly"]
-        );
+        //insert user details to order and save order.
+        foreach ($xmlObj->loginUser as $user)    //loop though row
+        {
+            $uid     = (string)$user->user_id;
+            $ufname  = (string)$user->user_firstName;
+            $ulname  = (string)$user->user_lastName;
+            $uemail     = (string)$user->user_email;
+            $uadress  = (string)$user->user_address;
+            $uzip  = (string)$user->user_zip;
+            $ucity     = (string)$user->user_city;
+            $ucountry  = (string)$user->user_country;
+
+        }
+                          /*
+                          order_shipping,
+                          order_phone,
+                          order_tax,
+                          order_date,
+                          order_paymentID,
+                          order_transactStatus,
+                          order_shipped,
+                          order_fulFilled,
+                          */
+
+        $query = "INSERT INTO orders(
+                          order_ShipName,
+                          order_ShipAddress,
+                          order_email,
+                          order_shipZip,
+                          order_shipCity,
+                          order_shipCountry,
+                          user_id
+                          )
+                       VALUES('"
+                .$ufname.$ulname."','"
+                .$uadress."','"
+                .$uemail."','"
+                .$uzip ."','"
+                .$ucity."','"
+                .$ucountry ."','"
+                .$uid
+                ."')";
+
+        query_insert($query);
+
+        //return the created order as xml
+        $rootElementName = "UserOrders";
+        $childElementName="order";
+
+        $userCurrentOrder = get_user_currentOrder(0,$_SESSION['sess_user_id']);
+        $userCurrentOrder_xml = sqlToXml($userCurrentOrder,$rootElementName, $childElementName);
+
+        if($ajax){
+            echo $userCurrentOrder_xml;
+        }
+        else{
+            return $userCurrentOrder_xml;
+        }
+
     }
-
-// Finally, destroy the session.
-    session_destroy();
-
 }
+
+//----GETTERS----
 
 function get_login($ajax)
 {
+    //session_destroy();
     $rootElementName = "loginUsers";
     $childElementName="loginUser";
 
@@ -115,18 +173,21 @@ function get_login($ajax)
     {
         $xmlObj = new SimpleXMLElement($xml);
 
+<<<<<<< HEAD
         if(!isset($_SESSION)){session_start();}
         $_SESSION['valid'] = 'valid';
         if($_SESSION['valid'] != 'valid')
         {
             //handle disabled sessions
         }
+=======
+>>>>>>> FETCH_HEAD
         // output data of each row
         foreach ($xmlObj->loginUser as $user)    //loop though row
         {
-            $id     = (string) $user->user_id;
+            $id     = (string)$user->user_id;
             $fname  = (string)$user->user_firstName;
-            $lname  = (string) $user->user_lastName;
+            $lname  = (string)$user->user_lastName;
 
             // store user ID
             session_regenerate_id();
@@ -300,6 +361,28 @@ function get_items($ajax){
     }
 
 }
+function get_item($ajax, $itemId){
+
+    $rootElementName = "items";
+    $childElementName="item";
+
+    // build query
+    $query = "SELECT * FROM items WHERE item_id = ".$itemId;
+
+    // query data from database
+    $result = query_get($query);
+
+    //convert query to xml
+    $xml = sqlToXml($result,$rootElementName, $childElementName);
+    //return data
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
+
+}
 
 function get_users($ajax){
 
@@ -354,6 +437,28 @@ function get_user_missingItems($ajax,$user_id){
 
     // build query
     $query = "SELECT * FROM userItems where user_id!=".$user_id ;
+
+    // query data from database
+    $result = query_get($query);
+
+    //convert query to xml
+    $xml = sqlToXml($result,$rootElementName, $childElementName);
+    //return data
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
+
+}
+function get_user_currentOrder($ajax,$user_id){
+
+    $rootElementName = "orders";
+    $childElementName= "order";
+
+    // build query
+    $query = "SELECT * FROM orders where user_id=".$user_id AND order_fulFilled!=1;
 
     // query data from database
     $result = query_get($query);
