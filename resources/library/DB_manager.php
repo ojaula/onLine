@@ -120,28 +120,39 @@ function set_logout($ajax)
 function  accept_shoppingCart($ajax)
 {
     //check if logged in!
-    if(!isset($_SESSION['sess_user_id']) || (trim($_SESSION['sess_user_id']) == '')){
 
-        $rootElementName = "loginUsers";
-        $childElementName="loginUser";
+    if(!isset($_SESSION)){
+        session_start();
+    }
+    /*
+    $_SESSION['valid'] = 'valid';
+    if($_SESSION['valid'] != 'valid')
+    {
+        //handle disabled sessions
+    }
+    */
+
+    if(isset($_SESSION['sess_user_id'])){
+
         $checkthisIs = $_SESSION['sess_user_id'];
         //get user details for creating order
-        $userData = get_user(0,$_SESSION['sess_user_id']);
-        $xml = sqlToXml($userData,$rootElementName, $childElementName);
-        $xmlObj = new SimpleXMLElement($xml);
+        $userDataXML = get_user(0,$_SESSION['sess_user_id']);
+        $xmlObj = new SimpleXMLElement($userDataXML);
 
         //insert user details to order and save order.
-        foreach ($xmlObj->loginUser as $user)    //loop though row
+        foreach ($xmlObj->user as $user)    //loop though row
         {
             $uid     = (string)$user->user_id;
             $ufname  = (string)$user->user_firstName;
             $ulname  = (string)$user->user_lastName;
             $uemail     = (string)$user->user_email;
-            $uadress  = (string)$user->user_address;
-            $uzip  = (string)$user->user_zip;
+            $uadress    = (string)$user->user_address;
+            $uzip       = (string)$user->user_zip;
             $ucity     = (string)$user->user_city;
             $ucountry  = (string)$user->user_country;
-
+            $ufulFilled  = 0;
+            $zero = 0.0;
+            settype($zero, "float");
         }
                           /*
                           order_shipping,
@@ -154,6 +165,7 @@ function  accept_shoppingCart($ajax)
                           order_fulFilled,
                           */
 
+        //0 means it is not fulfilled
         $query = "INSERT INTO orders(
                           order_ShipName,
                           order_ShipAddress,
@@ -161,6 +173,14 @@ function  accept_shoppingCart($ajax)
                           order_shipZip,
                           order_shipCity,
                           order_shipCountry,
+                          order_shipping,
+                          order_phone,
+                          order_tax,
+                          order_date,
+                          order_paymentID,
+                          order_transactStatus,
+                          order_shipped,
+                          order_fulFilled,
                           user_id
                           )
                        VALUES('"
@@ -170,25 +190,74 @@ function  accept_shoppingCart($ajax)
                 .$uzip ."','"
                 .$ucity."','"
                 .$ucountry ."','"
+                .$zero."','"
+                ."n"."','"
+                .$zero."',"
+                ."now(),'"
+                ."n"."','"
+                ."n"."','"
+                ."n"."','"
+                .$ufulFilled ."','"
                 .$uid
                 ."')";
 
         query_insert($query);
 
-        //return the created order as xml
-        $rootElementName = "UserOrders";
-        $childElementName="order";
 
+        //return the created order as xml
         $userCurrentOrder = get_user_currentOrder(0,$_SESSION['sess_user_id']);
-        $userCurrentOrder_xml = sqlToXml($userCurrentOrder,$rootElementName, $childElementName);
+        $userCurrentOrderOBJ = new SimpleXMLElement($userCurrentOrder);
+        $orderDetail_orderId = $userCurrentOrderOBJ->order->order_id;
+        //CREATE ORDER DETAILS
+
+        $itemAmountArr = $_POST['chart_item_amount'];
+        $itemIdArr = $_POST['chart_Item_Id'];
+
+        for($i=0; $i<count($itemIdArr);$i++)
+        {
+            $tempItem = get_item(0, $itemIdArr[$i]);
+            $tempItemObj = new SimpleXMLElement($tempItem);
+
+            $orderDetail_itemId = $itemIdArr[$i];
+            $orderDetail_price = $itemAmountArr[$i]*$tempItemObj->item->item_price;     //TEMP!!!
+            $orderDetail_Name = $tempItemObj->item->item_name;     //TEMP!!!
+            $orderDetail_quantity = $itemAmountArr[$i];     //TEMP!!!
+
+
+            $query = "INSERT INTO orderDetails(
+                          orderDetails_name,
+                          orderDetails_price,
+                          orderDetails_quantity,
+                          order_id,
+                          item_id
+                          )
+                       VALUES('"
+                            .$orderDetail_Name."','"
+                            .$orderDetail_price."','"
+                            .$orderDetail_quantity."','"
+                            .$orderDetail_orderId."','"
+                            .$orderDetail_itemId
+                            ."')";
+
+            query_insert($query);
+        }
 
         if($ajax){
-            echo $userCurrentOrder_xml;
+            echo $userCurrentOrder;
         }
         else{
-            return $userCurrentOrder_xml;
+            return $userCurrentOrder;
         }
 
+    }
+    else //not logged in
+    {
+        if($ajax){
+            echo null;
+        }
+        else{
+            return null;
+        }
     }
 }
 
@@ -501,8 +570,8 @@ function get_user_currentOrder($ajax,$user_id){
     $rootElementName = "orders";
     $childElementName= "order";
 
-    // build query
-    $query = "SELECT * FROM orders where user_id=".$user_id AND order_fulFilled!=1;
+    // get current order, only one order should be not fulfilled(the current order)!
+    $query = "SELECT * FROM orders where user_id=".$user_id." AND order_fulFilled=0";
 
     // query data from database
     $result = query_get($query);
@@ -763,9 +832,10 @@ function query_insert($query){
         echo "\n"."New record created successfully";
     } else {
         echo "\n"."Error: " . $query . "\n" . $mysqlCon->error;
+        $errnolog= $mysqlCon->error;
     }
 
-    $mysqlCon->close();
+    //$mysqlCon->close();
 }
 
 function query_get($query){
@@ -788,7 +858,7 @@ function query_get($query){
     //search db from query
     $result = $mysqlCon->query($query);
 
-    $mysqlCon->close();
+    //$mysqlCon->close();
 
     return $result;
 }

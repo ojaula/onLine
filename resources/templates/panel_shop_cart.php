@@ -50,6 +50,7 @@
             <input  type="submit" value="Checkout">
             <br>
         </form>
+        <p id="form_cart_message"></p>
 
     </div>
 
@@ -61,8 +62,8 @@
         // global var for choppingCart content
         //loadLocalCart();    //load to global shoppingCart_list
         loadShoppingCart()
-        var shoppingCart_list = [];
 
+        //var shoppingCart_list = [];
         var shoppingCart_list2 = [
             {
                 item_id: 1,
@@ -74,7 +75,7 @@
                 item_price: "Jhons2"}
         ];
          //localStorage.setItem('onLine_shoppingCart', JSON.stringify(shoppingCart_list));
-        console.log(shoppingCart_list2);
+        //console.log(shoppingCart_list2);
 
 
         //var shoppingCart = getLocalCart();
@@ -97,48 +98,35 @@
                 jsonOBJ = itemOBJ;
             }
             //store new value in localstorage
-            addToLocalCart(jsonOBJ);
+            cart_addItem(jsonOBJ);
             //update local cart model
             //loadLocalCart();
-            shoppingCart_list.push(jsonOBJ);
+            //shoppingCart_list.push(jsonOBJ);
             loadShoppingCart();
         }
 
-        function addToLocalCart(jsonOBJ){
+        function cart_addItem(jsonOBJ){
             // Put the object into storage
             // Parse the serialized data back into an aray of objects
-            var itemArray= [];
-            try{
-                itemArray = JSON.parse(localStorage.getItem('onLine_shoppingCart'));
 
-            }catch(e){
-                itemArray= [];
-            }
+            var cart =cart_load();
 
             // add quantity value in the time object as an pre order detail.
             jsonOBJ.item["item_quantity"]=1;
 
-            itemArray.push(jsonOBJ["item"]);
-            console.log(itemArray);
-            localStorage.setItem('onLine_shoppingCart', JSON.stringify(itemArray));
+            cart.push(jsonOBJ["item"]);
+            console.log(cart);
+            localStorage.setItem('onLine_shoppingCart', JSON.stringify(cart));
         }
 
-        function loadLocalCart(){
+
+
+        function cart_load(){
             // Retrieve the object from storage
-            var a;
-            try{
-                a = JSON.parse(localStorage.getItem('onLine_shoppingCart'));
-                shoppingCart_list.push(a);
-            }catch(e){
-                console.log("cant load choppingcart!")
-            }
+            var ret=[];
+            return JSON.parse(localStorage.getItem('onLine_shoppingCart')) || ret;
         }
 
-
-        function getLocalCart(){
-            // Retrieve the object from storage
-            return JSON.parse(localStorage.getItem('onLine_shoppingCart'));
-        }
 
         function cart_deleteitem(item_id){
             // Put the object into storage
@@ -188,7 +176,7 @@
         function loadShoppingCart(){
 
             var cartContainer = document.getElementById("chart_productlist");
-            var chartJson =getLocalCart();
+            var chartJson =cart_load();
 
             cartContainer.innerHTML = "";
             for (var i = 0; i < chartJson.length; i++) {
@@ -205,11 +193,11 @@
                     '<td class="prod_name" style="min-width:450px">'+
                     '<p><a href="/se-sv/spel/nintendo_wii_u/161184-bayonetta_2_special_edition">'+obj.item_name+' : '+obj.item_descShort+'</a></p><nobr>'+
                     '<p class="prod_artnr"><nobr>Artikelnummer: '+obj.item_id+'</p>'+
-                    '<input type="hidden" name="chartOBJ'+obj.item_id+'[]" value="'+obj.item_id+'">'+
+                    '<input type="hidden" name="chart_Item_Id[]" value="'+obj.item_id+'">'+
                     '</td>'+
                     '<td class=" prod_amount">'+
                     '<span class="glyphicon glyphicon-refresh" onclick="cart_updateitemQuantity(\''+obj.item_id+'\',\'item_quantity'+obj.item_id+'\')" aria-hidden="true"></span>'+
-                    '<input type="text" size="3" onblur="cart_updateitemQuantity(\''+obj.item_id+'\',\'item_quantity'+obj.item_id+'\')" id="item_quantity'+obj.item_id+'" value="'+obj.item_quantity+'" name="item_amount[]"> st :'+
+                    '<input type="text" size="3" onblur="cart_updateitemQuantity(\''+obj.item_id+'\',\'item_quantity'+obj.item_id+'\')" id="item_quantity'+obj.item_id+'" value="'+obj.item_quantity+'" name="chart_item_amount[]"> st :'+
                     '</td>'+
                     '<td class="prod_price">'+obj.item_price+' kr</td>'+
                     '<td class="prod_remove">'+

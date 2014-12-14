@@ -151,6 +151,8 @@
             }
             catch(err)
             {
+                ajaxResponse=null;
+                window[callback]();
                 console.log("Error parsing XML file!");
             }
         }
@@ -168,8 +170,15 @@
                 window[callback]();
             }
             catch(err){
+                ajaxResponse=null;
+                window[callback]();
                 console.log("retrieving plain text!");
             }
+        }
+        else{
+            ajaxResponse=null;
+            window[callback]();
+            console.log("received null!");
         }
     }
 
@@ -270,7 +279,19 @@
 
     function ajaxCallback_createdOrder()
     {
+        //alert("created Order callback");
+        var xmlObj = ajaxResponse;
+        if(!xmlObj)
+        {
             alert("created Order callback");
+            document.getElementById("form_cart_message").innerHTML= "Not logged in!";
+        }
+        else
+        {
+            document.getElementById("form_cart_message").innerHTML= "";
+            document.getElementById("shop_personaldetails_body").style.display ="block";
+            document.getElementById("shop_userdetails_body").style.display ="block";
+        }
     }
 
     //log xml to response in testPage
