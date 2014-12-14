@@ -22,6 +22,18 @@
         }
     }
 
+    function logOutAttempt()
+    {
+        console.log("logOutAttempt");
+        xmlhttp = new XMLHttpRequest(); //create request;
+        //set callback function
+        var callback = "ajaxCallback_std";
+            xmlhttp.onreadystatechange= function(){serverResponseCheck(callback);};
+        //send te request
+        xmlhttp.open("POST", "../resources/library/DB_manager.php?", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        xmlhttp.send("action=set_logout");
+    }
     function formSubmitEvent(e){
 
         //suppress the usual page transfer

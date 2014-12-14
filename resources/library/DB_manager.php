@@ -7,25 +7,26 @@ $mysqlCon;
 
 //print debug logg , on or off.
 $printLog = 0;
-
-if($printLog){
-    echo "entered manage_db file"."\n";
-}
+$printLogString = "";
+$printLogString .= "entered manage_db file"."<br>\n";
 
 
 
-if(isset($_POST['action']) && !empty($_POST['action'])) {
+
+if(isset($_POST['action']) && !empty($_POST['action']))
+{
     $action = $_POST['action'];
 
-    if($printLog) {
-        echo "entered POST request handler! with action: " . $action . "\n";
-    }
+
+        $printLogString .= "entered POST request handler! with action: " . $action . "\n";
+
 
     init_DB();
 
     $ajax= 1;
 
     switch($action) {
+        case 'set_logout'               : set_logout($ajax);break;
         case 'get_login'                : get_login($ajax);break;
         case 'get_users'                : get_users($ajax);break;
         case 'get_user'                 : get_user($ajax,$_POST['user_id']);break;
@@ -50,9 +51,19 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
         case 'bind_itemCategory'        : bind_itemCategory();break;
 
         case 'accept_shoppingCart'        : accept_shoppingCart($ajax);break;
-
+        default:
+            $printLogString .= " action not recognised <br>\n";
+            break;
 
     }
+}
+else
+{
+    $printLogString .= "form action not set  <br>\n";
+}
+
+if($printLog) {
+    echo $printLogString;
 }
 
  
@@ -70,7 +81,41 @@ function init_DB(){
 // Create connection
     $mysqlCon = new mysqli($DB_SERVERNAME, $DB_USERNAME, $DB_PASSWORD);
 }
+function set_logout($ajax)
+{
+    // echo "set_logout";
+    // http://php.net/session_destroy
+// Initialize the session.
+// If you are using session_name("something"), don't forget it now!
 
+  //  session_start();
+    if(!isset($_SESSION)){session_start();} // double check session start that conforms with one.com php
+
+// Unset all of the session variables.
+    $_SESSION = array();
+
+// If it's desired to kill the session, also delete the session cookie.
+// Note: This will destroy the session, and not just the session data!
+    if (ini_get("session.use_cookies")) {
+        $params = session_get_cookie_params();
+        setcookie(session_name(), '', time() - 42000,
+            $params["path"], $params["domain"],
+            $params["secure"], $params["httponly"]
+        );
+    }
+
+// Finally, destroy the session.
+    session_destroy();
+    $xml = "<?xml version='1.0' encoding='utf-8'?>\n";
+    $xml .= "<logout>true</logout>";
+
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
+}
 
 function  accept_shoppingCart($ajax)
 {
@@ -173,15 +218,14 @@ function get_login($ajax)
     {
         $xmlObj = new SimpleXMLElement($xml);
 
-<<<<<<< HEAD
+
         if(!isset($_SESSION)){session_start();}
         $_SESSION['valid'] = 'valid';
         if($_SESSION['valid'] != 'valid')
         {
             //handle disabled sessions
         }
-=======
->>>>>>> FETCH_HEAD
+
         // output data of each row
         foreach ($xmlObj->loginUser as $user)    //loop though row
         {
