@@ -10,39 +10,13 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Brushes</h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" id="toolList">
 
-                    <!-- BRUSHES CONTENT -->
-                    <div class="row">
-                        <!-- COLOR -->
-                        <div class="col-xs-2 col-md-2">
-                            <button type="button" class="btn btn-default btn-xs glyphicon glyphicon-pencil">2px
-                            </button>
-                        </div>
-                        <div class="col-xs-2 col-md-2">
-                            <button type="button" class="btn btn-default btn-xs glyphicon glyphicon-pencil">4px
-                            </button>
-                        </div>
-                        <div class="col-xs-2 col-md-2">
-                            <button type="button" class="btn btn-default btn-xs glyphicon glyphicon-pencil">8px
-                            </button>
-                            <?php
+                    <!-- TOOL / BRUSH CONTENT -->
+                        <?php
+                        require_once(TEMPLATES_PATH . "/panel_user_list_tool.php");
+                        ?>
 
-                            if(!isset($_SESSION['sess_user_id']) || (trim($_SESSION['sess_user_id']) == ''))
-                            {
-                                //header("location: login.html");
-                               // require_once(TEMPLATES_PATH . "/header_unregistered.php");
-                                echo "show NOTHING";
-                            }
-                            else
-                            {
-                               // require_once(TEMPLATES_PATH . "/header_hasLoggedin.php");
-                                echo "show users brushes";
-                            }
-
-                            ?>
-                        </div>
-                    </div>
 
                 </div>
             </div>
@@ -52,61 +26,19 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Colors</h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" id="colorList">
 
                     <!-- COLOR CONTENT -->
-                    <div class="row">
+
                         <!-- COLOR -->
-                        <div class="col-xs-1 col-md-1">
-                            <button type="button" class="btn btn-default btn-xs">
-                                <div class="thumbnail" style="background-color: #28a4c9"></div>
-                            </button>
-                        </div>
-                        <div class="col-xs-1 col-md-1">
-                            <button type="button" class="btn btn-default btn-xs">
-                                <div class="thumbnail" style="background-color: #28a4c9"></div>
-                            </button>
-                        </div>
-                        <div class="col-xs-1 col-md-1">
-                            <button type="button" class="btn btn-default btn-xs">
-                                <div class="thumbnail" style="background-color: #28a4c9"></div>
-                            </button>
 
-                        </div>
                         <?php
+                        require_once(TEMPLATES_PATH . "/panel_user_list_color.php");
 
-                        if(!isset($_SESSION['sess_user_id']) || (trim($_SESSION['sess_user_id']) == ''))
-                        {
-                            //header("location: login.html");
-                            // require_once(TEMPLATES_PATH . "/header_unregistered.php");
-
-                        }
-                        else
-                        {
-                            // require_once(TEMPLATES_PATH . "/header_hasLoggedin.php");
-                            echo "show users colours";
-                        }
 
                         ?>
-                    </div>
-                    <div class="row">
-                        <!-- COLOR -->
-                        <div class="col-xs-1 col-md-1">
-                            <button type="button" class="btn btn-default btn-xs">
-                                <div class="thumbnail" style="background-color: #28a4c9"></div>
-                            </button>
-                        </div>
-                        <div class="col-xs-1 col-md-1">
-                            <button type="button" class="btn btn-default btn-xs">
-                                <div class="thumbnail" style="background-color: #28a4c9"></div>
-                            </button>
-                        </div>
-                        <div class="col-xs-1 col-md-1">
-                            <button type="button" class="btn btn-default btn-xs">
-                                <div class="thumbnail" style="background-color: #28a4c9"></div>
-                            </button>
-                        </div>
-                    </div>
+
+
                 </div>
             </div>
         </div>

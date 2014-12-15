@@ -10,7 +10,7 @@ $printLog = 0;
 $printLogString = "";
 $printLogString .= "entered manage_db file"."<br>\n";
 
-
+$isDBSet = false;
 
 
 if(isset($_POST['action']) && !empty($_POST['action']))
@@ -40,7 +40,7 @@ if(isset($_POST['action']) && !empty($_POST['action']))
         case 'get_user_orders'          : get_user_orders($ajax,$_POST['user_id']);break;
         case 'get_order_orderDetails'   : get_order_orderDetails($ajax,$_POST['order_id']);break;
         case 'get_user_color'           : get_user_color($ajax,$_POST['user_id']);break;
-        case 'get_user_tool'            : get_user_color($ajax,$_POST['user_id']);break;
+        case 'get_user_tool'            : get_user_tool($ajax,$_POST['user_id']);break;
 
 
         case 'insert_user'              : insert_user();break;
@@ -75,6 +75,7 @@ function init_DB(){
 
     global $config;
     global $mysqlCon;
+    global $isDBSet;
     //init database obj
 
     $DB_USERNAME    = $config["db"]["onlineDB"]["username"];
@@ -83,6 +84,7 @@ function init_DB(){
 
 // Create connection
     $mysqlCon = new mysqli($DB_SERVERNAME, $DB_USERNAME, $DB_PASSWORD);
+    $isDBSet = true;
 }
 function set_logout($ajax)
 {
@@ -508,8 +510,14 @@ function get_item($ajax, $itemId){
 // gets a list of the colored items that belong to the user
 function get_user_color($ajax, $user_id)
 {
+    global $isDBSet;
+
     $rootElementName = "items";
     $childElementName="item";
+    if (!$isDBSet)
+    {
+        init_DB();
+    }
 
     // build query
     $query =    "SELECT items.* FROM userItems ";
@@ -521,23 +529,34 @@ function get_user_color($ajax, $user_id)
     // query data from database
     $result = query_get($query);
 
-    //convert query to xml
-    $xml = sqlToXml($result,$rootElementName, $childElementName);
-    //return data
-    if($ajax){
-        echo $xml;
+    if ($ajax == 2)
+    {
+        return $result;
     }
-    else{
-        return $xml;
+    else {
+        //convert query to xml
+        $xml = sqlToXml($result, $rootElementName, $childElementName);
+        //return data
+        if ($ajax) {
+            echo $xml;
+        } else {
+            return $xml;
+        }
     }
 }
 
 // retrieves a list of tools owned by a specific user
 function get_user_tool($ajax, $user_id)
 {
+    global $isDBSet;
+
     $rootElementName = "items";
     $childElementName="item";
 
+    if (!$isDBSet)
+    {
+        init_DB();
+    }
     // build query
     $query =    "SELECT items.* FROM userItems ";
     $query .=   "INNER JOIN items ON ( userItems.item_id = items.item_id ) ";
@@ -551,14 +570,19 @@ function get_user_tool($ajax, $user_id)
     // query data from database
     $result = query_get($query);
 
-    //convert query to xml
-    $xml = sqlToXml($result,$rootElementName, $childElementName);
-    //return data
-    if($ajax){
-        echo $xml;
+    if ($ajax == 2)
+    {
+        return $result;
     }
-    else{
-        return $xml;
+    else {
+        //convert query to xml
+        $xml = sqlToXml($result, $rootElementName, $childElementName);
+        //return data
+        if ($ajax) {
+            echo $xml;
+        } else {
+            return $xml;
+        }
     }
 }
 

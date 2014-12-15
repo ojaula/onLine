@@ -255,6 +255,8 @@
         else
         {
             console.log("user did exist");
+
+            // header
             var headerDeployDiv = document.getElementById("header_userSection");
 
             //fetch html with Ajax, not async!.
@@ -263,7 +265,25 @@
             xmlhttp.send();
             headerDeployDiv.innerHTML = xmlhttp.responseText;
 
+            // Available Tools
+            $("#toolList").load("../resources/templates/panel_user_list_tool.php");
+            /*
+            var toolListDeployDiv = document.getElementById("toolList");
 
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET","../resources/templates/panel_user_list_tool.php", false);
+            xmlhttp.send();
+            toolListDeployDiv.innerHTML = xmlhttp.responseText;
+*/
+            // Available Colours
+            $("#colorList").load("../resources/templates/panel_user_list_color.php");
+            /*
+            var colorListDeployDiv = document.getElementById("colorList");
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET","../resources/templates/panel_user_list_color.php", false);
+            xmlhttp.send();
+            colorListDeployDiv.innerHTML = xmlhttp.responseText;
+            */
         }
 
         //change header bar
