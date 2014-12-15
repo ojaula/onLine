@@ -3,40 +3,6 @@
         <h3 class="panel-title">Shopping Cart</h3>
     </div>
     <div class="panel-body">
-        <!--
-        <div ng-app="myApp">
-            <div ng-controller="shoppingCart_controller">
-                <p>    Click <a ng-click="updateChart()">here</a> to load data.</p>
-                <table>
-                    <tr>
-                        <th>Id</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                    </tr>
-                    <tr ng-repeat="item in items">
-                        <td>{{item.item_id}}</td>
-                        <td>{{item.item_name}}</td>
-                        <td>{{item.item_price}}</td>
-
-                        category_id: "1"
-                        itemCategory_id: "1"
-                        item_color: "0"
-                        item_descLong: "Mouse"
-                        item_descShort: "Mouse"
-                        item_id: "1"
-                        item_image: "Mouse"
-                        item_name: "Mickey"
-                        item_price: "1"
-                        item_rank: "5"
-                        item_stock: "4"
-                        item_update: "2005-03-30 00:00:00"item_weight: "2"
-
-
-                    </tr>
-                </table>
-            </div>
-        </div>
-        -->
 
         <form data-callback="ajaxCallback_createdOrder" action='../resources/manage_db.php' method='get' id='form_cart'>
             <input type="hidden" name="action" value="accept_shoppingCart">
@@ -47,7 +13,7 @@
 
             Accept ShoppingChart:
             <br>
-            <input  type="submit" value="Checkout">
+            <input type="submit" value="Checkout">
             <br>
         </form>
         <p id="form_cart_message"></p>
@@ -61,7 +27,7 @@
 
         // global var for choppingCart content
         //loadLocalCart();    //load to global shoppingCart_list
-        loadShoppingCart()
+        cart_loadToView()
 
         //var shoppingCart_list = [];
         var shoppingCart_list2 = [
@@ -80,10 +46,9 @@
 
         //var shoppingCart = getLocalCart();
 
-        function shoppingCart_insert(itemId){
+        function cart_addItemXML(itemId){
 
             var itemOBJ=global_object_dict[itemId];
-            var itemQuantity = document.getElementById("item_"+itemId).value;
 
             var jsonOBJ;
             //try to convert xml to json, database xmlrequest needs to be converted to angularjs json format.
@@ -97,12 +62,17 @@
                 //alert("could not convert xml, must be json already!");
                 jsonOBJ = itemOBJ;
             }
+
+            // add quantity value in the time object as an pre order detail.
+            var itemQuantity = document.getElementById("item_"+itemId).value;
+            jsonOBJ.item["item_quantity"]=itemQuantity;
+
             //store new value in localstorage
             cart_addItem(jsonOBJ);
             //update local cart model
             //loadLocalCart();
             //shoppingCart_list.push(jsonOBJ);
-            loadShoppingCart();
+            cart_loadToView();
         }
 
         function cart_addItem(jsonOBJ){
@@ -110,9 +80,6 @@
             // Parse the serialized data back into an aray of objects
 
             var cart =cart_load();
-
-            // add quantity value in the time object as an pre order detail.
-            jsonOBJ.item["item_quantity"]=1;
 
             cart.push(jsonOBJ["item"]);
             console.log(cart);
@@ -147,7 +114,7 @@
                 }
             }
             localStorage.setItem('onLine_shoppingCart', JSON.stringify(chartJson));
-            loadShoppingCart();
+            cart_loadToView();
         }
         function cart_updateitemQuantity(item_id,valueSource){
             // Put the object into storage
@@ -170,10 +137,10 @@
                 }
             }
             localStorage.setItem('onLine_shoppingCart', JSON.stringify(chartJson));
-            loadShoppingCart();
+            cart_loadToView();
         }
 
-        function loadShoppingCart(){
+        function cart_loadToView(){
 
             var cartContainer = document.getElementById("chart_productlist");
             var chartJson =cart_load();

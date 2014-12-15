@@ -217,7 +217,7 @@
                     '<input type="hidden" type="text" name="name" value="1">'+
                     'QTY:'+
                     '<input id="item_'+item_id[i].textContent+'" type="text" maxlength="1" size="2" name="quantity" value="1">'+
-                    '<button onclick="shoppingCart_insert('+item_id[i].textContent+')">BUY</button>'+
+                    '<button onclick="cart_addItemXML('+item_id[i].textContent+')">BUY</button>'+
                 '</form>';
 
             // check if if item is a color
@@ -284,7 +284,7 @@
         if(!xmlObj)
         {
             alert("created Order callback");
-            document.getElementById("form_cart_message").innerHTML= "Not logged in!";
+            document.getElementById("form_cart_message").innerHTML= "<strong style='color:#ff0000;'>Not logged in!</strong>";
         }
         else
         {
@@ -297,9 +297,10 @@
     //log xml to response in testPage
     function ajaxCallback_std()
     {
+        alert("ajaxCallback_std");
         var respArea = document.getElementById("responseArea");
         respArea.innerHTML += xmlhttp.responseText;
-        document.getElementById("responseRender").innerHTML=xmlhttp.responseText;
+        //document.getElementById("responseRender").innerHTML=xmlhttp.responseText;
     }
 
 

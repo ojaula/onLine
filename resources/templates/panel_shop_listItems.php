@@ -40,7 +40,6 @@
             echo "<hr>";
 
             ?>
-            <hr>
             <button type="submit">Search</button>
         </form>
 

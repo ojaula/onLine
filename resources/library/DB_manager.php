@@ -142,6 +142,11 @@ function  accept_shoppingCart($ajax)
         $userDataXML = get_user(0,$_SESSION['sess_user_id']);
         $xmlObj = new SimpleXMLElement($userDataXML);
 
+
+        // check igf there is an order that is not fulfilled, if it is delete that, and create new
+        //else, create new
+        delete_user_currentOrder($_SESSION['sess_user_id']);
+
         //insert user details to order and save order.
         foreach ($xmlObj->user as $user)    //loop though row
         {
@@ -627,6 +632,15 @@ function get_user_missingItems($ajax,$user_id){
     }
 
 }
+
+
+function delete_user_currentOrder($user_id){
+
+    // get current order, only one order should be not fulfilled(the current order)!
+    $query = "DELETE FROM orders where user_id=".$user_id." AND order_fulFilled=0";
+    query_insert($query);
+}
+
 function get_user_currentOrder($ajax,$user_id){
 
     $rootElementName = "orders";
