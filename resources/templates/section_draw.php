@@ -26,6 +26,21 @@
                         <div class="col-xs-2 col-md-2">
                             <button type="button" class="btn btn-default btn-xs glyphicon glyphicon-pencil">8px
                             </button>
+                            <?php
+
+                            if(!isset($_SESSION['sess_user_id']) || (trim($_SESSION['sess_user_id']) == ''))
+                            {
+                                //header("location: login.html");
+                               // require_once(TEMPLATES_PATH . "/header_unregistered.php");
+                                echo "show NOTHING";
+                            }
+                            else
+                            {
+                               // require_once(TEMPLATES_PATH . "/header_hasLoggedin.php");
+                                echo "show users brushes";
+                            }
+
+                            ?>
                         </div>
                     </div>
 
@@ -56,7 +71,23 @@
                             <button type="button" class="btn btn-default btn-xs">
                                 <div class="thumbnail" style="background-color: #28a4c9"></div>
                             </button>
+
                         </div>
+                        <?php
+
+                        if(!isset($_SESSION['sess_user_id']) || (trim($_SESSION['sess_user_id']) == ''))
+                        {
+                            //header("location: login.html");
+                            // require_once(TEMPLATES_PATH . "/header_unregistered.php");
+
+                        }
+                        else
+                        {
+                            // require_once(TEMPLATES_PATH . "/header_hasLoggedin.php");
+                            echo "show users colours";
+                        }
+
+                        ?>
                     </div>
                     <div class="row">
                         <!-- COLOR -->

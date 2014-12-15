@@ -39,6 +39,9 @@ if(isset($_POST['action']) && !empty($_POST['action']))
         case 'get_user_missingItems'    : get_user_missingItems($ajax,$_POST['user_id']);break;
         case 'get_user_orders'          : get_user_orders($ajax,$_POST['user_id']);break;
         case 'get_order_orderDetails'   : get_order_orderDetails($ajax,$_POST['order_id']);break;
+        case 'get_user_color'           : get_user_color($ajax,$_POST['user_id']);break;
+        case 'get_user_tool'            : get_user_color($ajax,$_POST['user_id']);break;
+
 
         case 'insert_user'              : insert_user();break;
         case 'insert_item_color'        : insert_item_color($_POST['color']);break;
@@ -497,6 +500,64 @@ function get_item($ajax, $itemId){
 
 }
 
+// gets a list of the colored items that belong to the user
+function get_user_color($ajax, $user_id)
+{
+    $rootElementName = "items";
+    $childElementName="item";
+
+    // build query
+    $query =    "SELECT items.* FROM userItems ";
+    $query .=   "INNER JOIN items ON ( userItems.item_id = items.item_id ) ";
+    $query .=   "INNER JOIN itemCategories ON ( items.item_id = itemCategories.item_id ) ";
+    $query .=   "WHERE (userItems.user_id = " . $user_id ." )";
+    $query .=   "AND (itemCategories.category_id =2 )";
+
+    // query data from database
+    $result = query_get($query);
+
+    //convert query to xml
+    $xml = sqlToXml($result,$rootElementName, $childElementName);
+    //return data
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
+}
+
+// retrieves a list of tools owned by a specific user
+function get_user_tool($ajax, $user_id)
+{
+    $rootElementName = "items";
+    $childElementName="item";
+
+    // build query
+    $query =    "SELECT items.* FROM userItems ";
+    $query .=   "INNER JOIN items ON ( userItems.item_id = items.item_id ) ";
+    $query .=   "INNER JOIN itemCategories ON ( items.item_id = itemCategories.item_id ) ";
+    $query .=   "WHERE (userItems.user_id = " . $user_id ." )";
+    $query .=   "AND (itemCategories.category_id =1 )";
+
+
+
+
+    // query data from database
+    $result = query_get($query);
+
+    //convert query to xml
+    $xml = sqlToXml($result,$rootElementName, $childElementName);
+    //return data
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
+}
+
+
 function get_users($ajax){
 
     $rootElementName = "users";
@@ -504,7 +565,7 @@ function get_users($ajax){
 
     // build query
     $query = "SELECT * FROM users" ;
-
+//  $query = "SELECT * FROM orders where user_id=".$user_id." AND order_fulFilled=0";
     // query data from database
     $result = query_get($query);
 
@@ -527,6 +588,7 @@ function get_user_items($ajax,$user_id){
 
     // build query
     $query = "SELECT * FROM userItems where user_id=".$user_id ;
+//  $query = "SELECT * FROM orders where user_id=".$user_id." AND order_fulFilled=0";
 
     // query data from database
     $result = query_get($query);
