@@ -32,7 +32,7 @@
 
                                     require_once(realpath(dirname(__FILE__). "/panel_shop_cart.php"));
 
-                                    require_once(realpath(dirname(__FILE__). "/panel_shop_personalDetails.php"));
+                                    require_once(realpath(dirname(__FILE__). "/panel_shop_details.php"));
                                 ?>
 
                             </div>

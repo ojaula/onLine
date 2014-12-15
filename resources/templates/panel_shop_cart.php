@@ -25,26 +25,7 @@
         //temp resetter
         //localStorage.setItem('onLine_shoppingCart', JSON.stringify([]));
 
-        // global var for choppingCart content
-        //loadLocalCart();    //load to global shoppingCart_list
         cart_loadToView()
-
-        //var shoppingCart_list = [];
-        var shoppingCart_list2 = [
-            {
-                item_id: 1,
-                item_name: "Peter",
-                item_price: "Jhons"},
-            {
-                item_id: 2,
-                item_name: "Peter2",
-                item_price: "Jhons2"}
-        ];
-         //localStorage.setItem('onLine_shoppingCart', JSON.stringify(shoppingCart_list));
-        //console.log(shoppingCart_list2);
-
-
-        //var shoppingCart = getLocalCart();
 
         function cart_addItemXML(itemId){
 
@@ -69,9 +50,6 @@
 
             //store new value in localstorage
             cart_addItem(jsonOBJ);
-            //update local cart model
-            //loadLocalCart();
-            //shoppingCart_list.push(jsonOBJ);
             cart_loadToView();
         }
 
@@ -178,34 +156,6 @@
 
                 cartContainer.innerHTML += chart_item;
             }
-
-        }
-
-        var app = angular.module('myApp', []);
-
-        function shoppingCart_controller($scope, $http) {
-
-            $scope.items = [];
-
-            //$scope.items = shoppingCart_list2;
-
-
-            $scope.updateChart = function() {
-
-                /*
-                 var httpRequest = $http({
-                 method: 'POST',
-                 url: '/echo/json/',
-                 data: shoppingCart_list2
-
-                 }).success(function(data, status) {
-                 $scope.people = data;
-                 });
-                 */
-
-                $scope.items= shoppingCart_list;
-            };
-
 
         }
 

@@ -290,6 +290,7 @@
             var headerDeployDiv = document.getElementById("header_userSection");
 
             //fetch html with Ajax, not async!.
+
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.open("GET","../resources/templates/header_hasLoggedin.php", false);
             xmlhttp.send();
@@ -333,15 +334,22 @@
         var xmlObj = ajaxResponse;
         if(!xmlObj)
         {
-            alert("created Order callback");
+            //alert("created Order callback");
             document.getElementById("form_cart_message").innerHTML= "<strong style='color:#ff0000;'>Not logged in!</strong>";
         }
         else
         {
             document.getElementById("form_cart_message").innerHTML= "";
-            document.getElementById("shop_personaldetails_body").style.display ="block";
+            //document.getElementById("shop_personaldetails_body").style.display ="block";
             document.getElementById("shop_userdetails_body").style.display ="block";
+            $("#shop_userdetails_body").load("../resources/templates/content_personalDetails.php");
         }
+    }
+    function ajaxCallback_updateOrderDetails()
+    {
+        var xmlObj = ajaxResponse;
+        alert("ajaxCallback_updateOrderDetails")
+        $("#shop_userdetails_body").load("../resources/templates/content_personalDetails.php");
     }
 
     //log xml to response in testPage
