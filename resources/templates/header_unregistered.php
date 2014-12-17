@@ -9,5 +9,5 @@
 </form>
 <ul class="nav navbar-nav navbar-right">
     <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart </a></li>
-
+<script> if (globalAjaxInit == true) {formSubmitEvent_bindAll();} </script>
 </ul>

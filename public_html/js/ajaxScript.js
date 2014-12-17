@@ -258,7 +258,7 @@
 
             // header
             var headerDeployDiv = document.getElementById("header_userSection");
-            
+
           // nav bar info
             $("#header_userSection").load("../resources/templates/header_unregistered.php");
 
@@ -352,6 +352,7 @@
         respArea.innerHTML += xmlhttp.responseText;
         //document.getElementById("responseRender").innerHTML=xmlhttp.responseText;
     }
+    globalAjaxInit = true;
 
 
 
