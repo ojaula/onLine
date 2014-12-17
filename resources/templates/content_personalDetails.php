@@ -6,8 +6,8 @@
  * Time: 8:35 PM
  */
 
-require("/../library/DB_manager.php");
-
+//require("/../library/DB_manager.php");
+require_once(realpath(dirname(__FILE__) . "/../library/DB_manager.php"));
     if(!isset($_SESSION)){
         session_start();
     }
@@ -66,7 +66,8 @@ require("/../library/DB_manager.php");
         submit:
             <br>
             <button type="submit">Submit</button>
-        </form>';
+        </form>
+        <script> if (globalAjaxInit == true) {formSubmitEvent_bindAll();} </script>';
     }
     else
     {
