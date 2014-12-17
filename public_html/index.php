@@ -20,7 +20,7 @@ if (isset($_SESSION['sess_username'])) {
 $sessionLoginDebug .= "session_id = " . $ses_id . "<br>";
 $sessionLoginDebug .= "sess_username = " . $ses_name. "<br>";
 
-echo $sessionLoginDebug;
+// echo $sessionLoginDebug;
 
 /*
     Now you can handle all your php logic outside of the template

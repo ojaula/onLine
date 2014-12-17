@@ -27,7 +27,7 @@
         console.log("logOutAttempt");
         xmlhttp = new XMLHttpRequest(); //create request;
         //set callback function
-        var callback = "ajaxCallback_std";
+        var callback = "ajaxCallback_logOutEvent";
             xmlhttp.onreadystatechange= function(){serverResponseCheck(callback);};
         //send te request
         xmlhttp.open("POST", "../resources/library/DB_manager.php?", true);
@@ -242,6 +242,36 @@
 
         // set ajax event to all forms WARNING! this is not optimized, update all forms!
         formSubmitEvent_bindAll();
+    }
+
+    function ajaxCallback_logOutEvent(){
+        var xmlObj = ajaxResponse;
+        var loginUser  = xmlObj.getElementsByTagName("logout");
+
+        if(loginUser.length<1)
+        {
+            console.log("user did not exist to logout");
+        }
+        else
+        {
+            console.log("user did exist and we logged out");
+
+            // header
+            var headerDeployDiv = document.getElementById("header_userSection");
+            
+          // nav bar info
+            $("#header_userSection").load("../resources/templates/header_unregistered.php");
+
+            // Available Tools
+            $("#toolList").load("../resources/templates/panel_user_list_tool.php");
+
+            $("#colorList").load("../resources/templates/panel_user_list_color.php");
+
+        }
+
+        //change header bar
+        //change shop bar
+
     }
 
     function ajaxCallback_loginEvent(){

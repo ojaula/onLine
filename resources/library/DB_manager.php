@@ -112,7 +112,7 @@ function set_logout($ajax)
 // Finally, destroy the session.
     session_destroy();
     $xml = "<?xml version='1.0' encoding='utf-8'?>\n";
-    $xml .= "<logout>true</logout>";
+    $xml .= "<logout><logout>true</logout></logout>";
 
     if($ajax){
         echo $xml;

@@ -41,6 +41,6 @@
     are available in here.
 */
 
-echo $setInIndexDotPhp;
+//echo $setInIndexDotPhp;
 
 ?>
