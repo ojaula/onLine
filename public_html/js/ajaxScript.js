@@ -83,8 +83,8 @@
         xmlhttp=new XMLHttpRequest(); //create request;
 
         //set callback function
-        f =document.getElementById("get_items");
-        var callback = f.getAttribute("data-callback")|| "ajaxCallback_std";
+        //f =document.getElementById("get_items");
+        var callback = callback|| "ajaxCallback_std";
 
         xmlhttp.onreadystatechange= function(){serverResponseCheck(callback);};
 
@@ -348,8 +348,16 @@
     function ajaxCallback_updateOrderDetails()
     {
         var xmlObj = ajaxResponse;
-        alert("ajaxCallback_updateOrderDetails")
-        $("#shop_userdetails_body").load("../resources/templates/content_personalDetails.php");
+        //alert("ajaxCallback_updateOrderDetails")
+        //$("#shop_userdetails_body").load("../resources/templates/content_personalDetails.php");
+        $("#shop_accept_body").load("../resources/templates/content_order_summary.php");
+    }
+
+    function ajaxCallback_order_finished()
+    {
+        var xmlObj = ajaxResponse;
+        document.getElementById("shop_done").style.display="block";
+
     }
 
     //log xml to response in testPage

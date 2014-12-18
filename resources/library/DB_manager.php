@@ -55,7 +55,7 @@ if(isset($_POST['action']) && !empty($_POST['action']))
 
         case 'accept_shoppingCart'        : accept_shoppingCart($ajax);break;
         case 'update_current_order'       : update_current_order();break;
-
+        case 'order_finished'           : order_finished();break;
 
         default:
             $printLogString .= " action not recognised <br>\n";
@@ -125,7 +125,7 @@ function set_logout($ajax)
     }
 }
 
-function  accept_shoppingCart($ajax)
+function accept_shoppingCart($ajax)
 {
     //check if logged in!
 
@@ -732,49 +732,53 @@ function insert_order_detail(){
 }
 
 //----SETTERS----
+function order_finished()
+{
+    if(!isset($_SESSION)){
+        session_start();
+    }
+    //$usercurrentOrder =  get_user_currentOrder($_SESSION['sess_user_id']);
+    $userCurrentOrder = get_user_currentOrder(0,$_SESSION['sess_user_id']);
+    $userCurrentOrderOBJ = new SimpleXMLElement($userCurrentOrder);
+    $orderDetail_orderId = $userCurrentOrderOBJ->order->order_id;
 
+    $query = "UPDATE orders
+            SET order_fulFilled = 1
+            WHERE
+                order_id=".$orderDetail_orderId;
+
+    query_insert($query);
+}
 //replaces, must be logged in
 function update_current_order()
 {
     if(!isset($_SESSION)){
         session_start();
     }
-    delete_user_currentOrder($_SESSION['sess_user_id']);
+    //$usercurrentOrder =  get_user_currentOrder($_SESSION['sess_user_id']);
+    $userCurrentOrder = get_user_currentOrder(0,$_SESSION['sess_user_id']);
+    $userCurrentOrderOBJ = new SimpleXMLElement($userCurrentOrder);
+    $orderDetail_orderId = $userCurrentOrderOBJ->order->order_id;
 
     //0 means it is not fulfilled
-    $query = "INSERT INTO orders(
-                          order_ShipName,
-                          order_ShipAddress,
-                          order_email,
-                          order_shipZip,
-                          order_shipCity,
-                          order_shipCountry,
-                          order_shipping,
-                          order_phone,
-                          order_tax,
-                          order_date,
-                          order_paymentID,
-                          order_transactStatus,
-                          order_shipped,
-                          order_fulFilled,
-                          user_id
-                          )
-                       VALUES('"
-                                .$_POST['ship_name']."','"
-                                .$_POST['ship_address']."','"
-                                .$_POST['ship_zip']."','"
-                                .$_POST['ship_city']."','"
-                                .$_POST['ship_country']."','"
-                                .$_POST['shipping']."','"
-                                .$_POST['phone']."','"
-                                .$_POST['tax']."','"
-                                .$_POST['date']."','"
-                                ."0','"
-                                ."0','"
-                                ."0','"
-                                ."0','"
-                                .$_SESSION['sess_user_id']."','"
-                                ."')";
+    $query = "UPDATE orders
+                SET
+                          order_ShipName = '".$_POST['ship_name']."',
+                          order_ShipAddress = '".$_POST['ship_address']."',
+                          order_shipZip = '".$_POST['ship_zip']."',
+                          order_shipCity = '".$_POST['ship_city']."',
+                          order_shipCountry = '".$_POST['ship_country']."',
+                          order_shipping = '".$_POST['shipping']."',
+                          order_phone = '".$_POST['phone']."',
+                          order_tax = '".$_POST['tax']."',
+                          order_date = '".$_POST['date']."',
+                          order_paymentID = 0,
+                          order_transactStatus = 0,
+                          order_shipped = 0,
+                          order_fulFilled = 0,
+                          user_id = ".$_SESSION['sess_user_id']."
+                        WHERE
+                            order_id=".$orderDetail_orderId;
 
     query_insert($query);
 
