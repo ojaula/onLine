@@ -1,5 +1,5 @@
 <section style="margin:0px; padding:0px;" class="header">
-    <nav class="navbar navbar-inverse navbar-static-top " role="navigation">
+    <nav id="navLinks" class=" navbar navbar-inverse navbar-static-top " role="navigation">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header ">
