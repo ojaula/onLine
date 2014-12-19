@@ -13,7 +13,7 @@
 
             Accept ShoppingChart:
             <br>
-            <input type="submit" value="Checkout">
+            <input id="checkOutButton" type="submit" value="Checkout"  >
             <br>
         </form>
         <p id="form_cart_message"></p>
@@ -26,6 +26,45 @@
         //localStorage.setItem('onLine_shoppingCart', JSON.stringify([]));
 
         cart_loadToView()
+
+        // PD function that checks the cart size to enable / disable "CHECKOUT button
+        function cartSizeCheck()
+        {
+            var cartContainer = document.getElementById("chart_productlist");
+            var chartJson =cart_load();
+
+            console.log("cartSizeCheck " + chartJson.length.toString());
+            if(chartJson.length <= 0)
+            {
+
+                disableCheckOutButton();
+
+            }
+            else
+            {
+                enableCheckOutButton();
+            }
+        }
+
+        // PD disable "CHECKOUT button AND eliminate the personal-order details, Leaves a sloppy "border" line left.
+        function disableCheckOutButton()
+        {
+            console.log("disableCheckOutButton");
+            document.getElementById("checkOutButton").disabled=true;
+            var user_details = document.getElementById("shop_userdetails_body");
+            if (user_details != undefined)
+            {
+                user_details.innerHTML = "";
+            }
+
+        }
+
+        // PD function that  enable  "CHECKOUT button
+        function enableCheckOutButton()
+        {
+            console.log("enableCheckOutButton");
+            document.getElementById("checkOutButton").disabled=false;
+        }
 
         function cart_addItemXML(itemId){
 
@@ -55,13 +94,14 @@
 
         function cart_addItem(jsonOBJ){
             // Put the object into storage
-            // Parse the serialized data back into an aray of objects
+            // Parse the serialized data back into an array of objects
 
             var cart =cart_load();
 
             cart.push(jsonOBJ["item"]);
             console.log(cart);
             localStorage.setItem('onLine_shoppingCart', JSON.stringify(cart));
+
         }
 
 
@@ -124,6 +164,7 @@
             var chartJson =cart_load();
 
             cartContainer.innerHTML = "";
+            cartSizeCheck();
             for (var i = 0; i < chartJson.length; i++) {
                 var obj = chartJson[i];
                 //alert(obj.item_id);
@@ -156,6 +197,7 @@
 
                 cartContainer.innerHTML += chart_item;
             }
+
 
         }
 
