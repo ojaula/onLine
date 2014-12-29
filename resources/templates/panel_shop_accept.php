@@ -13,7 +13,6 @@
     </div>
     <div class="panel-body">
         <div id="shop_accept_body"class="col-xs-12 col-md-12 ">
-            <p>hej!</p>
         </div>
     </div>
 </div>

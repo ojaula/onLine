@@ -55,13 +55,9 @@ require_once(realpath(dirname(__FILE__) . "/../library/DB_manager.php"));
             <input class="form-control" type="text" name="tax" value="25%">
         date:
             <input class="form-control" type="hidden" name="date" value='.date('l jS \of F Y h:i:s A').'>
-        paymentId:
             <input class="form-control" type="hidden" name="paymentId" value="silvercoins by birds">
-        transactStatus:
             <input class="form-control" type="hidden" name="transactStatus" value="pending">
-        shipped:
             <input class="form-control" type="hidden" name="shipped" value="0">
-        fullfilled:
             <input class="form-control" type="hidden" name="fullfilled" value="0">
         submit:
             <br>

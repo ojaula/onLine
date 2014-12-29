@@ -23,7 +23,7 @@
 
                             require_once(realpath(dirname(__FILE__). "/panel_shop_accept.php"));
                         ?>
-                    <div  class="glyphicon glyphicon-ok" id="shop_done" style="font-size:30px; color:green; display:none;">Tack för ditt köp!</div>
+                    <div  class="glyphicon glyphicon-ok" id="shop_done" style="font-size:30px; color:green; display:none;">Success!</div>
 
                     <div style="display:inline-block; max-width: 600px; padding-right:40px;">
                     <p>Online usually ship the ordered goods within 24 hours (if they exist in our local warehouse).<br>

@@ -22,9 +22,9 @@
         $userOrderDetailsOBJ = new SimpleXMLElement($userOrderDetails);
         $orderDetais = $userCurrentOrderOBJ->orderDetails->order_id;
 
-        echo "Din beställning är ännu inte bekräftad. Vänligen kontrollera
-         att alla uppgifter stämmer och bekräfta sedan din beställning.
-          Om du betalar med internetbank eller kort kommer du att skickas vidare.";
+        echo "Your order is not yet verified. Please check
+          that all information is correct and then confirm your order.
+           If you pay by internet banking or card you will be forwarded.";
 
         echo'<div class="summary"">';
         echo '<div style="width:100%; border:1px #dcdcdc solid;border-radius:5px;">';
@@ -46,9 +46,9 @@
     // print sum/price of order
     echo '      <div style="width:100%; border:1px #dcdcdc solid;border-radius:5px;">
                     <div style="float:right;">
-                        <span  class="total_text">Totalpris:</span> <span class="total"><span id="total_sum">'.$totalPris.'</span> kr</span>
+                        <span  class="total_text">Total:</span> <span class="total"><span id="total_sum">'.$totalPris.'</span> kr</span>
                         <br>
-                        <span class="breakdown" id="breakdown_text">Inklusive fraktavgift ('.$totalPris.' + 0 kr)</span>
+                        <span class="breakdown" id="breakdown_text">With Shipping ('.$totalPris.' + 0 kr)</span>
                     </div>
                 </div>';
 
@@ -71,14 +71,12 @@
     //Print agreement
     echo '<div class="cartconfirmation" style="border:1px #dcdcdc solid;border-radius:5px;">
 			<tr><td style="max-width:200px;"><p>
-                <label for="kopvillkor">Jag har läst och godkänner
-                    <a href="#" target="_blank">köpvillkoren</a>
-                    och är införstådd i att Webhallen kommer<br>att hantera mina personuppgifter i enlighet med Personuppgiftslagen
+                <label I have read and agree to the Terms and agrees that line will handle my personal data in accordance with the Privacy Act
                 </label>
                 </p>
             </td>
             <td>
-                <button onclick="sendRequest_post(\'action=order_finished\',\'ajaxCallback_order_finished\')" class="button">Slutför köp</button>
+                <button onclick="sendRequest_post(\'action=order_finished\',\'ajaxCallback_order_finished\')" class="button">Complete order</button>
             </td></tr>';
 
     echo '</div>';
