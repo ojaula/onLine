@@ -33,8 +33,10 @@
                         <!-- COLOR -->
 
                         <?php
-                        //require_once(TEMPLATES_PATH . "/panel_user_list_color.php");
-                        require_once(realpath(dirname(__FILE__). "/panel_shop_colorpicker.php"));
+
+                        require_once(TEMPLATES_PATH . "/panel_user_list_color.php");                    // 2014-12-29 PD this finds sessionID on the loading
+                        // require_once(realpath(dirname(__FILE__). "/panel_shop_colorpicker.php")); // 2014-12-29  PD this DOES NOT find sessionID on the loading
+                        // 2014-12-29  PD is confused by this.
                         ?>
 
                 </div>
