@@ -215,6 +215,7 @@ function accept_shoppingCart($ajax)
         $itemAmountArr = $_POST['chart_item_amount'];
         $itemIdArr = $_POST['chart_Item_Id'];
 
+        // looping though the shoppingcart arrays of items, and append items to the corresponding order (id).
         for($i=0; $i<count($itemIdArr);$i++)
         {
             $tempItem = get_item(0, $itemIdArr[$i]);
@@ -360,7 +361,14 @@ function get_item_category($ajax,$item_id){
     $childElementName="item";
 
     // build query
-    $query = "SELECT * FROM categories WHERE item_id =". $item_id ;
+    //$query = "SELECT * FROM categories WHERE item_id =". $item_id ;
+    $query = ("
+        SELECT
+            categories.*,
+            itemCategories.*
+         FROM  categories
+         INNER JOIN itemCategories ON (itemCategories.category_id= categories.category_id)
+         WHERE itemCategories.item_id=".$item_id);
 
     // query data from database
     $result = query_get($query);
@@ -737,7 +745,8 @@ function order_finished()
     if(!isset($_SESSION)){
         session_start();
     }
-    //$usercurrentOrder =  get_user_currentOrder($_SESSION['sess_user_id']);
+
+    //change current order to fulfilled
     $userCurrentOrder = get_user_currentOrder(0,$_SESSION['sess_user_id']);
     $userCurrentOrderOBJ = new SimpleXMLElement($userCurrentOrder);
     $orderDetail_orderId = $userCurrentOrderOBJ->order->order_id;
@@ -747,7 +756,24 @@ function order_finished()
             WHERE
                 order_id=".$orderDetail_orderId;
 
-    query_insert($query);
+    //    query_insert($query);
+
+    $potetialNewItem = get_order_orderDetails(0, $orderDetail_orderId);
+    $potetialNewItemOBJ = new SimpleXMLElement($potetialNewItem);
+    foreach ($potetialNewItemOBJ->orderDetail as $detail) {
+        $itemcategory = get_item_category(0, $detail->item_id);
+        $itemcategoryOBJ = new SimpleXMLElement($itemcategory);
+
+        foreach($itemcategoryOBJ->item as $category) {
+
+            if ($category->itemCategory_name = "color" || $category->itemCategory_name = "tools") {
+                //bind_itemCategory_NoAjax($category->item_id, $category->category_id);
+                bind_itemtoUser($category->item_id,$_SESSION['sess_user_id']);
+            }
+        }
+
+
+    }
 }
 //replaces, must be logged in
 function update_current_order()
@@ -892,9 +918,30 @@ function insert_category(){
                                     ."')";
 
     query_insert($query);
-
 }
 
+function bind_itemtoUser($item_id, $user_id)
+{
+    $query = "INSERT INTO userItems(
+                              item_id,
+                              user_id
+                              )
+                           VALUES('". $item_id . "','"
+                                    . $user_id . "')";
+    query_insert($query);
+}
+
+function bind_itemCategory_NoAjax($itemId, $categoryId)
+{
+    $query = "INSERT INTO itemCategories(
+                              item_id,
+                              category_id
+                              )
+                           VALUES('". $itemId. "','"
+                                    .$categoryId
+                                    . "')";
+    query_insert($query);
+}
 function bind_itemCategory()
 {
     $query = "INSERT INTO itemCategories(
@@ -904,10 +951,7 @@ function bind_itemCategory()
                            VALUES('". $_POST['item_id'] . "','"
                                     . $_POST['category_id']
                                     . "')";
-
-
     query_insert($query);
-
 }
 
 //----DELETE-----
