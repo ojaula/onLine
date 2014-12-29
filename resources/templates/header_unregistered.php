@@ -9,5 +9,19 @@
 </form>
 <ul class="nav navbar-nav navbar-right">
     <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart </a></li>
-<script> if (globalAjaxInit == true) {formSubmitEvent_bindAll();} </script>
+<script>
+    if (globalAjaxInit == true)
+    {
+
+
+
+            // force the nav_link scan again, it's broken on dynamic load in.
+        $("#navLinks a").click(function(e){
+            e.preventDefault();
+            $(this).tab('show');
+        });
+
+        formSubmitEvent_bindAll();
+
+    } </script>
 </ul>

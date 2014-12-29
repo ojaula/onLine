@@ -266,7 +266,7 @@
             $("#toolList").load("../resources/templates/panel_user_list_tool.php");
 
             $("#colorList").load("../resources/templates/panel_user_list_color.php");
-
+            $("#section_draw").tab('show');
         }
 
         //change header bar
