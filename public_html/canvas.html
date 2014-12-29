@@ -2,17 +2,17 @@
 <html>
 <head>
 <style type="text/css">
-body
-{
-font-size:70%;
-font-family:verdana,helvetica,arial,sans-serif;
-}
+    body
+    {
+    font-size:70%;
+    font-family:verdana,helvetica,arial,sans-serif;
+    }
 </style>
 
 <body style="margin:0px;">
 
 
-    
+
 
     <canvas id="myCanvas" width="500" height="300" style="border:1px solid #d3d3d3;" onmousedown="mouseDown(event)" onmousemove="cnvs_getCoordinates(event)" onmouseup="mouseUp(event)" onmouseout="cnvs_clearCoordinates()">
 Your browser does not support the HTML5 canvas tag.</canvas>
@@ -70,8 +70,7 @@ function cnvs_getCoordinates(e)
        
     }
     
-    
-    
+
 }
 function storePoints()
 {
@@ -98,10 +97,6 @@ function drawing()
             ctx.moveTo(a.x,a.y);
             ctx.lineTo(b.x,b.y);
             ctx.stroke();
-            
-            
-            
-          
             
             var  str = new String("DRAWING: (" + a.x + "," + a.y + " to " + b.x + "," + b.y + ")");
             

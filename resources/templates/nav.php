@@ -35,7 +35,7 @@
     });
 </script>
 
-// PD this scans out all the links in the navLinks
+<!-- PD this scans out all the links in the navLinks-->
 <script type="text/javascript">
     $(document).ready(function(){
         $("#navLinks a").click(function(e){

@@ -43,30 +43,14 @@ else
         // output data of each row
         while($row = $result->fetch_assoc())    //loop though row
         {
-            if ($count == 0)
-            {
-                printf('<div class="row">' . "\n");
-            }
+
             printf('<div class="col-xs-2 col-md-2">' . "\n");
 
             printf("\t" . '<button type="button" class="btn btn-default btn-xs glyphicon glyphicon-pencil">%s</button>' . "\n",$row["item_name"]);
             printf('</div>' . "\n");
-            if ($count < 3)
-            {
-                $count++;
 
+        }
 
-            }
-            else
-            {
-                printf('</div>' . "\n");
-                $count = 0;
-            }
-        }
-        if ($count != 0)
-        {
-            printf('</div>' . "\n");
-        }
 
     }
 

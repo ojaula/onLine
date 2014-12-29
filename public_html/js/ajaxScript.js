@@ -357,13 +357,14 @@
     {
         var xmlObj = ajaxResponse;
         document.getElementById("shop_done").style.display="block";
-
+        cart_delete();
+        cart_loadToView();
     }
 
     //log xml to response in testPage
     function ajaxCallback_std()
     {
-        alert("ajaxCallback_std");
+        //alert("ajaxCallback_std");
         var respArea = document.getElementById("responseArea");
         respArea.innerHTML += xmlhttp.responseText;
         //document.getElementById("responseRender").innerHTML=xmlhttp.responseText;

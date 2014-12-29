@@ -22,9 +22,7 @@
         $userOrderDetailsOBJ = new SimpleXMLElement($userOrderDetails);
         $orderDetais = $userCurrentOrderOBJ->orderDetails->order_id;
 
-        echo "Your order is not yet verified. Please check
-          that all information is correct and then confirm your order.
-           If you pay by internet banking or card you will be forwarded.";
+        echo "Your order is not yet verified. Please check that all information is correct and then confirm your order. If you pay by internet banking or card you will be forwarded.";
 
         echo'<div class="summary"">';
         echo '<div style="width:100%; border:1px #dcdcdc solid;border-radius:5px;">';

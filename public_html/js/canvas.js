@@ -1,11 +1,23 @@
 /**
  * Created by pauldixon on 26/11/14.
  */
-var point = {x:0,y:0}
-var pointArray = new Array(10);
-var mouseDownB = false;
-var canvas_element = document.getElementById("myCanvas");
-var canvas_context = canvas_element.getContext("2d");
+var point;
+var pointArray ;
+var mouseDownB;
+var canvas_element;
+var canvas_context;
+var scale; //scale of canvas, 900px is max. rescaling is only needed in x axis.
+
+function canvas_init(){
+    point = {x:0,y:0}
+    pointArray = new Array(10);
+    mouseDownB = false;
+    canvas_element = document.getElementById("myCanvas");
+    canvas_context = canvas_element.getContext("2d");
+    // spacer/holder for canvas coord info tag
+    document.getElementById("xycoordinates").innerHTML="Coordinates:(,)";
+    scale = (900/canvas_element.offsetWidth);
+}
 
 function mouseUp(e)
 {
@@ -76,6 +88,8 @@ function storePoints()
 
 function drawing()
 {
+
+
     if ( pointArray[1] != undefined && pointArray[0] != undefined && mouseDownB)
     {
         a = pointArray[1];
@@ -86,11 +100,9 @@ function drawing()
         {
             // alert("hello drawing from " + a + " to " +b);
 
-            canvas_context.moveTo(a.x,a.y);
-            canvas_context.lineTo(b.x,b.y);
+            canvas_context.moveTo(scale*a.x,a.y);//scale of canvas, 900px is current max. rescaling is only needed in x axis.
+            canvas_context.lineTo(scale*b.x,b.y);
             canvas_context.stroke();
-
-
 
 
 
@@ -104,7 +116,7 @@ function drawing()
 }
 function cnvs_clearCoordinates()
 {
-    document.getElementById("xycoordinates").innerHTML="";
+    //document.getElementById("xycoordinates").innerHTML="";
     resetMouse();
 
 }

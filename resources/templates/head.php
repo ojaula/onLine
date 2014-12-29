@@ -28,6 +28,7 @@
     <!--My scripts -->
     <script src="js/jqueryScripts.js"></script>
     <script src="js/headerUpdates.js"></script>
+    <script src="../public_html/js/canvas.js"></script>
 
 
 

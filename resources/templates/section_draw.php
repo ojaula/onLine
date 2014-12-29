@@ -33,24 +33,22 @@
                         <!-- COLOR -->
 
                         <?php
-                        require_once(TEMPLATES_PATH . "/panel_user_list_color.php");
-
-
+                        //require_once(TEMPLATES_PATH . "/panel_user_list_color.php");
+                        require_once(realpath(dirname(__FILE__). "/panel_shop_colorpicker.php"));
                         ?>
-
 
                 </div>
             </div>
         </div>
     </div>
-    <?php
-        require_once(realpath(dirname(__FILE__). "/panel_shop_colorpicker.php"));
-    ?>
 
     <!-- CANVAS -->
     <div class="row">
         <div class="center-block canvasWrapper " style="float: none; max-width: 900px;">
-            <canvas style=" margin:auto ;border:1px solid black"></canvas>
+            <!--<canvas style=" margin:auto ;border:1px solid black"></canvas>-->
+            <div id="xycoordinates" style="border:1px solid black:width:500px;"></div>
+            <canvas id="myCanvas" width="900" height="600" style="border:1px solid #d3d3d3; overflow:"hidden"" onmousedown="mouseDown(event)" onmousemove="cnvs_getCoordinates(event)" onmouseup="mouseUp(event)" onmouseout="cnvs_clearCoordinates()">
+                Your browser does not support the HTML5 canvas tag.</canvas>
         </div>
     </div>
 </div>

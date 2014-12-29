@@ -36,9 +36,7 @@
             console.log("cartSizeCheck " + chartJson.length.toString());
             if(chartJson.length <= 0)
             {
-
                 disableCheckOutButton();
-
             }
             else
             {
@@ -104,7 +102,9 @@
 
         }
 
-
+        function cart_delete(){
+            localStorage.setItem('onLine_shoppingCart',null);
+        }
 
         function cart_load(){
             // Retrieve the object from storage
