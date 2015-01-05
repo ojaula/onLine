@@ -265,7 +265,7 @@
             // Available Tools
             $("#toolList").load("../resources/templates/panel_user_list_tool.php");
 
-            $("#colorList").load("../resources/templates/panel_user_list_color.php");
+            //$("#colorList").load("../resources/templates/panel_user_list_color.php");
             $("#section_draw").tab('show');
         }
 
@@ -307,7 +307,7 @@
             toolListDeployDiv.innerHTML = xmlhttp.responseText;
 */
             // Available Colours
-            $("#colorList").load("../resources/templates/panel_user_list_color.php");
+            //$("#colorList").load("../resources/templates/panel_user_list_color.php");
             /*
             var colorListDeployDiv = document.getElementById("colorList");
             xmlhttp = new XMLHttpRequest();

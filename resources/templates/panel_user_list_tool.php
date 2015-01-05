@@ -11,13 +11,8 @@ if(!isset($_SESSION)){session_start();}
 
  */
 
-
-
-if(!isset($_SESSION['sess_user_id']) || (trim($_SESSION['sess_user_id']) == ''))
-{
-?>
-    <!-- BRUSHES CONTENT -->
-    <div class="row">
+//echo std brushes
+echo     '<!-- BRUSHES CONTENT -->
         <div class="col-xs-2 col-md-2">
             <button type="button" class="btn btn-default btn-xs glyphicon glyphicon-pencil">2px</button>
         </div>
@@ -27,9 +22,13 @@ if(!isset($_SESSION['sess_user_id']) || (trim($_SESSION['sess_user_id']) == ''))
         <div class="col-xs-2 col-md-2">
             <button type="button" class="btn btn-default btn-xs glyphicon glyphicon-pencil">8px</button>
 
-        </div>
-    </div>
-<?php
+        </div>';
+
+
+
+if(!isset($_SESSION['sess_user_id']) || (trim($_SESSION['sess_user_id']) == ''))
+{
+
 }
 else
 {
