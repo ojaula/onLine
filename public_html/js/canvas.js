@@ -2,18 +2,19 @@
  * Created by pauldixon on 26/11/14.
  */
 var point;
-var pointArray ;
+var lastPoint ;
 var mouseDownB;
 var canvas_element;
 var canvas_context;
 var canvas_toolState="1";
 var canvas_tools={"1":drawing_line};
+var myTimeoutFunc;
 
 var scale; //scale of canvas, 900px is max. rescaling is only needed in x axis.
 
 function canvas_init(){
     point = {x:0,y:0}
-    pointArray = new Array(10);
+    lastPoint = new Array(10);
     mouseDownB = false;
     canvas_element = document.getElementById("myCanvas");
     canvas_context = canvas_element.getContext("2d");
@@ -33,6 +34,9 @@ function resetMouse()
     mouseDownB = false;
     canvas_element.style.cursor = "auto";
     //alert("mouse up");
+    clearInterval(myTimeoutFunc);
+    canvas_context.closePath();
+    lastPoint = undefined;
 }
 function set_canvas_context(modifyOBJ){
     for (var modProp  in modifyOBJ){
@@ -46,25 +50,18 @@ function set_canvas_context(modifyOBJ){
 }
 
 function loadColors(){
-
+    canvas_context.strokeStyle = document.getElementById("RGB").style.backgroundColor;
 }
 
 function mouseDown(e)
 {
-
     //alert("mouse down");
     mouseDownB = true;
     canvas_element.style.cursor = 'none';
-    myTimeoutFunction();
+    //myTimeoutFunction();
+    myTimeoutFunc = setInterval(function(){ canvas_tools[canvas_toolState](); }, 10);
 }
 
-function myTimeoutFunction()
-{
-    //alert("myTimeoutFunction")
-    storePoints();
-    canvas_tools[canvas_toolState]();
-    setTimeout(myTimeoutFunction, 1);
-}
 
 // this is running indendently and automatically on mouse movement
 function cnvs_getCoordinates(evt)
@@ -80,10 +77,8 @@ function cnvs_getCoordinates(evt)
         document.getElementById("xycoordinates").innerHTML=str;
 
     }
-
-
-
 }
+
 /* helper method from internet source */
 function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
@@ -93,42 +88,43 @@ function getMousePos(canvas, evt) {
     };
 }
 
-function storePoints()
-{
-    var localPoint = {x:parseInt(point.x),y:parseInt(point.y)}
-    pointArray.pop();
-    pointArray.unshift(localPoint);
-
-}
-
-
 function drawing_line()
 {
 
-    if ( pointArray[1] != undefined && pointArray[0] != undefined && mouseDownB)
+
+    if ( point!= undefined && lastPoint!= undefined && mouseDownB && point!= lastPoint)
     {
-        a = pointArray[1];
-        b = pointArray[0];
+        loadColors();
 
-
-        if ((a != 0 || y != 0 ) || (a.x != 0 && a.y != 0) || (b.x != 0 && b.y != 0))
-        {
-            // alert("hello drawing from " + a + " to " +b);
-            scale = (900/canvas_element.offsetWidth);
-
-            canvas_context.moveTo(scale*a.x,a.y);//scale of canvas, 900px is current max. rescaling is only needed in x axis.
-            canvas_context.lineTo(scale*b.x,b.y);
-            canvas_context.stroke();
+        var a = lastPoint;
+        var b = point;
 
 
 
-            var  str = new String("DRAWING: (" + a.x + "," + a.y + " to " + b.x + "," + b.y + ")");
+        // alert("hello drawing from " + a + " to " +b);
+        scale = (900/canvas_element.offsetWidth);
+        canvas_context.beginPath();
+        canvas_context.moveTo(scale*a.x,a.y);//scale of canvas, 900px is current max. rescaling is only needed in x axis.
+        canvas_context.lineTo(scale*b.x,b.y);
+        canvas_context.stroke();
+        console.log("a: "+a.x);
+        console.log(b.x);
+
+        lastPoint.x = point.x;
+        lastPoint.y = point.y;
+
+        var  str = new String("DRAWING: (" + a.x + "," + a.y + " to " + b.x + "," + b.y + ")");
 
 
-            document.getElementById("xycoordinates").innerHTML=str;
+        document.getElementById("xycoordinates").innerHTML=str;
 
-        }
     }
+    else{
+        lastPoint = {x:0,y:0}
+        lastPoint.x = point.x;
+        lastPoint.y = point.y;
+    }
+
 }
 
 function cnvs_clearCoordinates()
