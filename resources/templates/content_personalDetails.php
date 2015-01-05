@@ -12,11 +12,20 @@ require_once(realpath(dirname(__FILE__) . "/../library/DB_manager.php"));
         session_start();
     }
 
+    $firstName  = (string) "";
+    $LastName   = (string) "";
+    $Email      = (string) "";
+    $address    = (string) "";
+    $zip        = (string) "";
+    $City       = (string) "";
+    $country    = (string) "";
+    $phone      = (string) "";
+    $order_id   = (string) "";
+    $buttonText = (string) "Create Account";
     // is logged in?
-    if(isset($_SESSION['sess_user_id']))
-    {
+    if(isset($_SESSION['sess_user_id'])) {
         $userId = $_SESSION['sess_user_id'];
-        $userXml = get_user(0,$userId);
+        $userXml = get_user(0, $userId);
         $userXmlObj = new SimpleXMLElement($userXml);
 
         $firstName = (string)$userXmlObj->user->user_firstName;
@@ -28,9 +37,10 @@ require_once(realpath(dirname(__FILE__) . "/../library/DB_manager.php"));
         $country = (string)$userXmlObj->user->user_country;
         $phone = (string)$userXmlObj->user->user_phone;
         $order_id = (string)$userXmlObj->user->user_id;
+        $buttonText = (string) "Update Account";
 
-
-        echo '
+    }
+echo '
         <h3>Order details</h3>
         <form data-callback="ajaxCallback_updateOrderDetails" data- id="form_insert_order" action="../resources/manage_db.php" method="get">
 
@@ -61,14 +71,9 @@ require_once(realpath(dirname(__FILE__) . "/../library/DB_manager.php"));
             <input class="form-control" type="hidden" name="fullfilled" value="0">
         submit:
             <br>
-            <button type="submit">Submit</button>
+            <button type="submit">'.$buttonText.'</button>
         </form>
         <script> if (globalAjaxInit == true) {formSubmitEvent_bindAll();} </script>';
-    }
-    else
-    {
-        echo' <div class="boxtitle">You are not logged in!</div>';
-        echo' <div class="formrow">If you are not logged in, you want be able to receive the digital goods. However, we gladly accept your donations!</div>';
-    }
+
 
 ?>
