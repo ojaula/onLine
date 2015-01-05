@@ -11,7 +11,7 @@
                 </div>
                 <div class="panel-body">
 <?php
-                    require_once(realpath(dirname(__FILE__). "/content_personalDetails.php"));
+                    require_once(realpath(dirname(__FILE__). "/panel_createUser.php"));
 ?>
                 </div>
             </div>

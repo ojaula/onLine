@@ -43,7 +43,7 @@ if(isset($_POST['action']) && !empty($_POST['action']))
         case 'get_user_tool'            : get_user_tool($ajax,$_POST['user_id']);break;
 
 
-        case 'insert_user'              : insert_user();break;
+        case 'insert_user'              : insert_user($ajax);break;
         case 'insert_item_color'        : insert_item_color($_POST['color']);break;
         case 'insert_item'              : insert_item();break;
         case 'insert_category'          : insert_category();break;
@@ -163,6 +163,7 @@ function accept_shoppingCart($ajax)
             $uzip       = (string)$user->user_zip;
             $ucity     = (string)$user->user_city;
             $ucountry  = (string)$user->user_country;
+            $uregdate   = (string)$user-user_regDate;
             $ufulFilled  = 0;
             $zero = 0.0;
             settype($zero, "float");
@@ -840,7 +841,7 @@ function update_current_order()
 
 }
 
-function insert_user(){
+function insert_user($ajax){
 
     $query = "INSERT INTO users(
                               user_firstName,
@@ -871,7 +872,21 @@ function insert_user(){
                                     .$_POST['emailVerified']
                                     ."')";
 
-    query_insert($query);
+    $retStr = query_insert($query);
+    $xml = "<?xml version='1.0' encoding='utf-8'?>\n";
+    if ($retStr !=  null) {
+        $xml .= "<didSucceed att='true'></didSucceed>";
+    } else {
+        $xml = null;
+    }
+
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
+
 
 }
 // this is an safety check for color items, using insert_item.
@@ -1076,6 +1091,7 @@ function query_insert($query){
     global $mysqlCon;
     global $printLog;// get global print state
 
+    $retStr = "";
     if(!$mysqlCon)
     {
         init_DB();
@@ -1085,7 +1101,7 @@ function query_insert($query){
     if ($mysqlCon->connect_error) {
         die("Connection failed: " . $mysqlCon->connect_error);
     }
-    echo "\n"."Connected successfully";
+    // echo "\n"."Connected successfully";
 
     //select database
     $DB_NAME = $config["db"]["onlineDB"]["dbname"];
@@ -1093,13 +1109,14 @@ function query_insert($query){
 
     //insert row to database
     if ($mysqlCon->query($query) === TRUE) {
-        echo "\n"."New record created successfully";
+        $retStr =  "New record created successfully";
     } else {
-        echo "\n"."Error: " . $query . "\n" . $mysqlCon->error;
+        $retStr = null; // "Error: " . $query . "\n" . $mysqlCon->error;
         $errnolog= $mysqlCon->error;
     }
 
     //$mysqlCon->close();
+    return $retStr;
 }
 
 function query_get($query){

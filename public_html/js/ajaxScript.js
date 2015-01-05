@@ -22,6 +22,18 @@
         }
     }
 
+    function logInAttempt(username,password)
+    {
+        console.log("logOutAttempt");
+        xmlhttp = new XMLHttpRequest(); //create request;
+        //set callback function
+        var callback = "ajaxCallback_loginEvent";
+        xmlhttp.onreadystatechange= function(){serverResponseCheck(callback);};
+        //send te request
+        xmlhttp.open("POST", "../resources/library/DB_manager.php?", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        xmlhttp.send("action=get_login&username="+username+"&password="+password+"");
+    }
     function logOutAttempt()
     {
         console.log("logOutAttempt");
@@ -344,6 +356,21 @@
             document.getElementById("shop_userdetails_body").style.display ="block";
             $("#shop_userdetails_body").load("../resources/templates/content_personalDetails.php");
         }
+    }
+    function ajaxCallback_userCreateAndLogin() {
+        var xmlObj = ajaxResponse;
+        if (xmlObj != null) {
+            var didSucceedNodes = xmlObj.getElementsByTagName("didSucceed");
+            var didSucceed = didSucceedNodes.firstChild.getAttribute("att");
+        }
+        var username = localStorage.getItem("createUserEmail");
+        var pass = localStorage.getItem("createUsersPass");
+        alert("Contrats you've created an account. I shall attempt to log you in with \n user: " + username + "\nPassword: " + pass);
+
+        logInAttempt(username, pass);
+        //}
+        localStorage.removeItem("createUserEmail");
+        localStorage.removeItem("createUsersPass");
     }
     function ajaxCallback_updateOrderDetails()
     {
