@@ -105,7 +105,6 @@ function storePoints()
 function drawing_line()
 {
 
-
     if ( pointArray[1] != undefined && pointArray[0] != undefined && mouseDownB)
     {
         a = pointArray[1];
