@@ -46,7 +46,7 @@ else
 
             printf('<div class="col-xs-2 col-md-2">' . "\n");
 
-            printf("\t" . '<button type="button" class="btn btn-default btn-xs glyphicon glyphicon-pencil">%s</button>' . "\n",$row["item_name"]);
+            printf("\t" . '<button type="button" onclick="set_canvas_context({tool:\'1\'})" class="btn btn-default btn-xs glyphicon glyphicon-pencil">%s</button>' . "\n",$row["item_name"]);
             printf('</div>' . "\n");
 
         }

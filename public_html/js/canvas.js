@@ -6,6 +6,9 @@ var pointArray ;
 var mouseDownB;
 var canvas_element;
 var canvas_context;
+var canvas_toolState="1";
+var canvas_tools={"1":drawing_line};
+
 var scale; //scale of canvas, 900px is max. rescaling is only needed in x axis.
 
 function canvas_init(){
@@ -31,6 +34,20 @@ function resetMouse()
     canvas_element.style.cursor = "auto";
     //alert("mouse up");
 }
+function set_canvas_context(modifyOBJ){
+    for (var modProp  in modifyOBJ){
+        if (canvas_context.hasOwnProperty(modProp)) {
+            canvas_context[modProp] = modifyOBJ[modProp];
+        }
+        if(modProp=="tool"){
+            canvas_toolState = modifyOBJ[modProp];
+        }
+    }
+}
+
+function loadColors(){
+
+}
 
 function mouseDown(e)
 {
@@ -45,7 +62,7 @@ function myTimeoutFunction()
 {
     //alert("myTimeoutFunction")
     storePoints();
-    drawing();
+    canvas_tools[canvas_toolState]();
     setTimeout(myTimeoutFunction, 1);
 }
 
@@ -85,8 +102,7 @@ function storePoints()
 }
 
 
-
-function drawing()
+function drawing_line()
 {
 
 
@@ -99,6 +115,7 @@ function drawing()
         if ((a != 0 || y != 0 ) || (a.x != 0 && a.y != 0) || (b.x != 0 && b.y != 0))
         {
             // alert("hello drawing from " + a + " to " +b);
+            scale = (900/canvas_element.offsetWidth);
 
             canvas_context.moveTo(scale*a.x,a.y);//scale of canvas, 900px is current max. rescaling is only needed in x axis.
             canvas_context.lineTo(scale*b.x,b.y);
@@ -114,6 +131,7 @@ function drawing()
         }
     }
 }
+
 function cnvs_clearCoordinates()
 {
     //document.getElementById("xycoordinates").innerHTML="";

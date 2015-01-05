@@ -71,6 +71,7 @@
 
 <!--Script for bootstrap sliders -->
 <script>
+
     function componentToHex(c) {
         var hex = c.toString(16);
         return hex.length == 1 ? "0" + hex : hex;
@@ -78,19 +79,20 @@
     function rgbToHex(r, g, b) {
         return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
     }
-    var RGBChange = function() {
-        $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')');
-        $('#display_RGB_hex').val(rgbToHex(r.getValue(), g.getValue(), b.getValue()));
+
+    var RGBChange2 = function() {
+        $('#RGB').css('background', 'rgb('+r2.getValue()+','+g2.getValue()+','+b2.getValue()+')');
+        $('#display_RGB_hex').val(rgbToHex(r2.getValue(), g2.getValue(), b2.getValue()));
     };
 
-    var r = $('#R').slider()
-        .on('slide', RGBChange)
+    var r2 = $('#R').slider()
+        .on('slide', RGBChange2)
         .data('slider');
-    var g = $('#G').slider()
-        .on('slide', RGBChange)
+    var g2 = $('#G').slider()
+        .on('slide', RGBChange2)
         .data('slider');
-    var b = $('#B').slider()
-        .on('slide', RGBChange)
+    var b2 = $('#B').slider()
+        .on('slide', RGBChange2)
         .data('slider');
 
 </script>

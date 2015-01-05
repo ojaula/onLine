@@ -223,7 +223,7 @@
             // check if if item is a color
             if (item_category[i].textContent==2){}
             var thumnail = '' +
-                '<div style="display: inline-block; max-height=40px; max-width=50px;" class="thumbnail">'+
+                '<div style="display: inline-block; max-height=40px; max-width=50px;" onclick="loadItemDetail(\''+item_id[i].textContent+'\')" class="thumbnail">'+
                 '<img data-src="'+item_image[i]+'" alt="...">'+
                 '<div class="caption">'+
                     '<h3>'+ item_name[i].textContent +'</h3>'+

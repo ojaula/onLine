@@ -48,6 +48,7 @@ if(isset($_POST['action']) && !empty($_POST['action']))
         case 'insert_item'              : insert_item();break;
         case 'insert_category'          : insert_category();break;
         case 'insert_order_detail'      : insert_order_detail();break;
+        case 'insert_item_grade'           : insert_item_grade();break;
 
         case 'delete_by_id'             : delete_by_id();break;
 
@@ -375,6 +376,35 @@ function get_item_category($ajax,$item_id){
 
     //convert query to xml
     //$xml = sqlToXml($result,$rootElementName, $childElementName);
+    $xml = sqlToXml($result,$rootElementName, $childElementName);
+    //return data
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
+
+}
+
+function get_item_grade($ajax, $itemId){
+
+    $rootElementName = "grades";
+    $childElementName="grade";
+
+    // build query
+    $query = "SELECT itemGrades.*,
+                    items.*,
+                    users.*
+              FROM itemGrades
+              INNER JOIN items ON (itemGrades.item_id = items.item_id)
+              INNER JOIN users ON (itemGrades.user_id = users.user_id)
+              WHERE itemGrades.item_id = ".$itemId;
+
+    // query data from database
+    $result = query_get($query);
+
+    //convert query to xml
     $xml = sqlToXml($result,$rootElementName, $childElementName);
     //return data
     if($ajax){
@@ -736,7 +766,7 @@ function get_order_orderDetails($ajax,$order_id){
 }
 
 function insert_order_detail(){
-    echo "entered insert order detail";
+    echo "entered insert order detail";// managed in accept_shoppingCart
 }
 
 //----SETTERS----
@@ -906,6 +936,49 @@ function insert_item(){
 
 
 
+}
+
+function insert_item_grade(){
+
+    if(!isset($_SESSION)){
+        session_start();
+    }
+
+    if(isset($_SESSION['sess_user_id'])) {
+        $userId = $_SESSION['sess_user_id'];
+
+        if (!$_POST['itemGrade_parent']) {
+            $parent = 0;
+        } else {
+            $parent = $_POST['itemGrade_parent'];
+        }
+        //check if already rated by user
+        $checkQuery = "SELECT * FROM itemGrades WHERE user_id = " . $_SESSION['sess_user_id'] . " and item_id =".$_POST['item_id']."  and itemGrade_nr !=0";
+        $earlierComments = query_get($checkQuery);
+
+        if ($earlierComments->num_rows<1 or $_POST['itemGrade_nr']==0) {
+
+            $query = "INSERT INTO itemGrades(
+                                  itemGrade_nr,
+                                  itemGrade_comment,
+                                  itemGrade_parent,
+                                  item_id,
+                                  user_id
+                                  )
+                               VALUES('" . $_POST['itemGrade_nr'] . "','"
+                . $_POST['itemGrade_comment'] . "','"
+                . $parent . "','"
+                . $_POST['item_id'] . "','"
+                . $userId
+                . "')";
+
+            query_insert($query);
+        }
+        else
+        {
+            // cant rate item again.
+        }
+    }
 }
 
 function insert_category(){

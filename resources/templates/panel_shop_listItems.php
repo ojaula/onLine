@@ -23,11 +23,11 @@
                 include_once($loc);
             }
 
-         //       include_once('/../library/DB_manager.php');
 
             echo "<hr>";
             echo "Item category:  ";
 
+            //list all categories for selection filtering
             $xmlResponse_str = get_categories(0); // 0 not an ajax request
             $xml = new SimpleXMLElement($xmlResponse_str);
             if($xml !=null){
