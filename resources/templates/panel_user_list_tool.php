@@ -13,14 +13,14 @@ if(!isset($_SESSION)){session_start();}
 
 //echo std brushes
 echo     '<!-- BRUSHES CONTENT -->
-        <div class="col-xs-2 col-md-2">
-            <button type="button" class="btn btn-default btn-xs glyphicon glyphicon-pencil">2px</button>
+        <div class="col-xs-3 col-md-3">
+            <button type="button" onclick="set_canvas_context({tool:\'std_1\'})" class="btn btn-default btn-xs glyphicon glyphicon-pencil">2px</button>
         </div>
-        <div class="col-xs-2 col-md-2">
-            <button type="button" class="btn btn-default btn-xs glyphicon glyphicon-pencil">4px</button>
+        <div class="col-xs-3 col-md-3">
+            <button type="button" onclick="set_canvas_context({tool:\'std_2\'})" class="btn btn-default btn-xs glyphicon glyphicon-pencil">4px</button>
         </div>
-        <div class="col-xs-2 col-md-2">
-            <button type="button" class="btn btn-default btn-xs glyphicon glyphicon-pencil">8px</button>
+        <div class="col-xs-3 col-md-3">
+            <button type="button" onclick="set_canvas_context({tool:\'std_3\'})" class="btn btn-default btn-xs glyphicon glyphicon-pencil">8px</button>
 
         </div>';
 
@@ -43,9 +43,9 @@ else
         while($row = $result->fetch_assoc())    //loop though row
         {
 
-            printf('<div class="col-xs-2 col-md-2">' . "\n");
+            printf('<div class="col-xs-3 col-md-3">' . "\n");
 
-            printf("\t" . '<button type="button" onclick="set_canvas_context({tool:\'1\'})" class="btn btn-default btn-xs glyphicon glyphicon-pencil">%s</button>' . "\n",$row["item_name"]);
+            printf("\t" . '<button type="button" onclick="set_canvas_context({tool:\''.$row["item_id"].'\'})" class="btn btn-default btn-xs glyphicon glyphicon-pencil">%s</button>' . "\n",$row["item_name"]);
             printf('</div>' . "\n");
 
         }

@@ -25,7 +25,7 @@
         //temp resetter
         //localStorage.setItem('onLine_shoppingCart', JSON.stringify([]));
 
-        cart_loadToView()
+        cart_loadToView();
 
         // PD function that checks the cart size to enable / disable "CHECKOUT button
         function cartSizeCheck()

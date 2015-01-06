@@ -37,7 +37,7 @@ require_once(realpath(dirname(__FILE__) . "/../library/DB_manager.php"));
         $country = (string)$userXmlObj->user->user_country;
         $phone = (string)$userXmlObj->user->user_phone;
         $order_id = (string)$userXmlObj->user->user_id;
-        $buttonText = (string) "Update Account";
+        $buttonText = (string) "Finished";
 
     }
 echo '

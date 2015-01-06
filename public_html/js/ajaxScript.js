@@ -279,6 +279,12 @@
 
             //$("#colorList").load("../resources/templates/panel_user_list_color.php");
             $("#section_draw").tab('show');
+
+            //set only std tools state
+            var canvas_tools={"1":drawing_line_2px,
+                "2":drawing_line_4px,
+                "3":drawing_line_8px};
+
         }
 
         //change header bar
@@ -308,8 +314,19 @@
             xmlhttp.send();
             headerDeployDiv.innerHTML = xmlhttp.responseText;
 
-            // Available Tools
+            // Available Tools for selection
             $("#toolList").load("../resources/templates/panel_user_list_tool.php");
+            //load tool state object
+            $.ajax({
+                type:"POST",
+                url:"../resources/templates/tool_hash.php",
+                dataType: 'json',
+                success: function (html) {
+                    canvas_tools= html;
+                    console.log("loaded tool state");
+                    console.log(html);
+                }
+            });
             /*
             var toolListDeployDiv = document.getElementById("toolList");
 
@@ -384,8 +401,10 @@
     {
         var xmlObj = ajaxResponse;
         document.getElementById("shop_done").style.display="block";
-        cart_delete();
-        cart_loadToView();
+        //window["cart_delete"]();  doe not work!, replaced with line below->
+            localStorage.setItem('onLine_shoppingCart',null);
+
+        window["cart_loadToView"]();
     }
 
     //log xml to response in testPage
