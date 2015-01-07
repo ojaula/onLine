@@ -401,6 +401,7 @@
 
         window["cart_loadToView"]();
         $("#toolList").load("../resources/templates/panel_user_list_tool.php");
+        window.location.reload();
 
     }
 

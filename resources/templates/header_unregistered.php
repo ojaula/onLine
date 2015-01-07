@@ -9,7 +9,9 @@
     </div>
 </form>
 <ul class="nav navbar-nav navbar-right">
-    <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart </a></li>
+
+    <li><a href="#section_shop"   ><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</a></li>
+
     <li><a href="#section_user_details">Create Account</a></li>
 <script>
     if (globalAjaxInit == true)

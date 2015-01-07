@@ -39,7 +39,7 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-    <div id="responseArea" style="color:floralwhite"></div>
+    <div id="responseArea" style="color:floralwhite:display:none;"></div>
     <!--Site LOGO  -->
     <div class="row">
         <div class="col-xs-1 col-md-1"></div>

@@ -833,7 +833,7 @@ function order_finished()
             WHERE
                 order_id=".$orderDetail_orderId;
 
-    //    query_insert($query);
+        query_insert($query);
 
     $potetialNewItem = get_order_orderDetails(0, $orderDetail_orderId);
     $potetialNewItemOBJ = new SimpleXMLElement($potetialNewItem);
