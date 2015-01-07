@@ -271,15 +271,16 @@
             // header
             var headerDeployDiv = document.getElementById("header_userSection");
 
+
           // nav bar info
             $("#header_userSection").load("../resources/templates/header_unregistered.php");
 
             // Available Tools
-            $("#toolList").load("../resources/templates/panel_user_list_tool.php");
+            //$("#toolList").load("../resources/templates/panel_user_list_tool.php");
 
             //$("#colorList").load("../resources/templates/panel_user_list_color.php");
-            $("#section_draw").tab('show');
-
+            //$("#section_draw").tab('show');
+            window.location.reload();
             //set only std tools state
             var canvas_tools={"1":drawing_line_2px,
                 "2":drawing_line_4px,
@@ -304,15 +305,8 @@
         {
             console.log("user did exist");
 
-            // header
-            var headerDeployDiv = document.getElementById("header_userSection");
+            $("#header_userSection").load("../resources/templates/header_hasLoggedin.php");
 
-            //fetch html with Ajax, not async!.
-
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET","../resources/templates/header_hasLoggedin.php", false);
-            xmlhttp.send();
-            headerDeployDiv.innerHTML = xmlhttp.responseText;
 
             // Available Tools for selection
             $("#toolList").load("../resources/templates/panel_user_list_tool.php");
@@ -327,23 +321,9 @@
                     console.log(html);
                 }
             });
-            /*
-            var toolListDeployDiv = document.getElementById("toolList");
+            //$("#a_link")[0].click();
+          window.location.reload();
 
-            xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET","../resources/templates/panel_user_list_tool.php", false);
-            xmlhttp.send();
-            toolListDeployDiv.innerHTML = xmlhttp.responseText;
-*/
-            // Available Colours
-            //$("#colorList").load("../resources/templates/panel_user_list_color.php");
-            /*
-            var colorListDeployDiv = document.getElementById("colorList");
-            xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET","../resources/templates/panel_user_list_color.php", false);
-            xmlhttp.send();
-            colorListDeployDiv.innerHTML = xmlhttp.responseText;
-            */
         }
 
         //change header bar
@@ -376,15 +356,30 @@
     }
     function ajaxCallback_userCreateAndLogin() {
         var xmlObj = ajaxResponse;
+        console.log("ajaxCallback_userCreateAndLogin");
         if (xmlObj != null) {
+            console.log("ajaxCallback_userCreateAndLogin xmlObj != null");
             var didSucceedNodes = xmlObj.getElementsByTagName("didSucceed");
-            var didSucceed = didSucceedNodes.firstChild.getAttribute("att");
-        }
-        var username = localStorage.getItem("createUserEmail");
-        var pass = localStorage.getItem("createUsersPass");
-        alert("Contrats you've created an account. I shall attempt to log you in with \n user: " + username + "\nPassword: " + pass);
+            var didfailNodes = xmlObj.getElementsByTagName("didFail");
+            if (didSucceedNodes.length == 1 && didfailNodes.length == 0)
+            {
+                console.log("ajaxCallback_userCreateAndLogin local storage access");
+                var username = localStorage.getItem("createUserEmail");
+                var pass = localStorage.getItem("createUsersPass");
+                alert("Contrats you've created an account. I shall attempt to log you in with \n user: " + username + "\nPassword: " + pass);
 
-        logInAttempt(username, pass);
+                logInAttempt(username, pass);
+            }
+            else
+            {
+                alert("can not create user ");
+
+            }
+            console.log("ajaxCallback_userCreateAndLogin didSucceedNodes = " + didSucceedNodes);
+            //var didSucceed = didSucceedNodes.firstChild.getAttribute("att");
+            console.log("ajaxCallback_userCreateAndLogin didfailNodes = " + didfailNodes);
+        }
+
         //}
         localStorage.removeItem("createUserEmail");
         localStorage.removeItem("createUsersPass");
@@ -405,6 +400,8 @@
             localStorage.setItem('onLine_shoppingCart',null);
 
         window["cart_loadToView"]();
+        $("#toolList").load("../resources/templates/panel_user_list_tool.php");
+
     }
 
     //log xml to response in testPage

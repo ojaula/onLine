@@ -41,6 +41,7 @@ if(isset($_POST['action']) && !empty($_POST['action']))
         case 'get_order_orderDetails'   : get_order_orderDetails($ajax,$_POST['order_id']);break;
         case 'get_user_color'           : get_user_color($ajax,$_POST['user_id']);break;
         case 'get_user_tool'            : get_user_tool($ajax,$_POST['user_id']);break;
+        case 'get_order_orderHistory'   : get_order_orderHistory($ajax,$_POST['user_id']);break;
 
 
         case 'insert_user'              : insert_user($ajax);break;
@@ -719,13 +720,58 @@ function get_user_currentOrder($ajax,$user_id){
 
 }
 
+function get_order_orderHistory($ajax,$user_id)
+{
+    /*
+ * orders
+order_id, order_ShipName, order_ShipAddress, order_email, order_shipZip, order_shipCity, order_shipCountry, order_shipping, order_phone, order_tax, order_date, order_paymentID, order_transactStatus, order_shipped, order_fulFilled, user_id
+
+orderDetails
+orderDetails_id, orderDetails_name, orderDetails_price, orderDetails_quantity, order_id, item_id
+
+items
+item_id, item_name, item_price, item_weight, item_descShort, item_descLong, item_image, item_update, item_stock, item_rank, item_color, item_code
+ */
+    $rootElementName = "orderHistories";
+    $childElementName= "orderHistory";
+
+    // build query
+    $query =    "SELECT * FROM orders";
+    $query .=   " INNER JOIN orderDetails ON orders.order_id = orderDetails.order_id";
+    $query .=   " INNER JOIN items ON orderDetails.item_id = items.item_id";
+    $query .=   " WHERE orders.user_id=".$user_id ;
+    $query .=   "";
+
+    /*
+      SELECT orders.*, orderDetails.*, items.* FROM orders
+     INNER JOIN orderDetails ON orders.order_id = orderDetails.order_id
+     INNER JOIN items ON orderDetails.item_id = items.item_id
+     WHERE orders.user_id=1
+     */
+    // query data from database
+    $result = query_get($query);
+
+    //convert query to xml
+    $xml = sqlToXml($result,$rootElementName, $childElementName);
+    //return data
+    if($ajax){
+        echo $xml;
+    }
+    else{
+        return $xml;
+    }
+
+
+}
 function get_user_orders($ajax,$user_id){
 
     $rootElementName = "orders";
     $childElementName= "order";
 
     // build query
-    $query = "SELECT * FROM orders where user_id=".$user_id ;
+    $query =    "SELECT * FROM orders";
+    $query .=   " WHERE order_id.user_id=".$user_id ;
+    $query .=   "";
 
     // query data from database
     $result = query_get($query);
@@ -877,7 +923,7 @@ function insert_user($ajax){
     if ($retStr !=  null) {
         $xml .= "<didSucceed att='true'></didSucceed>";
     } else {
-        $xml = null;
+        $xml = "<didFail att='true'></didFail>";
     }
 
     if($ajax){

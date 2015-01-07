@@ -107,7 +107,7 @@ localStorage.setItem("createUsersPass", pass);
         <br>
         emailVerified:
         <br>
-        <input class="form-control" type="text" name="emailVerified" value="Mouse">
+        <input class="form-control" type="text" name="emailVerified" value="Mouse" '.$disabled.'>
          submit:
             <br>
             <button type="submit" onclick="quickSave()" '.$disabled.'>'.$buttonText.'</button>
